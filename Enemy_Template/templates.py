@@ -19,6 +19,14 @@ enemies = [
       "weapons": {"name": "Scimitar", "dice": "d6", "hit modifier": 3, "damage bonus": 1},
       "health": 11,
       "armor": 12
+      },
+      {"id:" 2,
+      "name": "Goblin",
+      "descirption:" "Goblins are small, black-hearted humanoids that lair in despoiled dungeons and other dismal settings.",
+      "stats:" {"str": 8, "dex": 14, "con": 10, "int": 10, "wis": 8, "cha": 8},
+      "weapons":{"name": "Scimitar", "dice": "d6", "hit modifier": 4, "damage bonus": 2},
+      "health": 7,
+      "armor": 15  
       }  
 ]
 
@@ -26,11 +34,12 @@ listlength = len(enemies)
 
 userChoice = "NULL"
 attack = 0
-total_health = enemies[0]["health"]
+
 escape = ""
 
-enemy = enemies[0]["name"]
-print("You've encountered a " + enemy)
+enemy = random.choice(enemies)
+total_health = enemy["health"]
+print("You've encountered a " + enemy["name"])
 print('\n') 
 
 while userChoice != "done" and total_health != 0 and escape != "success":
