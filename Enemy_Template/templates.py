@@ -20,7 +20,7 @@ enemies = [
       "health": 11,
       "armor": 12
       },
-      {"id:" 2,
+      {"id": 2,
       "name": "Goblin",
       "descirption:" "Goblins are small, black-hearted humanoids that lair in despoiled dungeons and other dismal settings.",
       "stats:" {"str": 8, "dex": 14, "con": 10, "int": 10, "wis": 8, "cha": 8},
