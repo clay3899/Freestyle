@@ -10,9 +10,9 @@ enemies and fight the enemy.
 
 Currently to run put
 
-'''sh
+```sh
 python Enemy_Template/templates.py
-'''
+```
 
 into the command line.
 
