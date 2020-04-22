@@ -15,16 +15,16 @@ Then you will need to create a virtual environment, or use the base environment
 
 If you wish to create an environment use
 
-'''sh
+```sh
 conda create -n pygame-env Pytho=3.7 #first time only
 conda activate pygame-env #after creation
-'''
+```
 
 next you need to install pygame to the environment
 
-'''sh
+```sh
 pip install pygame
-'''
+```
 
 This will allow you to run the game.
 
@@ -32,9 +32,9 @@ This will allow you to run the game.
 
 To play the game use the command:
 
-'''sh
+```sh
 Python DNDLVL1.py
-'''
+```
 
 *This will likely be updated to a .exe eventually
 
