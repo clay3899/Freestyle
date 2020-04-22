@@ -1,6 +1,11 @@
 import pygame
 import random
 import math
+from pygame.locals import *
+from pygame import mixer
+
+
+global player_phase
 
 # initialize pygame
 pygame.init()
@@ -40,6 +45,7 @@ class button():
                 return True
         
         return False
+
 
 
 # Title and Icon
@@ -92,6 +98,12 @@ for i in range(number_of_enemies):
 
 background = pygame.image.load("images/map1.png").convert()
 
+# background sound
+
+mixer.music.load('sounds/orchestra_ambiance.ogg')
+
+mixer.music.play(-1)
+
 def show_moves(x, y):
     move_count = movesfont.render("Moves Left    " + str(int(moves)), True, (255,255,255))
     screen.blit(move_count, (x, y))
@@ -101,6 +113,13 @@ def enemy(x,y,i):
 
 def player(x,y):
     screen.blit(playerImg, (x, y))
+
+def isCollision(enemyX, enemyY, playerX, playerY):
+    distance = math.hypot(enemyX - playerX, enemyY - playerY)
+    if distance < 128:
+        return True
+    else:
+        return False
 
 # game loop
 running = True
@@ -113,6 +132,8 @@ while running:
 
     #background Image
     screen.blit(background, (0,0))
+    
+    player_phase = True
 
     for event in pygame.event.get():
 
@@ -126,7 +147,30 @@ while running:
         if event.type == pygame.MOUSEBUTTONDOWN:
             if EndTurn.isOver(pos):
                 for i in range(number_of_enemies):
-                    enemyX[i] -= enemyX_change[i]
+                    player_phase = False
+                    
+                    remaining_move = enemy_moves[i]
+                    
+
+                    for moves in range(int(enemy_moves[i])):
+                        collision = isCollision(enemyX[i], enemyY[i], playerX, playerY)
+                        if collision == False:
+                            if remaining_move > 0:
+                                if playerX < enemyX[i] and (enemyX[i] - playerX) > 64:
+                                    enemyX[i] -= enemyX_change[i]
+                                    remaining_move = remaining_move - 1
+                                if playerX > enemyX[i] and (playerX - enemyX[i]) > 64: 
+                                    enemyX[i] += enemyX_change[i]
+                                    remaining_move = remaining_move - 1
+                                if playerY > enemyY[i]:
+                                    enemyY[i] += enemyY_change[i]
+                                    remaining_move = remaining_move - 1
+                                if playerY < enemyY[i]:
+                                    enemyY[i] -= enemyY_change[i]
+                                    remaining_move = remaining_move - 1
+                    
+                    
+                    player_phase = True
                     moves = (player_movement/5)
         if event.type == pygame.MOUSEMOTION:
             if EndTurn.isOver(pos):
@@ -181,9 +225,8 @@ while running:
                         if playerX == enemyX[i] and playerY == enemyY[i]:
                             playerY -= playerY_change 
                             moves +=1
-
-    
-    
+            walk_sound = mixer.Sound('sounds/dirtwalk.ogg')
+            walk_sound.play() 
     player(playerX, playerY)
     for i in range(number_of_enemies):
         enemy(enemyX[i], enemyY[i], i)

@@ -1,0 +1,48 @@
+class player:
+    def __init__(self, movementX, movementY):
+        self.movement = movement
+        
+    
+    def set_location(self,x, y):
+        self.x = x
+        self.y = y
+        self.xMovement = 0
+        self.yMovement = 0
+
+    def keys(self):
+        k = pygame.key.get_released()
+        
+        if k[K_LEFT]: 
+            self.xMovement = -self.movement
+        if k[K_RIGHT]: 
+            self.xMovement = self.movement
+        if k[K_UP]:
+            self.yMovement = -self.movement
+        if k[K_DOWN]:
+            self.yMovement = self.movement    
+
+    def move(self)
+        self.x += self.xMovement
+        
+        if self.x > 1216:
+            self.x = 1216
+        if self.x < 0:
+            self.x = 0
+        
+        self.y += self.yMovement
+        
+        if self.y > 1216:
+            self.y = 1216
+        if self.y < 0:
+            self.y = 0
+
+    def draw(self, image):
+       display = pygame.display.get_surface()
+
+       display.blit(image, (self.x, self.y))
+        
+
+    def do(self):
+        self.keys()
+        self.move()
+        self.draw()
