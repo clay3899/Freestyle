@@ -7,12 +7,15 @@ from pygame import mixer
 
 global player_phase
 
+
+
 # initialize pygame
 pygame.init()
 
 
 #create the screen
-screen = pygame.display.set_mode((1280, 960))
+screen = pygame.display.set_mode((960, 720), HWSURFACE|DOUBLEBUF|RESIZABLE)
+
 
 
 # The Button Class is taken with Gratitude from Tech with Tim on YouTube
@@ -143,6 +146,12 @@ while running:
         if event.type == pygame.QUIT:
             running = False
         
+        #screen resizing
+        if event.type==VIDEORESIZE:
+            screen=pygame.display.set_mode(event.dict['size'],HWSURFACE|DOUBLEBUF|RESIZABLE)
+            screen.blit(pygame.transform.scale(background,event.dict['size']),(0,0))
+            pygame.display.flip()
+
         # click end turn
         if event.type == pygame.MOUSEBUTTONDOWN:
             if EndTurn.isOver(pos):
