@@ -33,7 +33,7 @@ This will allow you to run the game.
 To play the game use the command:
 
 ```sh
-Python DNDLVL1.py
+Python game/DNDLVL1.py
 ```
 
 *This will likely be updated to a .exe eventually
