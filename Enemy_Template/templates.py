@@ -8,7 +8,7 @@ d10 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 d12 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 d20 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
 
-action_list = ["Attack", "Run", "Talk", "Done"]
+action_list = ["Attack", "Run", "Talk", "done"]
 
 
 enemies = [
@@ -64,7 +64,7 @@ while userChoice != "done" and total_health > 0 and escape != "success":
                 print("The enemy has been wounded. You dealt " + str(damage) + " damage!")
                 pass
             else:
-                print("You have slain the " + enemy["name"])
+                print("You dealt " + str(damage) + " damage! You have slain the " + enemy["name"])
                 pass
             pass
     elif userChoice == "Run" or userChoice == "run":

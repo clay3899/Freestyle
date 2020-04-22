@@ -8,7 +8,7 @@ enemies and fight the enemy.
 
 ## Usage
 
-Currently to run put
+Currently to run clone the branch and put
 
 ```sh
 python Enemy_Template/templates.py
