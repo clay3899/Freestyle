@@ -7,8 +7,7 @@ height = 720
 FPS = 30
 
 
-
-# initialize pygame and create window
+pygame.mixer.pre_init(44100,16,2,4096)
 pygame.init()
 
 pygame.display.set_caption('Champions are Coming')
@@ -22,7 +21,7 @@ gold = (200,190,140)
 darkgrey = (93,94,94)
 white = (225,225,225)
 
-#Code help to understand structure of Pygame from https://github.com/joshuawillman/The-Lonely-Shooter
+#Code help to understand structure of the start screen from https://github.com/joshuawillman/The-Lonely-Shooter
 def draw_text(surface, text, size, x, y, color):
 
     font = pygame.font.Font(pygame.font.match_font('cambria'), size)
@@ -35,7 +34,7 @@ def start_screen():
     
     title = pygame.image.load(path.join(img_dir, "title_text.png")).convert_alpha()
     title = pygame.transform.scale(title, (width, 165))
-    background = pygame.image.load('images\Home_Screen.jpg').convert()
+    background = pygame.image.load('game\images\Home_Screen.jpg').convert()
     background_rect = background.get_rect()
 
     arrow_keys = pygame.image.load(path.join(img_dir, 'arrow_keys.png')).convert_alpha()
@@ -49,6 +48,9 @@ def start_screen():
     draw_text(display_screen, "If not, press [Q] to quit", 35, width/2, (height/2) + 100, white)
     draw_text(display_screen, "MOVE:", 35, 630, 550, white)
 
+    pygame.mixer.music.load('game\sounds\Destiny.mp3')
+    pygame.mixer.music.set_volume(0.5)
+    pygame.mixer.music.play(-1)
     pygame.display.update()
 
     while True:
