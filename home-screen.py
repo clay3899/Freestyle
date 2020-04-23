@@ -20,7 +20,9 @@ img_dir = path.join(path.dirname(__file__), 'images')
 black = (0,0,0)
 gold = (200,190,140)
 darkgrey = (93,94,94)
+white = (225,225,225)
 
+#Code help to understand structure of Pygame from https://github.com/joshuawillman/The-Lonely-Shooter
 def draw_text(surface, text, size, x, y, color):
 
     font = pygame.font.Font(pygame.font.match_font('cambria'), size)
@@ -42,10 +44,10 @@ def start_screen():
     screen.blit(background, background_rect)
     screen.blit(title, (0,110))
     screen.blit(arrow_keys, (720, 570))
-    draw_text(screen, "Are You Ready for the Challenge?", 35, width/2, height/2, gold)
-    draw_text(screen, "If so, press [ENTER] to begin", 35, width/2, (height/2) + 50, gold)
-    draw_text(screen, "If not, press [Q] to quit", 35, width/2, (height/2) + 100, gold)
-    draw_text(screen, "MOVE:", 35, 630, 550, gold)
+    draw_text(screen, "Are You Ready for the Challenge?", 35, width/2, height/2, white)
+    draw_text(screen, "If so, press [ENTER] to begin", 35, width/2, (height/2) + 50, white)
+    draw_text(screen, "If not, press [Q] to quit", 35, width/2, (height/2) + 100, white)
+    draw_text(screen, "MOVE:", 35, 630, 550, white)
 
     pygame.display.update()
 
