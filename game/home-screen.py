@@ -1,24 +1,19 @@
-import pygame, sys, random
+import pygame
 from pygame import *
 from os import path
 
 width = 960
 height = 720
-FPS = 30
-
 
 pygame.mixer.pre_init(44100,16,2,4096)
 pygame.init()
 
 pygame.display.set_caption('Champions are Coming')
 
-display_screen = pygame.display.set_mode((960, 720))
+display_screen = pygame.display.set_mode((width, height))
 
 img_dir = path.join(path.dirname(__file__), 'images')
 
-black = (0,0,0)
-gold = (200,190,140)
-darkgrey = (93,94,94)
 white = (225,225,225)
 
 #Code help to understand structure of the start screen from https://github.com/joshuawillman/The-Lonely-Shooter
@@ -48,6 +43,7 @@ def start_screen():
     draw_text(display_screen, "If not, press [Q] to quit", 35, width/2, (height/2) + 100, white)
     draw_text(display_screen, "MOVE:", 35, 630, 550, white)
 
+    #code for playing sound from CrouchingPython on YouTube https://www.youtube.com/watch?v=YQ1mixa9RAw
     pygame.mixer.music.load('game\sounds\Destiny.mp3')
     pygame.mixer.music.set_volume(0.5)
     pygame.mixer.music.play(-1)
