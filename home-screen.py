@@ -13,7 +13,7 @@ pygame.init()
 
 pygame.display.set_caption('Champions are Coming')
 
-screen = pygame.display.set_mode((960, 720))
+display_screen = pygame.display.set_mode((960, 720))
 
 img_dir = path.join(path.dirname(__file__), 'images')
 
@@ -41,13 +41,13 @@ def start_screen():
     arrow_keys = pygame.image.load(path.join(img_dir, 'arrow_keys.png')).convert_alpha()
     arrow_keys = pygame.transform.scale(arrow_keys, (150, 85))
     
-    screen.blit(background, background_rect)
-    screen.blit(title, (0,110))
-    screen.blit(arrow_keys, (720, 570))
-    draw_text(screen, "Are You Ready for the Challenge?", 35, width/2, height/2, white)
-    draw_text(screen, "If so, press [ENTER] to begin", 35, width/2, (height/2) + 50, white)
-    draw_text(screen, "If not, press [Q] to quit", 35, width/2, (height/2) + 100, white)
-    draw_text(screen, "MOVE:", 35, 630, 550, white)
+    display_screen.blit(background, background_rect)
+    display_screen.blit(title, (0,110))
+    display_screen.blit(arrow_keys, (720, 570))
+    draw_text(display_screen, "Are You Ready for the Challenge?", 35, width/2, height/2, white)
+    draw_text(display_screen, "If so, press [ENTER] to begin", 35, width/2, (height/2) + 50, white)
+    draw_text(display_screen, "If not, press [Q] to quit", 35, width/2, (height/2) + 100, white)
+    draw_text(display_screen, "MOVE:", 35, 630, 550, white)
 
     pygame.display.update()
 
