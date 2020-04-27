@@ -14,7 +14,7 @@ display_screen = pygame.display.set_mode((width, height))
 
 img_dir = path.join(path.dirname(__file__), 'images')
 
-white = (225,225,225)
+WHITE = (225,225,225)
 
 #Code help to understand structure of the start screen from https://github.com/joshuawillman/The-Lonely-Shooter
 def draw_text(surface, text, size, x, y, color):
@@ -38,10 +38,10 @@ def start_screen():
     display_screen.blit(background, background_rect)
     display_screen.blit(title, (0,110))
     display_screen.blit(arrow_keys, (720, 570))
-    draw_text(display_screen, "Are You Ready for the Challenge?", 35, width/2, height/2, white)
-    draw_text(display_screen, "If so, press [ENTER] to begin", 35, width/2, (height/2) + 50, white)
-    draw_text(display_screen, "If not, press [Q] to quit", 35, width/2, (height/2) + 100, white)
-    draw_text(display_screen, "MOVE:", 35, 630, 550, white)
+    draw_text(display_screen, "Are You Ready for the Challenge?", 35, width/2, height/2, WHITE)
+    draw_text(display_screen, "If so, press [ENTER] to begin", 35, width/2, (height/2) + 50, WHTIE)
+    draw_text(display_screen, "If not, press [Q] to quit", 35, width/2, (height/2) + 100, WHITE)
+    draw_text(display_screen, "MOVE:", 35, 630, 550, WHITE)
 
     #code for playing sound from CrouchingPython on YouTube https://www.youtube.com/watch?v=YQ1mixa9RAw
     pygame.mixer.music.load('game\sounds\Destiny.mp3')
