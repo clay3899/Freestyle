@@ -8,16 +8,13 @@ from os import path
 from settings import *
 from sprites import *
 
-enemy = Enemy(20,200,'wizard.png')
-
-
 class Game:
     def __init__(self):
         # initialiaze game window, etc.
         self.running = True
         pg.init()
         pg.mixer.init()
-        display_screen = pygame.display.set_mode((WIDTH, HEIGHT))
+        #display_screen = pg.display.set_mode((WIDTH, HEIGHT))
         self.screen = pg.display.set_mode((WIDTH, HEIGHT))
         pg.display.set_caption(TITLE)
         self.clock = pg.time.Clock()
@@ -29,8 +26,8 @@ class Game:
         self.platforms = pg.sprite.Group()
         self.player = Player(self)
         self.all_sprites.add(self.player)
-        enemy_list = pg.sprite.Group()   # create enemy group
-        enemy_list.add(enemy)   
+        self.enemy = Enemy(850, 600, 'wizard.png')
+        self.all_sprites.add(self.enemy) 
         
         for plat in PLATFORM_LIST:
             p = Platform(*plat)
@@ -63,9 +60,7 @@ class Game:
             if hits:
                 self.player.pos.y = hits[0].rect.top
                 self.player.vel.y = 0
-                self.player.acc.y = 0
-
-            
+                self.player.acc.y = 0        
     
     def events(self):
         # game loop -- events
@@ -84,14 +79,13 @@ class Game:
     
     def draw(self):
         # game loop -- draw
-        self.screen.fill(BLACK)
+        self.screen.fill(BLACK) #can change the background of the screen here
         
         self.all_sprites.draw(self.screen)
         
         # after drawing
         pg.display.flip()
 
-        pass
     
     def start_screen(self):
         # game splash
@@ -99,18 +93,14 @@ class Game:
         
         pass
     
-    def over_screen(self):
+    def end_screen(self):
         pass
 
 
-
-enemy = Enemy(20,200,'wizard.png')
-
-
 g = Game()
-g.show_start_screen()
+g.start_screen()
 while g.running:
     g.new()
-    g.show_go_screen()
+    g.end_screen()
 
 pg.quit()
