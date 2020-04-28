@@ -7,6 +7,10 @@ import os
 from os import path
 from settings import *
 from sprites import *
+
+enemy = Enemy(20,200,'wizard.png')
+
+
 class Game:
     def __init__(self):
         # initialiaze game window, etc.
@@ -16,7 +20,6 @@ class Game:
         self.screen = pg.display.set_mode((ScreenX, ScreenY))
         pg.display.set_caption(TITLE)
         self.clock = pg.time.Clock()
-        
         pass
     
     def new(self):
@@ -25,7 +28,8 @@ class Game:
         self.platforms = pg.sprite.Group()
         self.player = Player(self)
         self.all_sprites.add(self.player)
-        
+        enemy_list = pg.sprite.Group()   # create enemy group
+        enemy_list.add(enemy)   
         
         for plat in PLATFORM_LIST:
             p = Platform(*plat)
@@ -88,22 +92,21 @@ class Game:
 
         pass
     
-    def show_start_screen(self):
+    def start_screen(self):
         # game splash
         
         
         pass
     
-    def show_go_screen(self):
+    def over_screen(self):
         pass
 
+
+
+enemy = Enemy(20,200,'wizard.png')
+
+
 g = Game()
-
-enemy = Enemy(20,200,'wizard.png')# spawn enemy
-enemy_list = pg.sprite.Group()   # create enemy group
-enemy_list.add(enemy)                # add enemy to group
-
-
 g.show_start_screen()
 while g.running:
     g.new()

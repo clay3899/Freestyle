@@ -2,9 +2,10 @@ import random
 
 #game options/settimgs
 TITLE = "No Ordinary Princess"
-ScreenX = 1024
+ScreenX = 960
 ScreenY = 720
 FPS = 60
+
 
 
 # Player Properties
