@@ -2,15 +2,16 @@ import pygame
 from pygame import *
 from os import path
 
-width = 960
-height = 720
+WIDTH = 960
+HEIGHT = 720
+WHITE = (255, 255, 255)
 
 pygame.mixer.pre_init(44100,16,2,4096)
 pygame.init()
 
 pygame.display.set_caption('Champions are Coming')
 
-display_screen = pygame.display.set_mode((width, height))
+display_screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
 img_dir = path.join(path.dirname(__file__), 'images')
 
@@ -28,7 +29,7 @@ def draw_text(surface, text, size, x, y, color):
 def start_screen():
     
     title = pygame.image.load(path.join(img_dir, "title_text.png")).convert_alpha()
-    title = pygame.transform.scale(title, (width, 165))
+    title = pygame.transform.scale(title, (WIDTH, 165))
     background = pygame.image.load('game\images\Home_Screen.jpg').convert()
     background_rect = background.get_rect()
 
@@ -38,9 +39,9 @@ def start_screen():
     display_screen.blit(background, background_rect)
     display_screen.blit(title, (0,110))
     display_screen.blit(arrow_keys, (720, 570))
-    draw_text(display_screen, "Are You Ready for the Challenge?", 35, width/2, height/2, WHITE)
-    draw_text(display_screen, "If so, press [ENTER] to begin", 35, width/2, (height/2) + 50, WHTIE)
-    draw_text(display_screen, "If not, press [Q] to quit", 35, width/2, (height/2) + 100, WHITE)
+    draw_text(display_screen, "Are You Ready for the Challenge?", 35, WIDTH/2, HEIGHT/2, WHITE)
+    draw_text(display_screen, "If so, press [ENTER] to begin", 35, WIDTH/2, (HEIGHT/2) + 50, WHITE)
+    draw_text(display_screen, "If not, press [Q] to quit", 35, WIDTH/2, (HEIGHT/2) + 100, WHITE)
     draw_text(display_screen, "MOVE:", 35, 630, 550, WHITE)
 
     #code for playing sound from CrouchingPython on YouTube https://www.youtube.com/watch?v=YQ1mixa9RAw

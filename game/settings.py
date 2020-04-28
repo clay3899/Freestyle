@@ -2,8 +2,8 @@ import random
 
 #game options/settimgs
 TITLE = "No Ordinary Princess"
-ScreenX = 960
-ScreenY = 720
+WIDTH = 960
+HEIGHT = 720
 FPS = 60
 
 
@@ -18,11 +18,11 @@ PLAYER_JUMP = 18
 
 # starting platforms
 
-PLATFORM_LIST = [(0, ScreenY- 40, ScreenX, 40), 
-                (ScreenX /2 - 50, ScreenY *3/4, 100, 20),
-                (ScreenX - 100, ScreenY - 360, 100, 20),
-                (ScreenX - 100, ScreenY - 540, 100, 20),
-                (ScreenX/4, ScreenY * random.randint(25,50)/100, 200, 20)]
+PLATFORM_LIST = [(0, HEIGHT- 40, WIDTH, 40), 
+                (WIDTH /2 - 50, HEIGHT *3/4, 100, 20),
+                (WIDTH - 100, HEIGHT - 360, 100, 20),
+                (WIDTH - 100, HEIGHT - 540, 100, 20),
+                (WIDTH/4, HEIGHT * random.randint(25,50)/100, 200, 20)]
 
 # colors
 WHITE = (255, 255, 255)

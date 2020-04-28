@@ -17,7 +17,8 @@ class Game:
         self.running = True
         pg.init()
         pg.mixer.init()
-        self.screen = pg.display.set_mode((ScreenX, ScreenY))
+        display_screen = pygame.display.set_mode((WIDTH, HEIGHT))
+        self.screen = pg.display.set_mode((WIDTH, HEIGHT))
         pg.display.set_caption(TITLE)
         self.clock = pg.time.Clock()
         pass

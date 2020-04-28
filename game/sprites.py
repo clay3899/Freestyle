@@ -13,8 +13,8 @@ class Player(pg.sprite.Sprite):
         self.image = pg.Surface((32,32))
         self.image.fill(WHITE)
         self.rect = self.image.get_rect()
-        self.rect.center = (ScreenX / 2, ScreenY / 2)
-        self.pos = vec(ScreenX/2, ScreenY/2)
+        self.rect.center = (WIDTH / 2, HEIGHT / 2)
+        self.pos = vec(WIDTH/2, HEIGHT/2)
         self.vel = vec(0,0)
         self.acc = vec(0,0)
     
@@ -50,8 +50,8 @@ class Player(pg.sprite.Sprite):
         # Nothing passed the sides
         self.rect.midbottom = self.pos
 
-        if self.pos.x > ScreenX:
-            self.pos.x  = ScreenX
+        if self.pos.x > WIDTH:
+            self.pos.x  = WIDTH
         if self.pos.x < 0:
             self.pos.x = 0
 

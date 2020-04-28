@@ -4,7 +4,7 @@
 #initialize pygame and create window
 pygame.init()
 pygame.mixer.init()
-screen = pygame.display.set_mode((ScreenX, ScreenY))
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption(TITLE)
 clock = pygame.time.Clock()
 
