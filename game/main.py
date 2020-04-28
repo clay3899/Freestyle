@@ -84,10 +84,9 @@ class Game:
     
     def draw(self):
         # game loop -- draw
-        self.screen.fill(BLACK) #can change the background of the screen here
-        
+        self.background_image = pg.image.load("game\images\Forest.jpg").convert()
+        self.screen.blit(self.background_image, [0, 0])
         self.all_sprites.draw(self.screen)
-        
         # after drawing
         pg.display.flip()
 
