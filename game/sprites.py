@@ -1,7 +1,9 @@
 import pygame as pg
 from settings import *
+from os import path
 
 vec = pg.math.Vector2
+img_dir = path.join(path.dirname(__file__), 'images')
 
 # All comes from KidsCanCode
 class Player(pg.sprite.Sprite):
@@ -62,21 +64,17 @@ class Platform(pg.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
-class Mob(pg.sprite.Sprite): 
-    def __init__(self, y, player):  # initial position
+# Source: https://opensource.com/article/18/5/pygame-enemy
+class Enemy(pg.sprite.Sprite):
+    def __init__(self,x,y,img):
         pg.sprite.Sprite.__init__(self)
-        self.image = pg.Surface((32,32))
-        self.image.fill(BLUE)
-        self.image.set_colorkey(BLACK)
+        self.image = pg.image.load(path.join(img_dir, img)).convert_alpha()
+        self.image.set_colorkey(BLUE)
         self.rect = self.image.get_rect()
-        self.rect.center = (ScreenX - 50, y - 50)
-        self.pos = vec(ScreenX - 50, y)
-        self.vel = vec(0,0)
-        self.acc = vec(0,0)
-    def update(self):
-        self.acc = vec(0,PLAYER_GRAV)
+        self.rect.x = x
+        self.rect.y = y
 
-        self.rect.midbottom = self.pos
+
 
 class Arrow(pg.sprite.Sprite):
     def __init__(self, x, y):

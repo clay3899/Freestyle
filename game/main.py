@@ -99,6 +99,11 @@ class Game:
 
 g = Game()
 
+enemy = Enemy(20,200,'wizard.png')# spawn enemy
+enemy_list = pg.sprite.Group()   # create enemy group
+enemy_list.add(enemy)                # add enemy to group
+
+
 g.show_start_screen()
 while g.running:
     g.new()
