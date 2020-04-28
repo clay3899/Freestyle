@@ -27,7 +27,7 @@ class Player(pg.sprite.Sprite):
             self.vel.y = -PLAYER_JUMP
     
     def fire(self):
-        self.arrow = Arrow(self.rect.x, self.rect.centery)
+       pass
         
     
     def update(self):
@@ -87,7 +87,7 @@ class Arrow(pg.sprite.Sprite):
         self.rect.bottom = y
         self.rect.centerx = x
         self.pos = vec(x, y)
-        self.vel = vec(,0)
+        self.vel = vec(0,0)
         self.acc = vec(0,0)
     
     def update(self):

@@ -23,12 +23,9 @@ class Game:
         # start a new game
         self.all_sprites = pg.sprite.Group()
         self.platforms = pg.sprite.Group()
-        self.mobs = pg.sprite.Group()
-        self.arrows = pg.sprite.Group
         self.player = Player(self)
         self.all_sprites.add(self.player)
-        self.mob = Mob(400, self.player)
-        self.all_sprites.add(self.mob)
+        
         
         for plat in PLATFORM_LIST:
             p = Platform(*plat)
@@ -63,11 +60,7 @@ class Game:
                 self.player.vel.y = 0
                 self.player.acc.y = 0
 
-            hits = pg.sprite.spritecollide(self.mobs, self.platforms, False)
-            if hits:
-                self.mob.pos.y = hits[0].rect.top
-                self.mob.vel.y = 0
-                self.mob.acc.y = 0
+            
     
     def events(self):
         # game loop -- events
