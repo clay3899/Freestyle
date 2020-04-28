@@ -153,17 +153,18 @@ class Mob(pygame.sprite.Sprite):
         self.movement = movement
         self.speedy = self.movement
         self.speedx = self.movement
-
+        self.distance = math.hypot(player.rect.x - self.rect.x, player.rect.y - self.rect.y)
+    
     def update(self):
         
-        if self.rect.y < player.rect.y:
-            self.rect.y += self.speedy
-        if self.rect.y > player.rect.y:
-            self.rect.y += -self.speedy
-        if self.rect.x < player.rect.x:
-            self.rect.x += self.speedx
-        if self.rect.x > player.rect.x:
-            self.rect.x += -self.speedx
+            if self.rect.y < player.rect.y:
+                self.rect.y += self.speedy
+            if self.rect.y > player.rect.y:
+                self.rect.y += -self.speedy
+            if self.rect.x < player.rect.x and self.distance <= 200:
+                self.rect.x += self.speedx
+            if self.rect.x > player.rect.x:
+                self.rect.x += -self.speedx
 
 class Weapon(pygame.sprite.Sprite):
     def __init__(self, tool, x, y):
