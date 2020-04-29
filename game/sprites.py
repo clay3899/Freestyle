@@ -20,7 +20,7 @@ class Player(pg.sprite.Sprite):
         self.pos = vec(WIDTH/2, HEIGHT/2)
         self.vel = vec(0,0)
         self.acc = vec(0,0)
-    
+        self.health = PLAYER_HEALTH
     def jump(self):
         
         self.rect.y += 1
@@ -103,6 +103,12 @@ class Arrow(pg.sprite.Sprite):
         
         self.rect.x = self.pos.x
         self.rect.y = self.pos.y - 64
+
+        if self.rect.x > WIDTH + 100:
+            self.kill()
+        if self.rect.y > HEIGHT + 100:
+            self.kill()
+
         pass
        
          
