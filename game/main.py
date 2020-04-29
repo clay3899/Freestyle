@@ -24,7 +24,7 @@ class Game:
         # start a new game
         self.all_sprites = pg.sprite.Group()
         self.platforms = pg.sprite.Group()
-        self.player = Player(self)
+        self.player = Player(self, 'archer.png')
         self.all_sprites.add(self.player)
         self.enemy1 = Enemy(680, 655, 'wizard.png')
         self.all_sprites.add(self.enemy1) 

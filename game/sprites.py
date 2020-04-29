@@ -7,11 +7,11 @@ img_dir = path.join(path.dirname(__file__), 'images')
 
 # All comes from KidsCanCode
 class Player(pg.sprite.Sprite):
-    def __init__(self, game):
+    def __init__(self, game, img):
         self.game = game
         pg.sprite.Sprite.__init__(self)
         self.image = pg.Surface((32,32))
-        self.image.fill(WHITE)
+        self.image = pg.image.load(path.join(img_dir, img)).convert_alpha()
         self.rect = self.image.get_rect()
         self.rect.center = (WIDTH / 2, HEIGHT / 2)
         self.pos = vec(WIDTH/2, HEIGHT/2)
