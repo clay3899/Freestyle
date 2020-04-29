@@ -1,15 +1,10 @@
 import pygame
 from pygame import *
 from os import path
-
-WIDTH = 960
-HEIGHT = 720
-WHITE = (255, 255, 255)
+from settings import *
 
 pygame.mixer.pre_init(44100,16,2,4096)
 pygame.init()
-
-pygame.display.set_caption('Champions are Coming')
 
 display_screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
