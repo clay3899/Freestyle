@@ -90,7 +90,7 @@ class Arrow(pg.sprite.Sprite):
         self.rect.centery = y
         self.rect.centerx = x
         self.pos = vec(x, y)
-        self.vel = vec(ARROW_SPEED,0)
+        self.vel = vec(ARROW_SPEED,-3)
         self.acc = vec(0,0)
     
     def update(self):
