@@ -1,7 +1,12 @@
 import random
+import pygame
+from pygame import *
+from os import path
+
+img_dir = path.join(path.dirname(__file__), 'images')
 
 #game options/settimgs
-TITLE = "No Ordinary Princess"
+TITLE = 'Champions are Coming'
 WIDTH = 960
 HEIGHT = 720
 FPS = 60
@@ -15,7 +20,10 @@ PLAYER_FRICTION = -0.12
 PLAYER_GRAV = .5
 PLAYER_JUMP = 18
 
-
+# Arrows
+ARROW_SPEED = 10
+ARROW_DAMAGE = 1
+SHOT_TIME = 400
 # starting platforms
 
 PLATFORM_LIST = [(0, HEIGHT- 5, WIDTH, 10), 
@@ -32,3 +40,8 @@ GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 LBROWN = (181, 101, 29)
 DBROWN = (101, 67, 33)
+
+# screens
+img_dir = path.join(path.dirname(__file__), 'images')
+
+
