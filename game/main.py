@@ -8,6 +8,11 @@ from os import path
 from settings import *
 from sprites import *
 
+pg.mixer.pre_init(44100,16,2,4096)
+pg.init()
+
+display_screen = pg.display.set_mode((WIDTH, HEIGHT))
+
 class Game:
     def __init__(self):
         # initialiaze game window, etc.
@@ -114,15 +119,61 @@ class Game:
         # after drawing
         pg.display.flip()
 
+
     
-    def start_screen(self)::
-       pass
     
     def fire(self):
         arrow = Arrow(int(self.player.rect.centerx),int(self.player.rect.centery), 'uber_tiny.png')
         self.all_sprites.add(arrow)
         self.arrows.add(arrow)
         
+
+    #Code help to understand structure of the start screen from https://github.com/joshuawillman/The-Lonely-Shooter
+    def start_screen(self):
+        img_dir = path.join(path.dirname(__file__), 'images')
+        title = pg.image.load(path.join(img_dir, "title_text.png")).convert_alpha()
+        title = pg.transform.scale(title, (WIDTH, 165))
+        background = pg.image.load('game\images\Home_Screen.jpg').convert()
+        background_rect = background.get_rect()
+
+        arrow_keys = pg.image.load(path.join(img_dir, 'arrow_keys.png')).convert_alpha()
+        arrow_keys = pg.transform.scale(arrow_keys, (150, 85))
+
+        display_screen.blit(background, background_rect)
+        display_screen.blit(title, (0,110))
+        display_screen.blit(arrow_keys, (720, 570))
+
+        def draw_text(surface, text, size, x, y, color):
+
+            font = pg.font.Font(pg.font.match_font('cambria'), size)
+            text_surface = font.render(text, True, color)
+            text_rect = text_surface.get_rect()
+            text_rect.midtop = (x, y)
+            surface.blit(text_surface, text_rect)
+
+        draw_text(display_screen, "Are You Ready for the Challenge?", 35, WIDTH/2, HEIGHT/2, WHITE)
+        draw_text(display_screen, "If so, press [ENTER] to begin", 35, WIDTH/2, (HEIGHT/2) + 50, WHITE)
+        draw_text(display_screen, "If not, press [Q] to quit", 35, WIDTH/2, (HEIGHT/2) + 100, WHITE)
+        draw_text(display_screen, "MOVE:", 35, 630, 550, WHITE)
+
+        #code for playing sound from CrouchingPython on YouTube https://www.youtube.com/watch?v=YQ1mixa9RAw
+        pg.mixer.music.load('game\sounds\Destiny.mp3')
+        pg.mixer.music.set_volume(0.5)
+        pg.mixer.music.play(-1)
+        pg.display.update()
+
+        while True:
+            event = pg.event.poll()
+            if event.type == pg.KEYDOWN:
+                if event.key == pg.K_RETURN:
+                    break
+                elif event.key == pg.K_q:
+                    pg.quit()
+                    sys.exit()
+            elif event.type == QUIT:
+                pg.quit()
+                sys.exit() 
+
     def end_screen(self):
         pass
 
