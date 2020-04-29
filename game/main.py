@@ -115,52 +115,8 @@ class Game:
         pg.display.flip()
 
     
-    def start_screen(self):
-        # game splash
-        
-        #self.background = pg.image.load('game\images\Home_Screen.jpg').convert()
-        #self.background = pg.transform.scale(self.background, (WIDTH, HEIGHT))
-        #self.screen.blit(self.background,[0,0])
-        #self.draw_text("Are You Ready for the Challenge?", 35, WIDTH/2, HEIGHT/2 -100, WHITE)
-        #self.draw_text("If so, press [ENTER] to begin", 35, WIDTH/2, (HEIGHT/2), WHITE)
-        #self.draw_text("If not, press [Q] to quit", 35, WIDTH/2, (HEIGHT/2) + 100, WHITE)
-        #self.draw_text("MOVE: USE ARROWS", 35, 630, 550, WHITE)
-        #self.draw_text("FIRE: USE SPACE", 35, 630, 600, WHITE )
-        
-        #pg.mixer.music.load('game\sounds\Destiny.mp3')
-        #pg.mixer.music.set_volume(0.5)
-        #pg.mixer.music.play(-1)
-        #pg.display.update()
-
-        #pg.display.flip()
-        #self.wait_for_key()
-
-
-    #def wait_for_key(self):
-        #waiting= True
-        #while waiting:
-          #  self.clock.tick(FPS)
-          #  for event in pg.event.get():
-          #      if event.type == pg.QUIT:
-          #          waiting = False
-          #          self.running = False
-          #      elif event.type == pg.KEYDOWN:
-          #          if event.key == pygame.K_RETURN:
-          #              waiting = False
-          #          elif event.key == pygame.K_q:
-          #              waiting = False
-          #              self.running = False
-        pass
-    def draw_text(self, text, size, x, y, color):
-
-        font = pg.font.Font(pg.font.match_font('cambria'), size)
-        text_surface = font.render(text, True, color)
-        text_rect = text_surface.get_rect()
-        text_rect.midtop = (x, y)
-        self.screen.blit(text_surface, text_rect)  
-       
-       
-        pass
+    def start_screen(self)::
+       pass
     
     def fire(self):
         arrow = Arrow(int(self.player.rect.centerx),int(self.player.rect.centery), 'uber_tiny.png')
