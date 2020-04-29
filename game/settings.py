@@ -18,11 +18,11 @@ PLAYER_JUMP = 18
 
 # starting platforms
 
-PLATFORM_LIST = [(0, HEIGHT- 40, WIDTH, 40), 
-                (WIDTH /2 - 50, HEIGHT *3/4, 100, 20),
-                (WIDTH - 100, HEIGHT - 360, 100, 20),
-                (WIDTH - 100, HEIGHT - 540, 100, 20),
-                (WIDTH/4, HEIGHT * random.randint(25,50)/100, 200, 20)]
+PLATFORM_LIST = [(0, HEIGHT- 5, WIDTH, 10), 
+                (WIDTH /2 - 50, HEIGHT *3/4, 100, 5),
+                (WIDTH - 120, HEIGHT - 360, 100, 5),
+                (WIDTH - 155, HEIGHT - 540, 75, 5),
+                (WIDTH/4, HEIGHT * random.randint(25,50)/100, 200, 5)]
 
 # colors
 WHITE = (255, 255, 255)

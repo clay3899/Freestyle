@@ -26,11 +26,11 @@ class Game:
         self.platforms = pg.sprite.Group()
         self.player = Player(self)
         self.all_sprites.add(self.player)
-        self.enemy1 = Enemy(850, 618, 'wizard.png')
+        self.enemy1 = Enemy(680, 655, 'wizard.png')
         self.all_sprites.add(self.enemy1) 
         self.enemy2 = Enemy(WIDTH - 100, HEIGHT - 420, 'wizard.png')
         self.all_sprites.add(self.enemy2) 
-        self.enemy3 = Enemy(WIDTH - 100, HEIGHT - 600, 'wizard.png')
+        self.enemy3 = Enemy(WIDTH - 155, HEIGHT - 600, 'wizard.png')
         self.all_sprites.add(self.enemy3) 
 
 
