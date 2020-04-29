@@ -95,7 +95,7 @@ class Game:
         # after drawing
         pg.display.flip()
 
-    
+    #Code help to understand structure of the start screen from https://github.com/joshuawillman/The-Lonely-Shooter
     def start_screen(self):
         img_dir = path.join(path.dirname(__file__), 'images')
         title = pg.image.load(path.join(img_dir, "title_text.png")).convert_alpha()
