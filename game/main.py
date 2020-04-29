@@ -8,6 +8,9 @@ from os import path
 from settings import *
 from sprites import *
 
+
+
+
 pg.mixer.pre_init(44100,16,2,4096)
 pg.init()
 
@@ -178,8 +181,79 @@ class Game:
         pass
 
 
+    
+
+
+def scrolling_text(screen):
+            
+
+    centerx, centery = screen.get_rect().centerx, screen.get_rect().centery
+    deltaY = centery + 20 
+
+    #Scrolling Story Text
+    rolling_text = '''
+    placeholder
+
+    placeholder
+
+    placeholder
+    '''
+    
+    running = True
+    '''while running:
+        for event in pygame.event.get():
+            if event.type==QUIT:
+                running = False'''
+            
+
+
+
+    while True:
+        event = pg.event.poll()
+        if event.type == pg.KEYDOWN:
+            if event.key == pg.K_RETURN:
+                break
+        elif event.type == QUIT:
+            pg.quit()
+            sys.exit() 
+        
+        screen.fill(0)
+        
+        deltaY -=4 #adjusts speed of text
+        msg_list = []
+        pos_list = []
+        i=0
+        
+        #Font and Background
+        font = pygame.font.SysFont('cambria',60)
+        background = pg.image.load('game\images\parchment.png')#.convert()
+        background = pygame.transform.scale(background, (WIDTH, HEIGHT))
+        rect = background.get_rect()
+        screen.blit(background, rect)
+
+        for line in rolling_text.split('\n'):
+            msg = font.render(line,True, BLACK)
+            msg_list.append(msg)
+            
+            pos = msg.get_rect(center=(centerx,centery + deltaY + i*30)) 
+            pos_list.append(pos)
+            i = i+1
+
+        if (centery + deltaY + 30*(len(rolling_text.split('\n'))) < 0):
+            running = False
+
+
+        for j in range(i):
+            screen.blit(msg_list[j], pos_list[j])
+        pygame.display.update()
+    exit
+
+
+
+
 g = Game()
 g.start_screen()
+scrolling_text(display_screen)
 while g.running:
     g.new()
     g.end_screen()
