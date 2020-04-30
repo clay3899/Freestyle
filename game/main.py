@@ -54,8 +54,7 @@ class Game:
         self.all_sprites.add(self.enemy1, self.enemy2, self.enemy3) 
         self.enemies.add(self.enemy1, self.enemy2, self.enemy3)
         self.previous_time = pg.time.get_ticks()
-        self.HP = 100
-        self.HP_prev = 100
+        self.HP_prev = self.player.health
         
       
         
@@ -109,8 +108,8 @@ class Game:
             pg.mixer.Sound.play(fire_sound)
             self.fireballs.acc = 0
             self.fireballs.vel = 0
-            self.HP -= FIREBALL_DAMAGE
-            self.HP_prev = self.HP + FIREBALL_DAMAGE
+            self.player.health -= FIREBALL_DAMAGE
+            self.HP_prev = self.player.health + FIREBALL_DAMAGE
 
        
             
@@ -162,20 +161,20 @@ class Game:
         text = font.render("HP:",20,GREEN)
         display_screen.blit(text,(20,20))
 
-        if self.HP > 30:
+        if self.player.health > 30:
                 hb_color = GREEN
         else: hb_color = RED
 
-        pg.draw.rect(display_screen,hb_color,(50,20,self.HP,20),0)
+        pg.draw.rect(display_screen,hb_color,(50,20,self.player.health,20),0)
         pg.display.flip()
 
         #Health bar
-        if self.HP < self.HP_prev:
-            pg.draw.rect(display_screen,hb_color,(50,20,self.HP,20),0)
+        if self.player.health < self.HP_prev:
+            pg.draw.rect(display_screen,hb_color,(50,20,self.player.health,20),0)
             pg.display.flip()
 
-        if self.HP <= 0:
-            pg.exit()
+        if self.player.health <= 0:
+            self.end_screen()
 
 
     
@@ -186,23 +185,25 @@ class Game:
         self.arrows.add(arrow)
 
     def shoot_fire1(self):
-        fire_ball1 = Fireball(int(self.enemy1.rect.centerx),int(self.enemy1.rect.centery), 'Fireball1.png')
-        self.all_sprites.add(fire_ball1)
-        self.fireballs.add(fire_ball1)
+        
+        if self.enemy1.health > 0:
+            fire_ball1 = Fireball(int(self.enemy1.rect.centerx),int(self.enemy1.rect.centery), 'Fireball1.png')
+            self.all_sprites.add(fire_ball1)
+            self.fireballs.add(fire_ball1)
 
 
     def shoot_fire2(self):
-   
-        fire_ball2 = Fireball(int(self.enemy2.rect.centerx),int(self.enemy2.rect.centery), 'Fireball1.png')
-        self.all_sprites.add(fire_ball2)
-        self.fireballs.add(fire_ball2)
+        if self.enemy2.health > 0:
+            fire_ball2 = Fireball(int(self.enemy2.rect.centerx),int(self.enemy2.rect.centery), 'Fireball1.png')
+            self.all_sprites.add(fire_ball2)
+            self.fireballs.add(fire_ball2)
   
 
     def shoot_fire3(self):
- 
-        fire_ball3 = Fireball(int(self.enemy3.rect.centerx),int(self.enemy3.rect.centery), 'Fireball1.png')
-        self.all_sprites.add(fire_ball3)
-        self.fireballs.add(fire_ball3)
+        if self.enemy3.health > 0:
+            fire_ball3 = Fireball(int(self.enemy3.rect.centerx),int(self.enemy3.rect.centery), 'Fireball1.png')
+            self.all_sprites.add(fire_ball3)
+            self.fireballs.add(fire_ball3)
 
 
 

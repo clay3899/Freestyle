@@ -75,6 +75,7 @@ class Enemy(pg.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
         self.health = 10
+        
 
         
     def update(self):
