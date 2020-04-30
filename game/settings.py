@@ -11,8 +11,6 @@ WIDTH = 960
 HEIGHT = 720
 FPS = 60
 
-
-
 # Player Properties
 
 PLAYER_ACC = 0.5
@@ -24,6 +22,11 @@ PLAYER_JUMP = 18
 ARROW_SPEED = 10
 ARROW_DAMAGE = 1
 SHOT_TIME = 400
+
+#Fireball
+
+FIREBALL_DAMAGE = 10
+
 # starting platforms
 
 PLATFORM_LIST = [(0, HEIGHT- 5, WIDTH, 10), 

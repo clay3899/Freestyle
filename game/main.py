@@ -18,6 +18,9 @@ pygame.time.set_timer(enemy2_shoot_event,5000)
 enemy3_shoot_event = pygame.USEREVENT +3
 pygame.time.set_timer(enemy3_shoot_event,3000)
 
+player_damage_event = pygame.USEREVENT +4
+
+
 pg.mixer.pre_init(44100,16,2,4096)
 pg.init()
 
@@ -51,6 +54,11 @@ class Game:
         self.all_sprites.add(self.enemy1, self.enemy2, self.enemy3) 
         self.enemies.add(self.enemy1, self.enemy2, self.enemy3)
         self.previous_time = pg.time.get_ticks()
+        self.HP = 100
+        self.HP_prev = 100
+        
+      
+        
 
         
         for plat in PLATFORM_LIST:
@@ -95,7 +103,24 @@ class Game:
             hit.acc = (0,0)
             hit.vel = (0,0)
 
- 
+        hits = pg.sprite.spritecollide(self.player, self.fireballs, True, )
+        if hits:
+            fire_sound = pg.mixer.Sound('game\sounds\enemyhit.ogg')
+            pg.mixer.Sound.play(fire_sound)
+            self.fireballs.acc = 0
+            self.fireballs.vel = 0
+            self.HP -= FIREBALL_DAMAGE
+            self.HP_prev = self.HP + FIREBALL_DAMAGE
+
+       
+            
+       
+            
+                
+     
+
+          
+
       
 
     def events(self):
@@ -115,13 +140,6 @@ class Game:
                         self.previous_time = self.current_time
                         self.fire()
 
-                #TEMP FOR TESTING
-                '''if event.key == pg.K_DOWN:
-                    self.current_time = pg.time.get_ticks()
-                    if self.current_time - self.previous_time > SHOT_TIME:
-                        self.previous_time = self.current_time
-                        self.shoot_fire()
-                '''
         
             if event.type == enemy1_shoot_event:
                 self.shoot_fire1()
@@ -134,24 +152,30 @@ class Game:
 
     def draw(self):
         # game loop -- draw
-    
-        
-        
-        
+ 
         self.background_image = pg.image.load("game\images\Forest.jpg").convert()
         self.screen.blit(self.background_image, [0, 0])
         self.all_sprites.draw(self.screen)
         
-        #Draw healthbar
+        #Draw healthbar text
         font = pg.font.Font(pg.font.match_font('cambria'),17)
         text = font.render("HP:",20,GREEN)
         display_screen.blit(text,(20,20))
 
-        pg.draw.rect(display_screen,RED,(50,20,100,20),0)
-        pg.draw.rect(display_screen,GREEN,(50,20,100,20),0)
-        
-        # after drawing
+        if self.HP > 30:
+                hb_color = GREEN
+        else: hb_color = RED
+
+        pg.draw.rect(display_screen,hb_color,(50,20,self.HP,20),0)
         pg.display.flip()
+
+        #Health bar
+        if self.HP < self.HP_prev:
+            pg.draw.rect(display_screen,hb_color,(50,20,self.HP,20),0)
+            pg.display.flip()
+
+        if self.HP <= 0:
+            pg.exit()
 
 
     
@@ -170,21 +194,22 @@ class Game:
     def shoot_fire2(self):
    
         fire_ball2 = Fireball(int(self.enemy2.rect.centerx),int(self.enemy2.rect.centery), 'Fireball1.png')
- 
-    
         self.all_sprites.add(fire_ball2)
-    
         self.fireballs.add(fire_ball2)
   
 
     def shoot_fire3(self):
  
         fire_ball3 = Fireball(int(self.enemy3.rect.centerx),int(self.enemy3.rect.centery), 'Fireball1.png')
-
         self.all_sprites.add(fire_ball3)
-
         self.fireballs.add(fire_ball3)
 
+
+
+    
+
+
+    
 
     #Code help to understand structure of the start screen from https://github.com/joshuawillman/The-Lonely-Shooter
     def start_screen(self):
@@ -231,6 +256,8 @@ class Game:
             elif event.type == QUIT:
                 pg.quit()
                 sys.exit() 
+
+                 
 
     def end_screen(self):
         pass
