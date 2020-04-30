@@ -8,6 +8,19 @@ from os import path
 from settings import *
 from sprites import *
 
+
+enemy1_shoot_event = pygame.USEREVENT +1
+pygame.time.set_timer(enemy1_shoot_event,2500)
+
+enemy2_shoot_event = pygame.USEREVENT +2
+pygame.time.set_timer(enemy2_shoot_event,5000)
+
+enemy3_shoot_event = pygame.USEREVENT +3
+pygame.time.set_timer(enemy3_shoot_event,3000)
+
+player_damage_event = pygame.USEREVENT +4
+
+
 pg.mixer.pre_init(44100,16,2,4096)
 pg.init()
 
@@ -32,6 +45,7 @@ class Game:
         self.platforms = pg.sprite.Group()
         self.enemies = pg.sprite.Group()
         self.arrows = pg.sprite.Group()
+        self.fireballs = pg.sprite.Group()
         self.player = Player(self, 'archer.png')
         self.all_sprites.add(self.player)
         self.enemy1 = Enemy(680, 655, 'wizard.png')
@@ -40,6 +54,12 @@ class Game:
         self.all_sprites.add(self.enemy1, self.enemy2, self.enemy3) 
         self.enemies.add(self.enemy1, self.enemy2, self.enemy3)
         self.previous_time = pg.time.get_ticks()
+        self.HP_prev = self.player.health
+        
+      
+        
+
+        
         for plat in PLATFORM_LIST:
             p = Platform(*plat)
             self.all_sprites.add(p)
@@ -72,7 +92,7 @@ class Game:
                 self.player.pos.y = hits[0].rect.top
                 self.player.vel.y = 0
                 self.player.acc.y = 0        
-    
+
         hits = pg.sprite.groupcollide(self.enemies, self.arrows, False, True)
         for hit in hits:
             hit.health -= ARROW_DAMAGE
@@ -82,10 +102,28 @@ class Game:
             hit.acc = (0,0)
             hit.vel = (0,0)
 
+        hits = pg.sprite.spritecollide(self.player, self.fireballs, True, )
+        if hits:
+            fire_sound = pg.mixer.Sound('game\sounds\enemyhit.ogg')
+            pg.mixer.Sound.play(fire_sound)
+            self.fireballs.acc = 0
+            self.fireballs.vel = 0
+            self.player.health -= FIREBALL_DAMAGE
+            self.HP_prev = self.player.health + FIREBALL_DAMAGE
+
+       
+            
+       
+            
+                
+     
+
+          
+
+      
 
     def events(self):
-        # game loop -- events
-        
+        # game loop -- events      
         for event in pg.event.get():
 
             if event.type == pg.QUIT:
@@ -101,19 +139,42 @@ class Game:
                         self.previous_time = self.current_time
                         self.fire()
 
+        
+            if event.type == enemy1_shoot_event:
+                self.shoot_fire1()
+            
+            if event.type == enemy2_shoot_event:
+                self.shoot_fire2()
 
-    
+            if event.type == enemy3_shoot_event:
+                self.shoot_fire3()
+
     def draw(self):
         # game loop -- draw
-      
-        
-        self.background_image = pg.image.load("game\images\Forest.jpg").convert_alpha()
+ 
+        self.background_image = pg.image.load("game\images\Forest.jpg").convert()
         self.screen.blit(self.background_image, [0, 0])
         self.all_sprites.draw(self.screen)
         
-        
-        # after drawing
+        #Draw healthbar text
+        font = pg.font.Font(pg.font.match_font('cambria'),17)
+        text = font.render("HP:",20,GREEN)
+        display_screen.blit(text,(20,20))
+
+        if self.player.health > 30:
+                hb_color = GREEN
+        else: hb_color = RED
+
+        pg.draw.rect(display_screen,hb_color,(50,20,self.player.health,20),0)
         pg.display.flip()
+
+        #Health bar
+        if self.player.health < self.HP_prev:
+            pg.draw.rect(display_screen,hb_color,(50,20,self.player.health,20),0)
+            pg.display.flip()
+
+        if self.player.health <= 0:
+            self.end_screen()
 
 
     
@@ -122,7 +183,34 @@ class Game:
         arrow = Arrow(int(self.player.rect.centerx),int(self.player.rect.centery), 'uber_tiny.png')
         self.all_sprites.add(arrow)
         self.arrows.add(arrow)
+
+    def shoot_fire1(self):
         
+        if self.enemy1.health > 0:
+            fire_ball1 = Fireball(int(self.enemy1.rect.centerx),int(self.enemy1.rect.centery), 'Fireball1.png')
+            self.all_sprites.add(fire_ball1)
+            self.fireballs.add(fire_ball1)
+
+
+    def shoot_fire2(self):
+        if self.enemy2.health > 0:
+            fire_ball2 = Fireball(int(self.enemy2.rect.centerx),int(self.enemy2.rect.centery), 'Fireball1.png')
+            self.all_sprites.add(fire_ball2)
+            self.fireballs.add(fire_ball2)
+  
+
+    def shoot_fire3(self):
+        if self.enemy3.health > 0:
+            fire_ball3 = Fireball(int(self.enemy3.rect.centerx),int(self.enemy3.rect.centery), 'Fireball1.png')
+            self.all_sprites.add(fire_ball3)
+            self.fireballs.add(fire_ball3)
+
+
+
+    
+
+
+    
 
     #Code help to understand structure of the start screen from https://github.com/joshuawillman/The-Lonely-Shooter
     def start_screen(self):
@@ -165,17 +253,91 @@ class Game:
                     break
                 elif event.key == pg.K_q:
                     pg.quit()
-                    sys.exit()
+                    self.running = False
             elif event.type == QUIT:
                 pg.quit()
                 sys.exit() 
+
+                 
 
     def end_screen(self):
         pass
 
 
+
+
+
+    
+
+
+def scrolling_text(screen):
+            
+
+    centerx, centery = screen.get_rect().centerx, screen.get_rect().centery
+    deltaY = centery + 20 
+
+    #Scrolling Story Text
+    rolling_text = '''
+    placeholder
+
+    placeholder
+
+    placeholder
+    '''
+    
+    running = True
+    '''while running:
+        for event in pygame.event.get():
+            if event.type==QUIT:
+                running = False'''       
+
+
+    while True:
+        event = pg.event.poll()
+        if event.type == pg.KEYDOWN:
+            if event.key == pg.K_RETURN:
+                break
+        elif event.type == QUIT:
+            pg.quit()
+            sys.exit() 
+        
+        screen.fill(0)
+        
+        deltaY -=4 #adjusts speed of text
+        msg_list = []
+        pos_list = []
+        i=0
+        
+        #Font and Background
+        font = pygame.font.SysFont('cambria',60)
+        background = pg.image.load('game\images\parchment.png')#.convert()
+        background = pygame.transform.scale(background, (WIDTH, HEIGHT))
+        rect = background.get_rect()
+        screen.blit(background, rect)
+
+        for line in rolling_text.split('\n'):
+            msg = font.render(line,True, BLACK)
+            msg_list.append(msg)
+            
+            pos = msg.get_rect(center=(centerx,centery + deltaY + i*30)) 
+            pos_list.append(pos)
+            i = i+1
+
+        if (centery + deltaY + 30*(len(rolling_text.split('\n'))) < 0):
+            running = False
+
+
+        for j in range(i):
+            screen.blit(msg_list[j], pos_list[j])
+        pygame.display.update()
+    exit
+
+
+
+
 g = Game()
 g.start_screen()
+scrolling_text(display_screen)
 while g.running:
     g.new()
     g.end_screen()
