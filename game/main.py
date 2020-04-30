@@ -10,13 +10,13 @@ from sprites import *
 
 
 enemy1_shoot_event = pygame.USEREVENT +1
-pygame.time.set_timer(enemy1_shoot_event,2500)
+pygame.time.set_timer(enemy1_shoot_event,2000)
 
 enemy2_shoot_event = pygame.USEREVENT +2
-pygame.time.set_timer(enemy2_shoot_event,5000)
+pygame.time.set_timer(enemy2_shoot_event,3000)
 
 enemy3_shoot_event = pygame.USEREVENT +3
-pygame.time.set_timer(enemy3_shoot_event,3000)
+pygame.time.set_timer(enemy3_shoot_event, 2500)
 
 player_damage_event = pygame.USEREVENT +4
 
@@ -102,7 +102,7 @@ class Game:
             hit.acc = (0,0)
             hit.vel = (0,0)
 
-        hits = pg.sprite.spritecollide(self.player, self.fireballs, True, )
+        hits = pg.sprite.spritecollide(self.player, self.fireballs, True,  pg.sprite.collide_circle)
         if hits:
             fire_sound = pg.mixer.Sound('game\sounds\enemyhit.ogg')
             pg.mixer.Sound.play(fire_sound)
@@ -188,6 +188,7 @@ class Game:
         
         if self.enemy1.health > 0:
             fire_ball1 = Fireball(int(self.enemy1.rect.centerx),int(self.enemy1.rect.centery), 'Fireball1.png')
+            self.radius = 15
             self.all_sprites.add(fire_ball1)
             self.fireballs.add(fire_ball1)
 
@@ -195,12 +196,14 @@ class Game:
     def shoot_fire2(self):
         if self.enemy2.health > 0:
             fire_ball2 = Fireball(int(self.enemy2.rect.centerx),int(self.enemy2.rect.centery), 'Fireball1.png')
+            self.radius = 15
             self.all_sprites.add(fire_ball2)
             self.fireballs.add(fire_ball2)
   
 
     def shoot_fire3(self):
         if self.enemy3.health > 0:
+            self.radius = 15
             fire_ball3 = Fireball(int(self.enemy3.rect.centerx),int(self.enemy3.rect.centery), 'Fireball1.png')
             self.all_sprites.add(fire_ball3)
             self.fireballs.add(fire_ball3)
