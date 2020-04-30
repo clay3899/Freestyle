@@ -9,7 +9,14 @@ from settings import *
 from sprites import *
 
 
+enemy1_shoot_event = pygame.USEREVENT +1
+pygame.time.set_timer(enemy1_shoot_event,2500)
 
+enemy2_shoot_event = pygame.USEREVENT +2
+pygame.time.set_timer(enemy2_shoot_event,5000)
+
+enemy3_shoot_event = pygame.USEREVENT +3
+pygame.time.set_timer(enemy3_shoot_event,3000)
 
 pg.mixer.pre_init(44100,16,2,4096)
 pg.init()
@@ -35,6 +42,7 @@ class Game:
         self.platforms = pg.sprite.Group()
         self.enemies = pg.sprite.Group()
         self.arrows = pg.sprite.Group()
+        self.fireballs = pg.sprite.Group()
         self.player = Player(self, 'archer.png')
         self.all_sprites.add(self.player)
         self.enemy1 = Enemy(680, 655, 'wizard.png')
@@ -43,6 +51,8 @@ class Game:
         self.all_sprites.add(self.enemy1, self.enemy2, self.enemy3) 
         self.enemies.add(self.enemy1, self.enemy2, self.enemy3)
         self.previous_time = pg.time.get_ticks()
+
+        
         for plat in PLATFORM_LIST:
             p = Platform(*plat)
             self.all_sprites.add(p)
@@ -75,7 +85,7 @@ class Game:
                 self.player.pos.y = hits[0].rect.top
                 self.player.vel.y = 0
                 self.player.acc.y = 0        
-    
+
         hits = pg.sprite.groupcollide(self.enemies, self.arrows, False, True)
         for hit in hits:
             hit.health -= ARROW_DAMAGE
@@ -85,10 +95,11 @@ class Game:
             hit.acc = (0,0)
             hit.vel = (0,0)
 
+ 
+      
 
     def events(self):
-        # game loop -- events
-        
+        # game loop -- events      
         for event in pg.event.get():
 
             if event.type == pg.QUIT:
@@ -104,8 +115,23 @@ class Game:
                         self.previous_time = self.current_time
                         self.fire()
 
+                #TEMP FOR TESTING
+                '''if event.key == pg.K_DOWN:
+                    self.current_time = pg.time.get_ticks()
+                    if self.current_time - self.previous_time > SHOT_TIME:
+                        self.previous_time = self.current_time
+                        self.shoot_fire()
+                '''
+        
+            if event.type == enemy1_shoot_event:
+                self.shoot_fire1()
+            
+            if event.type == enemy2_shoot_event:
+                self.shoot_fire2()
 
-    
+            if event.type == enemy3_shoot_event:
+                self.shoot_fire3()
+
     def draw(self):
         # game loop -- draw
     
@@ -116,8 +142,13 @@ class Game:
         self.screen.blit(self.background_image, [0, 0])
         self.all_sprites.draw(self.screen)
         
-        
-        
+        #Draw healthbar
+        font = pg.font.Font(pg.font.match_font('cambria'),17)
+        text = font.render("HP:",20,GREEN)
+        display_screen.blit(text,(20,20))
+
+        pg.draw.rect(display_screen,RED,(50,20,100,20),0)
+        pg.draw.rect(display_screen,GREEN,(50,20,100,20),0)
         
         # after drawing
         pg.display.flip()
@@ -129,7 +160,31 @@ class Game:
         arrow = Arrow(int(self.player.rect.centerx),int(self.player.rect.centery), 'uber_tiny.png')
         self.all_sprites.add(arrow)
         self.arrows.add(arrow)
-        
+
+    def shoot_fire1(self):
+        fire_ball1 = Fireball(int(self.enemy1.rect.centerx),int(self.enemy1.rect.centery), 'Fireball1.png')
+        self.all_sprites.add(fire_ball1)
+        self.fireballs.add(fire_ball1)
+
+
+    def shoot_fire2(self):
+   
+        fire_ball2 = Fireball(int(self.enemy2.rect.centerx),int(self.enemy2.rect.centery), 'Fireball1.png')
+ 
+    
+        self.all_sprites.add(fire_ball2)
+    
+        self.fireballs.add(fire_ball2)
+  
+
+    def shoot_fire3(self):
+ 
+        fire_ball3 = Fireball(int(self.enemy3.rect.centerx),int(self.enemy3.rect.centery), 'Fireball1.png')
+
+        self.all_sprites.add(fire_ball3)
+
+        self.fireballs.add(fire_ball3)
+
 
     #Code help to understand structure of the start screen from https://github.com/joshuawillman/The-Lonely-Shooter
     def start_screen(self):
@@ -181,6 +236,9 @@ class Game:
         pass
 
 
+
+
+
     
 
 
@@ -203,9 +261,7 @@ def scrolling_text(screen):
     '''while running:
         for event in pygame.event.get():
             if event.type==QUIT:
-                running = False'''
-            
-
+                running = False'''       
 
 
     while True:
