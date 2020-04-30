@@ -21,6 +21,7 @@ class Player(pg.sprite.Sprite):
         self.vel = vec(0,0)
         self.acc = vec(0,0)
         self.health = PLAYER_HEALTH
+    
     def jump(self):
         
         self.rect.y += 1
@@ -74,11 +75,11 @@ class Enemy(pg.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
         self.health = 10
-    
+
+        
     def update(self):
         if self.health < 0:
             self.kill()
-        
     
 
 class Arrow(pg.sprite.Sprite):
@@ -111,7 +112,30 @@ class Arrow(pg.sprite.Sprite):
 
         pass
        
-         
+class Fireball(pg.sprite.Sprite):
+    def __init__(self, x, y, img):
+        pg.sprite.Sprite.__init__(self)
+        self.image = pg.image.load(path.join(img_dir, img)).convert_alpha()
+        self.image.set_colorkey(BLACK)
+        self.rect = self.image.get_rect()
+        self.rect.centery = y
+        self.rect.centerx = x
+        self.pos = vec(x, y)
+        self.vel = vec(-ARROW_SPEED,0)
+        self.acc = vec(0,0)
+    
+    def update(self):
+        
+        # equations of motion
+        self.acc = vec(0, 0.008)
+        self.acc.x += self.vel.x
+        self.vel.y += self.acc.y
+        self.pos += self.vel + 0.5 * self.acc
+        
+        self.rect.x = self.pos.x
+        self.rect.y = self.pos.y - 64
+        pass
+               
         
     
 
