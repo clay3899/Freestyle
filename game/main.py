@@ -220,7 +220,7 @@ class Game:
         img_dir = path.join(path.dirname(__file__), 'images')
         title = pg.image.load(path.join(img_dir, "title_text.png")).convert_alpha()
         title = pg.transform.scale(title, (WIDTH, 165))
-        background = pg.image.load('game\images\Home_Screen.jpg').convert()
+        background = pg.image.load('game\images\Home_Screen.jpg').convert_alpha()
         background_rect = background.get_rect()
 
         arrow_keys = pg.image.load(path.join(img_dir, 'arrow_keys.png')).convert_alpha()
