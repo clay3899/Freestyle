@@ -252,7 +252,7 @@ class Game:
                     break
                 elif event.key == pg.K_q:
                     pg.quit()
-                    sys.exit()
+                    self.running = False
             elif event.type == QUIT:
                 pg.quit()
                 sys.exit() 
