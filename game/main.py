@@ -105,15 +105,11 @@ class Game:
     
     def draw(self):
         # game loop -- draw
-    
+      
         
-        
-        
-        self.background_image = pg.image.load("game\images\Forest.jpg").convert()
+        self.background_image = pg.image.load("game\images\Forest.jpg").convert_alpha()
         self.screen.blit(self.background_image, [0, 0])
         self.all_sprites.draw(self.screen)
-        
-        
         
         
         # after drawing
@@ -133,7 +129,7 @@ class Game:
         img_dir = path.join(path.dirname(__file__), 'images')
         title = pg.image.load(path.join(img_dir, "title_text.png")).convert_alpha()
         title = pg.transform.scale(title, (WIDTH, 165))
-        background = pg.image.load('game\images\Home_Screen.jpg').convert()
+        background = pg.image.load('game\images\Home_Screen.jpg').convert_alpha()
         background_rect = background.get_rect()
 
         arrow_keys = pg.image.load(path.join(img_dir, 'arrow_keys.png')).convert_alpha()
