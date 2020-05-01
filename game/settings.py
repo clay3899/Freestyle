@@ -47,5 +47,3 @@ DBROWN = (101, 67, 33)
 
 # variable for image file path
 img_dir = path.join(path.dirname(__file__), 'images')
-
-

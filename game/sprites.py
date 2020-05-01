@@ -160,6 +160,8 @@ class Enemy(pg.sprite.Sprite):
         """ 
         if self.health < 0:
             self.kill()
+            death_sound = pg.mixer.Sound('game\sounds\explode.ogg')
+            pg.mixer.Sound.play(death_sound)
     
 
 class Arrow(pg.sprite.Sprite):

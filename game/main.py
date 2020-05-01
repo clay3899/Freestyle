@@ -139,6 +139,8 @@ class Game:
         hits = pg.sprite.groupcollide(self.enemies, self.arrows, False, True)
         for hit in hits:
             hit.health -= ARROW_DAMAGE
+            arrow_sound = pg.mixer.Sound('game\sounds\get_hit.ogg')
+            pg.mixer.Sound.play(arrow_sound)
 
         hits = pg.sprite.groupcollide(self.platforms, self.arrows, False, True)
         for hit in hits:
@@ -153,6 +155,7 @@ class Game:
             self.fireballs.vel = 0
             self.player.health -= FIREBALL_DAMAGE
             self.HP_prev = self.player.health + FIREBALL_DAMAGE
+
        
         if self.player.health <= 0:
             self.playing = False
@@ -164,6 +167,7 @@ class Game:
         Creates the events loop to allow for actions to occur in the pygame window.
 
         Parameters: 
+
 
             self (self):  keyword we can access the attributes and methods of the class in python 
 
@@ -232,6 +236,8 @@ class Game:
             pg.draw.rect(display_screen,hb_color,(50,20,self.player.health,20),0)
             pg.display.flip()
 
+
+
     def fire(self):
         arrow = Arrow(int(self.player.rect.centerx),int(self.player.rect.centery), 'uber_tiny.png')
         self.all_sprites.add(arrow)
@@ -281,7 +287,7 @@ class Game:
             self.all_sprites.add(fire_ball3)
             self.fireballs.add(fire_ball3)
 
-   
+
 
     
     def start_screen(self):
@@ -291,6 +297,7 @@ class Game:
         Parameters: 
 
             self (self):  keyword we can access the attributes and methods of the class in python 
+
 
         Source: Code help to understand structure of the start screen from https://github.com/joshuawillman/The-Lonely-Shooter
         """  
@@ -311,6 +318,7 @@ class Game:
         display_screen.blit(arrow_keys, (720, 570))
         display_screen.blit(spacebar, (720, 670))
 
+
         
         def draw_text(self, surface, text, size, x, y, color):
             """
@@ -323,6 +331,7 @@ class Game:
                 surface 
 
                 text (str): Words that are desired to be on the pygame screen
+
 
                 size (int):  Provides the desired text size of words
 
@@ -367,6 +376,8 @@ class Game:
                  
 
     def end_screen(self):
+
+
         """
         Function to create an end screen after the player wins or loses on the pygame screen.
 
@@ -374,17 +385,33 @@ class Game:
         
             self (self): keyword we can access the attributes and methods of the class in python 
         """  
-        img_dir = path.join(path.dirname(__file__), 'images')
-        title = pg.image.load(path.join(img_dir, "title_text.png")).convert_alpha()
-        title = pg.transform.scale(title, (WIDTH, 165))
-        background = pg.image.load('game\images\Home_Screen.jpg').convert()
-        background_rect = background.get_rect()
-        
 
-        display_screen.blit(background, background_rect)
+        if self.running == False:    
+            return
+        #img_dir = path.join(path.dirname(__file__), 'images')
+        
+        background = pg.image.load('game\images\onfiretown.png')#.convert()
+        background = pygame.transform.scale(background, (WIDTH, HEIGHT))
+        rect = background.get_rect()
+        display_screen.blit(background, rect)
+
+        font = pg.font.Font(pg.font.match_font('cambria'),75)
+        text = font.render("GAME OVER",20,WHITE)
+        display_screen.blit(text,(275,150))
+
+        font2 = pg.font.Font(pg.font.match_font('cambria'),25)
+        text2 = font2.render("Overwhelmed by the enemy onslaught, you fall in battle.",18,WHITE)
+        display_screen.blit(text2,(165,260))
+
+        text3 = font2.render("With nobody left to protect the town, it falls into chaos and ruin.",18,WHITE)
+        display_screen.blit(text3,(125,300))
+
+        text4 = font2.render("Press [ENTER] to play again!",20,GREEN)
+        display_screen.blit(text4,(300,350))
 
 
         pg.display.flip()
+
 
         while True:
             event = pg.event.poll()
@@ -399,12 +426,13 @@ class Game:
                 sys.exit() 
         
         
-  
+
     def scrolling_text(self, screen):
         """
         Function to create a screen with scrolling text similar to the Star Wars Exposition Screen.
 
         Parameters: 
+
 
             self (self): keyword we can access the attributes and methods of the class in python 
 
@@ -419,7 +447,6 @@ class Game:
         #Scrolling Story Text
         rolling_text = '''
         Three evil wizards are about to attack your village! 
-
 
         They are currently at the edge of the forest...
 
@@ -480,6 +507,7 @@ class Game:
                 pos_list.append(pos)
                 i = i+1
 
+
             if (centery + deltaY + 30*(len(rolling_text.split('\n'))) < 0):
                 running = False
 
@@ -490,7 +518,9 @@ class Game:
         exit
 
 
+
 #Run game class
+
 g = Game()
 g.start_screen()
 g.scrolling_text(display_screen)
