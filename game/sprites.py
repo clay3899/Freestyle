@@ -11,6 +11,7 @@ img_dir = path.join(path.dirname(__file__), 'images')
 # from KidsCanCode
 class Player(pg.sprite.Sprite):
     def __init__(self, game, img):
+
         self.game = game
         pg.sprite.Sprite.__init__(self)
         self.image = pg.Surface((32,32))
@@ -24,7 +25,7 @@ class Player(pg.sprite.Sprite):
         self.radius = 15 
     
     def jump(self):
-        
+ 
         self.rect.y += 1
 
         hits = pg.sprite.spritecollide(self,self.game.platforms, False)

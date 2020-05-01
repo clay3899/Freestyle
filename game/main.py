@@ -37,7 +37,7 @@ class Game:
         pg.display.set_caption(TITLE)
         self.clock = pg.time.Clock()
         
-        pass
+        
     
     def new(self):
         # start a new game
@@ -66,7 +66,7 @@ class Game:
             self.platforms.add(p)
       
         self.run()
-        pass
+        
 
     def run(self):
         # game loop
@@ -78,7 +78,7 @@ class Game:
             self.update()
             self.draw()
 
-        pass
+        
     
     def update(self):
         # game loop -- updates
@@ -114,16 +114,6 @@ class Game:
         if self.player.health <= 0:
             self.playing = False
        
-            
-       
-            
-                
-     
-
-          
-
-    
-
               
 
     def events(self):
@@ -177,11 +167,6 @@ class Game:
             pg.draw.rect(display_screen,hb_color,(50,20,self.player.health,20),0)
             pg.display.flip()
 
-       
-
-
-    
-    
     def fire(self):
         arrow = Arrow(int(self.player.rect.centerx),int(self.player.rect.centery), 'uber_tiny.png')
         self.all_sprites.add(arrow)
@@ -294,8 +279,6 @@ class Game:
         
         
   
-
-
 def scrolling_text(screen):
             
 
@@ -374,10 +357,6 @@ def scrolling_text(screen):
             screen.blit(msg_list[j], pos_list[j])
         pygame.display.update()
     exit
-
-
-
-
 
 
 
