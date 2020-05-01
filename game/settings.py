@@ -45,5 +45,5 @@ BLUE = (0, 0, 255)
 LBROWN = (181, 101, 29)
 DBROWN = (101, 67, 33)
 
-# screens
+# variable for image file path
 img_dir = path.join(path.dirname(__file__), 'images')

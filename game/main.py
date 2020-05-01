@@ -27,7 +27,21 @@ pg.init()
 display_screen = pg.display.set_mode((WIDTH, HEIGHT))
 
 class Game:
+    """
+    Creates the game class to run the game.
+    """
     def __init__(self):
+        """
+        Initializes (sets up) the game class.
+
+        Parameters: 
+
+            self (self):  keyword we can access the attributes and methods of the class in python 
+
+        Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
+
+        Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c
+        """
         # initialiaze game window, etc.
         self.running = True
         pg.init()
@@ -37,9 +51,20 @@ class Game:
         pg.display.set_caption(TITLE)
         self.clock = pg.time.Clock()
         
-        pass
+        
     
     def new(self):
+        """
+        Starts a new pygame window.
+
+        Parameters: 
+
+            self (self):  keyword we can access the attributes and methods of the class in python 
+
+        Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
+
+        Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c
+        """
         # start a new game
         self.all_sprites = pg.sprite.Group()
         self.platforms = pg.sprite.Group()
@@ -56,19 +81,26 @@ class Game:
         self.previous_time = pg.time.get_ticks()
         self.HP_prev = self.player.health
         
-      
-        
-
-        
         for plat in PLATFORM_LIST:
             p = Platform(*plat)
             self.all_sprites.add(p)
             self.platforms.add(p)
       
         self.run()
-        pass
+        
 
     def run(self):
+        """
+        Creates the game loop.
+
+        Parameters: 
+
+            self (self):  keyword we can access the attributes and methods of the class in python 
+
+        Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
+
+        Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c
+        """
         # game loop
         
         self.playing = True
@@ -78,13 +110,24 @@ class Game:
             self.update()
             self.draw()
 
-        pass
+        
     
     def update(self):
+        """
+        Method to control sprite's behavior (impact of collisions).
+
+        Parameters: 
+
+            self (self):  keyword we can access the attributes and methods of the class in python 
+
+        Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
+
+        Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c     
+        """ 
         # game loop -- updates
         self.all_sprites.update()
+
         #check if player hits platform if falling
-        
         if self.player.vel.y > 0:
             hits = pg.sprite.spritecollide(self.player, self.platforms, False,)
         
@@ -112,23 +155,26 @@ class Game:
             self.fireballs.vel = 0
             self.player.health -= FIREBALL_DAMAGE
             self.HP_prev = self.player.health + FIREBALL_DAMAGE
+
        
         if self.player.health <= 0:
             self.playing = False
        
-            
-       
-            
-                
-     
-
-          
-
-    
-
               
 
     def events(self):
+        """
+        Creates the events loop to allow for actions to occur in the pygame window.
+
+        Parameters: 
+
+
+            self (self):  keyword we can access the attributes and methods of the class in python 
+
+        Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
+
+        Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c
+        """
         # game loop -- events      
         for event in pg.event.get():
 
@@ -137,9 +183,9 @@ class Game:
                     self.playing = False
                     self.running = False
             if event.type == pg.KEYDOWN:
-                if event.key == pg.K_UP:
+                if event.key == pg.K_UP: #action of player to jump if up key is pressed
                     self.player.jump()
-                if event.key == pg.K_SPACE:
+                if event.key == pg.K_SPACE: #action of player to shoot if spacebar is pressed
                     self.current_time = pg.time.get_ticks()
                     if self.current_time - self.previous_time > SHOT_TIME:   
                         self.previous_time = self.current_time
@@ -156,6 +202,17 @@ class Game:
                 self.shoot_fire3()
 
     def draw(self):
+        """
+        Function that allows for the creation of items on the pygame screen.
+
+        Parameters: 
+
+            self (self):  keyword we can access the attributes and methods of the class in python 
+
+        Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
+
+        Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c
+        """
         # game loop -- draw
  
         self.background_image = pg.image.load("game\images\Forest.jpg").convert_alpha()
@@ -179,18 +236,21 @@ class Game:
             pg.draw.rect(display_screen,hb_color,(50,20,self.player.health,20),0)
             pg.display.flip()
 
-       
 
 
-    
-    
     def fire(self):
         arrow = Arrow(int(self.player.rect.centerx),int(self.player.rect.centery), 'uber_tiny.png')
         self.all_sprites.add(arrow)
         self.arrows.add(arrow)
 
-    def shoot_fire1(self):
-        
+    def shoot_fire1(self): 
+        """
+        Creates the fireballs that enemy 1 shoots.
+
+        Parameters: 
+
+            self (self):  keyword we can access the attributes and methods of the class in python 
+        """  
         if self.enemy1.health > 0:
             fire_ball1 = Fireball(int(self.enemy1.rect.centerx),int(self.enemy1.rect.centery), 'Fireball1.png')
             self.radius = 15
@@ -199,6 +259,13 @@ class Game:
 
 
     def shoot_fire2(self):
+        """
+        Creates the fireballs that enemy 2 shoots.
+
+        Parameters: 
+
+            self (self):  keyword we can access the attributes and methods of the class in python 
+        """ 
         if self.enemy2.health > 0:
             fire_ball2 = Fireball(int(self.enemy2.rect.centerx),int(self.enemy2.rect.centery), 'Fireball1.png')
             self.radius = 15
@@ -207,16 +274,33 @@ class Game:
   
 
     def shoot_fire3(self):
+        """
+        Creates the fireballs that enemy 3 shoots.
+
+        Parameters: 
+
+            self (self):  keyword we can access the attributes and methods of the class in python 
+        """ 
         if self.enemy3.health > 0:
             self.radius = 15
             fire_ball3 = Fireball(int(self.enemy3.rect.centerx),int(self.enemy3.rect.centery), 'Fireball1.png')
             self.all_sprites.add(fire_ball3)
             self.fireballs.add(fire_ball3)
 
-   
 
-    #Code help to understand structure of the start screen from https://github.com/joshuawillman/The-Lonely-Shooter
+
+    
     def start_screen(self):
+        """
+        Function to create start screen on the pygame screen.
+
+        Parameters: 
+
+            self (self):  keyword we can access the attributes and methods of the class in python 
+
+
+        Source: Code help to understand structure of the start screen from https://github.com/joshuawillman/The-Lonely-Shooter
+        """  
         img_dir = path.join(path.dirname(__file__), 'images')
         title = pg.image.load(path.join(img_dir, "title_text.png")).convert_alpha()
         title = pg.transform.scale(title, (WIDTH, 165))
@@ -234,9 +318,31 @@ class Game:
         display_screen.blit(arrow_keys, (720, 570))
         display_screen.blit(spacebar, (720, 670))
 
+
         
         def draw_text(self, surface, text, size, x, y, color):
+            """
+            Function to draw text on the the start screen.
 
+            Parameters: 
+
+                self (self): keyword we can access the attributes and methods of the class in python 
+
+                surface 
+
+                text (str): Words that are desired to be on the pygame screen
+
+
+                size (int):  Provides the desired text size of words
+
+                x (int): x coordinate of the text on the screen (changing the coordinate moves the text horizontally)
+
+                y (int): y coordinate of the text on the screen (changing the coordinate moves the text vertically)
+
+                color (preset color code from pygame): Determines the color of the text
+
+            Source: Code help to understand structure of the start screen from https://github.com/joshuawillman/The-Lonely-Shooter
+            """  
             font = pg.font.Font(pg.font.match_font('cambria'), size)
             text_surface = font.render(text, True, color)
             text_rect = text_surface.get_rect()
@@ -270,6 +376,16 @@ class Game:
                  
 
     def end_screen(self):
+
+
+        """
+        Function to create an end screen after the player wins or loses on the pygame screen.
+
+        Parameters: 
+        
+            self (self): keyword we can access the attributes and methods of the class in python 
+        """  
+
         if self.running == False:    
             return
         #img_dir = path.join(path.dirname(__file__), 'images')
@@ -294,10 +410,8 @@ class Game:
         display_screen.blit(text4,(300,350))
 
 
-
-
-
         pg.display.flip()
+
 
         while True:
             event = pg.event.poll()
@@ -314,9 +428,17 @@ class Game:
         
   
 
-
 def scrolling_text(screen):
-            
+    """
+    Function to create a screen with scrolling text similar to the Star Wars Exposition Screen.
+
+
+    Parameters: 
+
+        self (self): keyword we can access the attributes and methods of the class in python 
+
+    Source: 
+    """              
 
     centerx, centery = screen.get_rect().centerx, screen.get_rect().centery
     deltaY = centery + 20 
@@ -324,18 +446,28 @@ def scrolling_text(screen):
     #Scrolling Story Text
     rolling_text = '''
     Three evil wizards are about to attack your village! 
+
     
     They are currently at the edge of the forest...
+
     You have time to stop them, but must hurry!
+
+
     Will you be the hero and save your village? 
     
     Or will you let it be burned by the wizards' magic?
+
+
     Use the arrow keys to move and jump
+
     and the spacebar to shoot arrows!
+
+ 
     
     It is your time to let the wizards know that 
     
     A Champion is Coming to foil their plan!
+
     Press Enter to Save Your Village
     '''
     
@@ -385,9 +517,7 @@ def scrolling_text(screen):
 
 
 
-
-
-
+#Run game class
 
 g = Game()
 g.start_screen()

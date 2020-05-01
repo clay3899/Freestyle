@@ -1,45 +1,34 @@
-# Freestyle
+# Freestyle: Champions are Coming
 
-## Welcome to the Freestyle DND LVL 1 Branch
+## Instalation
 
-### This is a much different branch from the Templates branch
+Fork this repository and then use GitHub Desktop software or the command-line to download or "clone" it onto your computer. Choose a familiar download location like the Desktop.
 
-Here you will need to undergo a few setups in order to play this game.
-
-
-## SetUp
-
-First clone this repository's branch and download it to wherever you wish. Desktop will work well.
-
-Then you will need to create a virtual environment, or use the base environment
-
-If you wish to create an environment use
+Navigate there from the command line (subsequent commands assume you are running them from the local repository's root directory):
 
 ```sh
-conda create -n pygame-env Pytho=3.7 #first time only
-conda activate pygame-env #after creation
+cd ~/Desktop/Freestyle
 ```
 
-next you need to install pygame to the environment
+## Environment Setup
+
+Create and activate a new Anaconda virtual environment:
+
+```sh
+conda create -n game-env Pytho=3.7 #first time only
+conda activate game-env #after creation
+```
+
+Install pygame in the environment:
 
 ```sh
 pip install pygame
 ```
 
-This will allow you to run the game.
+## Playing the Game
 
-## Playing
-
-To play the game use the command:
+From within the virtual environment, use the following command to run the Python script from the command-line:
 
 ```sh
-Python game/DNDLVL1.py
+python game/main.py
 ```
-
-*This will likely be updated to a .exe eventually
-
-Currently the player can move around for about 6 spaces or 30ft of movement
-
-To get more movement hit End Turn on the bottom right.
-Enemies will advance one space *this will likely be updated for enemy AI
-
