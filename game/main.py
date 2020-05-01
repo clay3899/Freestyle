@@ -7,6 +7,9 @@ import os
 from os import path
 from settings import *
 from sprites import *
+from dotenv import load_dotenv
+from twilio.rest import Client
+import pytest
 
 
 enemy1_shoot_event = pg.USEREVENT +1
@@ -33,13 +36,9 @@ class Game:
     def __init__(self):
         """
         Initializes (sets up) the game class.
-
         Parameters: 
-
             self (self):  keyword we can access the attributes and methods of the class in python 
-
         Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
-
         Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c
         """
         # initialiaze game window, etc.
@@ -56,13 +55,9 @@ class Game:
     def new(self):
         """
         Starts a new pygame window.
-
         Parameters: 
-
             self (self):  keyword we can access the attributes and methods of the class in python 
-
         Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
-
         Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c
         """
         # start a new game
@@ -92,18 +87,15 @@ class Game:
     def run(self):
         """
         Creates the game loop.
-
         Parameters: 
-
             self (self):  keyword we can access the attributes and methods of the class in python 
-
         Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
-
         Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c
         """
         # game loop
         
         self.playing = True
+        
         while self.playing:
             self.clock.tick(FPS)
             self.events()
@@ -115,13 +107,9 @@ class Game:
     def update(self):
         """
         Method to control sprite's behavior (impact of collisions).
-
         Parameters: 
-
             self (self):  keyword we can access the attributes and methods of the class in python 
-
         Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
-
         Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c     
         """ 
         # game loop -- updates
@@ -165,14 +153,9 @@ class Game:
     def events(self):
         """
         Creates the events loop to allow for actions to occur in the pygame window.
-
         Parameters: 
-
-
             self (self):  keyword we can access the attributes and methods of the class in python 
-
         Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
-
         Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c
         """
         # game loop -- events      
@@ -204,13 +187,9 @@ class Game:
     def draw(self):
         """
         Function that allows for the creation of items on the pygame screen.
-
         Parameters: 
-
             self (self):  keyword we can access the attributes and methods of the class in python 
-
         Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
-
         Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c
         """
         # game loop -- draw
@@ -246,9 +225,7 @@ class Game:
     def shoot_fire1(self): 
         """
         Creates the fireballs that enemy 1 shoots.
-
         Parameters: 
-
             self (self):  keyword we can access the attributes and methods of the class in python 
         """  
         if self.enemy1.health > 0:
@@ -261,9 +238,7 @@ class Game:
     def shoot_fire2(self):
         """
         Creates the fireballs that enemy 2 shoots.
-
         Parameters: 
-
             self (self):  keyword we can access the attributes and methods of the class in python 
         """ 
         if self.enemy2.health > 0:
@@ -276,9 +251,7 @@ class Game:
     def shoot_fire3(self):
         """
         Creates the fireballs that enemy 3 shoots.
-
         Parameters: 
-
             self (self):  keyword we can access the attributes and methods of the class in python 
         """ 
         if self.enemy3.health > 0:
@@ -293,12 +266,8 @@ class Game:
     def start_screen(self):
         """
         Function to create start screen on the pygame screen.
-
         Parameters: 
-
             self (self):  keyword we can access the attributes and methods of the class in python 
-
-
         Source: Code help to understand structure of the start screen from https://github.com/joshuawillman/The-Lonely-Shooter
         """  
         img_dir = path.join(path.dirname(__file__), 'images')
@@ -323,24 +292,14 @@ class Game:
         def draw_text(self, surface, text, size, x, y, color):
             """
             Function to draw text on the the start screen.
-
             Parameters: 
-
                 self (self): keyword we can access the attributes and methods of the class in python 
-
                 surface 
-
                 text (str): Words that are desired to be on the pygame screen
-
-
                 size (int):  Provides the desired text size of words
-
                 x (int): x coordinate of the text on the screen (changing the coordinate moves the text horizontally)
-
                 y (int): y coordinate of the text on the screen (changing the coordinate moves the text vertically)
-
                 color (preset color code from pygame): Determines the color of the text
-
             Source: Code help to understand structure of the start screen from https://github.com/joshuawillman/The-Lonely-Shooter
             """  
             font = pg.font.Font(pg.font.match_font('cambria'), size)
@@ -379,7 +338,6 @@ class Game:
 
         """
         Function to create an end screen after the player wins or loses on the pygame screen.
-
         Parameters: 
         
             self (self): keyword we can access the attributes and methods of the class in python 
@@ -387,6 +345,8 @@ class Game:
 
         if self.running == False:    
             return
+        
+        self.send_text()
         
         background = pg.image.load('game\images\onfiretown.png').convert_alpha()
         background = pygame.transform.scale(background, (WIDTH, HEIGHT))
@@ -423,19 +383,46 @@ class Game:
                 pg.quit()
                 sys.exit() 
         
+    def send_text(self):
+
+        """
+        Sends text containing game stats to user
+        Parameters: 
+            self (self):  keyword we can access the attributes and methods of the class in python 
+        """ 
+    
+        load_dotenv()
+
+        TWILIO_ACCOUNT_SID = os.environ.get("TWILIO_ACCOUNT_SID", "OOPS, please specify env var called 'TWILIO_ACCOUNT_SID'")
+        TWILIO_AUTH_TOKEN  = os.environ.get("TWILIO_AUTH_TOKEN", "OOPS, please specify env var called 'TWILIO_AUTH_TOKEN'")
+        SENDER_SMS  = os.environ.get("SENDER_SMS", "OOPS, please specify env var called 'SENDER_SMS'")
+        RECIPIENT_SMS  = os.environ.get("RECIPIENT_SMS", "OOPS, please specify env var called 'RECIPIENT_SMS'")
+
+        client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
+
+      
+        content = "Thank you so much for playing Champions are Coming. In total, you have been playing for " + self.format_time() + " seconds."
+        message = client.messages.create(to=RECIPIENT_SMS, from_=SENDER_SMS, body=content)
+        pass
+
+    def format_time(self):
+        """
+        Gets the time pygame has been running and ensures it is the proper format for output (in seconds and 2 decimal points)
+        Parameters: 
+            self (self):  keyword we can access the attributes and methods of the class in python 
+        """ 
+        
+        time = pg.time.get_ticks()
+        time_seconds = str(round((time/1000),2))
+        return time_seconds
         
 
     def scrolling_text(self, screen):
         """
         Function to create a screen with scrolling text similar to the Star Wars Exposition Screen.
-
         Parameters: 
-
-
             self (self): keyword we can access the attributes and methods of the class in python 
-
             screen: the screen on which the scrolling text should display
-
         Source: https://youtu.be/Vbj-CtchRSI
         """              
 
@@ -445,28 +432,14 @@ class Game:
         #Scrolling Story Text
         rolling_text = '''
         Three evil wizards are about to attack your village! 
-
         They are currently at the edge of the forest...
-
-
         You have time to stop them, but must hurry!
-
-
         Will you be the hero and save your village? 
-
         Or will you let it be burned by the wizards' magic?
-
-
         Use the arrow keys to move and jump
-
         and the spacebar to shoot arrows!
-
-
         It is your time to let the wizards know that 
-
         A Champion is Coming to foil their plan!
-
-
         Press Enter to Save Your Village
         '''
 
