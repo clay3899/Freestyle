@@ -400,98 +400,100 @@ class Game:
         
         
   
-def scrolling_text(screen):
-    """
-    Function to create a screen with scrolling text similar to the Star Wars Exposition Screen.
+    def scrolling_text(self, screen):
+        """
+        Function to create a screen with scrolling text similar to the Star Wars Exposition Screen.
 
-    Parameters: 
+        Parameters: 
 
-        self (self): keyword we can access the attributes and methods of the class in python 
+            self (self): keyword we can access the attributes and methods of the class in python 
 
-    Source: 
-    """              
+            screen: the screen on which the scrolling text should display
 
-    centerx, centery = screen.get_rect().centerx, screen.get_rect().centery
-    deltaY = centery + 20 
+        Source: 
+        """              
 
-    #Scrolling Story Text
-    rolling_text = '''
-    Three evil wizards are about to attack your village! 
+        centerx, centery = screen.get_rect().centerx, screen.get_rect().centery
+        deltaY = centery + 20 
 
-    
-    They are currently at the edge of the forest...
-
-
-    You have time to stop them, but must hurry!
+        #Scrolling Story Text
+        rolling_text = '''
+        Three evil wizards are about to attack your village! 
 
 
-    Will you be the hero and save your village? 
-    
-    Or will you let it be burned by the wizards' magic?
+        They are currently at the edge of the forest...
 
 
-    Use the arrow keys to move and jump
-
-    and the spacebar to shoot arrows!
-
-    
-    It is your time to let the wizards know that 
-    
-    A Champion is Coming to foil their plan!
+        You have time to stop them, but must hurry!
 
 
-    Press Enter to Save Your Village
-    '''
-    
-    running = True
-     
+        Will you be the hero and save your village? 
+
+        Or will you let it be burned by the wizards' magic?
 
 
-    while True:
-        event = pg.event.poll()
-        if event.type == pg.KEYDOWN:
-            if event.key == pg.K_RETURN:
-                break
-        elif event.type == QUIT:
-            pg.quit()
-            sys.exit() 
-        
-        screen.fill(0)
-        
-        deltaY -=3 #adjusts speed of text
-        msg_list = []
-        pos_list = []
-        i=0
-        
-        #Font and Background
-        font = pygame.font.SysFont('cambria',35)
-        background = pg.image.load('game\images\parchment.png')#.convert()
-        background = pygame.transform.scale(background, (WIDTH, HEIGHT))
-        rect = background.get_rect()
-        screen.blit(background, rect)
+        Use the arrow keys to move and jump
 
-        for line in rolling_text.split('\n'):
-            msg = font.render(line,True, BLACK)
-            msg_list.append(msg)
-            
-            pos = msg.get_rect(center=(centerx,centery + deltaY + i*30)) 
-            pos_list.append(pos)
-            i = i+1
-
-        if (centery + deltaY + 30*(len(rolling_text.split('\n'))) < 0):
-            running = False
+        and the spacebar to shoot arrows!
 
 
-        for j in range(i):
-            screen.blit(msg_list[j], pos_list[j])
-        pygame.display.update()
-    exit
+        It is your time to let the wizards know that 
+
+        A Champion is Coming to foil their plan!
+
+
+        Press Enter to Save Your Village
+        '''
+
+        running = True
+
+
+
+        while True:
+            event = pg.event.poll()
+            if event.type == pg.KEYDOWN:
+                if event.key == pg.K_RETURN:
+                    break
+            elif event.type == QUIT:
+                pg.quit()
+                sys.exit() 
+
+            screen.fill(0)
+
+            deltaY -=3 #adjusts speed of text
+            msg_list = []
+            pos_list = []
+            i=0
+
+            #Font and Background
+            font = pygame.font.SysFont('cambria',35)
+            background = pg.image.load('game\images\parchment.png').convert_alpha()
+            background = pygame.transform.scale(background, (WIDTH, HEIGHT))
+            rect = background.get_rect()
+            screen.blit(background, rect)
+
+            for line in rolling_text.split('\n'):
+                msg = font.render(line,True, BLACK)
+                msg_list.append(msg)
+
+                pos = msg.get_rect(center=(centerx,centery + deltaY + i*30)) 
+                pos_list.append(pos)
+                i = i+1
+
+            if (centery + deltaY + 30*(len(rolling_text.split('\n'))) < 0):
+                running = False
+
+
+            for j in range(i):
+                screen.blit(msg_list[j], pos_list[j])
+            pygame.display.update()
+        exit
 
 
 #Run game class
 g = Game()
 g.start_screen()
-scrolling_text(display_screen)
+g.scrolling_text(display_screen)
 while g.running:
     g.new()
     g.end_screen()
