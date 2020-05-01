@@ -9,16 +9,16 @@ from settings import *
 from sprites import *
 
 
-enemy1_shoot_event = pygame.USEREVENT +1
-pygame.time.set_timer(enemy1_shoot_event,2000)
+enemy1_shoot_event = pg.USEREVENT +1
+pg.time.set_timer(enemy1_shoot_event,2000)
 
-enemy2_shoot_event = pygame.USEREVENT +2
+enemy2_shoot_event = pg.USEREVENT +2
 pygame.time.set_timer(enemy2_shoot_event,3000)
 
-enemy3_shoot_event = pygame.USEREVENT +3
-pygame.time.set_timer(enemy3_shoot_event, 2500)
+enemy3_shoot_event = pg.USEREVENT +3
+pg.time.set_timer(enemy3_shoot_event, 2500)
 
-player_damage_event = pygame.USEREVENT +4
+player_damage_event = pg.USEREVENT +4
 
 
 pg.mixer.pre_init(44100,16,2,4096)
@@ -110,6 +110,20 @@ class Game:
             self.fireballs.vel = 0
             self.player.health -= FIREBALL_DAMAGE
             self.HP_prev = self.player.health + FIREBALL_DAMAGE
+       
+        if self.player.health <= 0:
+            self.playing = False
+       
+            
+       
+            
+                
+     
+
+          
+
+    
+
               
 
     def events(self):
@@ -163,8 +177,7 @@ class Game:
             pg.draw.rect(display_screen,hb_color,(50,20,self.player.health,20),0)
             pg.display.flip()
 
-        if self.player.health <= 0:
-            self.end_screen()
+       
 
 
     
@@ -210,7 +223,7 @@ class Game:
         img_dir = path.join(path.dirname(__file__), 'images')
         title = pg.image.load(path.join(img_dir, "title_text.png")).convert_alpha()
         title = pg.transform.scale(title, (WIDTH, 165))
-        background = pg.image.load('game\images\Home_Screen.jpg').convert_alpha()
+        background = pg.image.load('game\images\Home_Screen.jpg').convert()
         background_rect = background.get_rect()
 
         arrow_keys = pg.image.load(path.join(img_dir, 'arrow_keys.png')).convert_alpha()
@@ -224,13 +237,7 @@ class Game:
         display_screen.blit(arrow_keys, (720, 570))
         display_screen.blit(spacebar, (720, 670))
 
-        def draw_text(surface, text, size, x, y, color):
-
-            font = pg.font.Font(pg.font.match_font('cambria'), size)
-            text_surface = font.render(text, True, color)
-            text_rect = text_surface.get_rect()
-            text_rect.midtop = (x, y)
-            surface.blit(text_surface, text_rect)
+        
 
         draw_text(display_screen, "Are You Ready for the Challenge?", 35, WIDTH/2, HEIGHT/2, WHITE)
         draw_text(display_screen, "If so, press [ENTER] to begin", 35, WIDTH/2, (HEIGHT/2) + 50, WHITE)
@@ -256,9 +263,42 @@ class Game:
                 pg.quit()
                 sys.exit() 
 
+    def draw_text(self, surface, text, size, x, y, color):
+
+            font = pg.font.Font(pg.font.match_font('cambria'), size)
+            text_surface = font.render(text, True, color)
+            text_rect = text_surface.get_rect()
+            text_rect.midtop = (x, y)
+            surface.blit(text_surface, text_rect)
                  
 
     def end_screen(self):
+        img_dir = path.join(path.dirname(__file__), 'images')
+        title = pg.image.load(path.join(img_dir, "title_text.png")).convert_alpha()
+        title = pg.transform.scale(title, (WIDTH, 165))
+        background = pg.image.load('game\images\Home_Screen.jpg').convert()
+        background_rect = background.get_rect()
+        
+
+        display_screen.blit(background, background_rect)
+
+
+        pg.display.flip()
+
+        while True:
+            event = pg.event.poll()
+            if event.type == pg.KEYDOWN:
+                if event.key == pg.K_RETURN:
+                    break
+                elif event.key == pg.K_q:
+                    pg.quit()
+                    self.running = False
+            elif event.type == QUIT:
+                pg.quit()
+                sys.exit() 
+        
+        
+        
         pass
 
 
@@ -284,10 +324,7 @@ def scrolling_text(screen):
     '''
     
     running = True
-    '''while running:
-        for event in pygame.event.get():
-            if event.type==QUIT:
-                running = False'''       
+     
 
 
     while True:
@@ -329,6 +366,9 @@ def scrolling_text(screen):
             screen.blit(msg_list[j], pos_list[j])
         pygame.display.update()
     exit
+
+
+
 
 
 
