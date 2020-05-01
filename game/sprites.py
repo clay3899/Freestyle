@@ -7,25 +7,25 @@ img_dir = path.join(path.dirname(__file__), 'images') #variable for image filepa
 
 
 class Player(pg.sprite.Sprite):
-"""
-Creates the Player class to provide a template for players in the game.
-"""
+    """
+    Creates the Player class to provide a template for players in the game.
+    """
     def __init__(self, game, img):
-    """
-    Initializes (sets up) the player class.
+        """
+        Initializes (sets up) the player class.
 
-    Parameters: 
-    
-        self (self):  keyword we can access the attributes and methods of the class in python 
-    
-        game #HOW TO EXPLAIN THIS???????
+        Parameters: 
 
-        img (.png file): png file that has an image for the player
-    
-    Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
+            self (self):  keyword we can access the attributes and methods of the class in python 
 
-    Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c
-    """
+            game 
+
+            img (.png file): png file that has an image for the player
+
+        Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
+
+        Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c
+        """
         self.game = game
         pg.sprite.Sprite.__init__(self)
         self.image = pg.Surface((32,32))
@@ -39,17 +39,17 @@ Creates the Player class to provide a template for players in the game.
         self.radius = 15 
     
     def jump(self):
-    """
-    Defines rules for the player action of jumping.
+        """
+        Defines rules for the player action of jumping.
 
-    Parameters: 
-    
-        self (self):  keyword we can access the attributes and methods of the class in python 
-    
-    Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
+        Parameters: 
 
-    Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c
-    """ 
+            self (self):  keyword we can access the attributes and methods of the class in python 
+
+        Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
+
+        Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c
+        """ 
         self.rect.y += 1
 
         hits = pg.sprite.spritecollide(self,self.game.platforms, False)
@@ -61,17 +61,17 @@ Creates the Player class to provide a template for players in the game.
         
     
     def update(self):
-    """
-    Method to control sprite's behavior (player movement).
+        """
+        Method to control sprite's behavior (player movement).
 
-    Parameters: 
-    
-        self (self):  keyword we can access the attributes and methods of the class in python 
+        Parameters: 
 
-    Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
+            self (self):  keyword we can access the attributes and methods of the class in python 
 
-    Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c     
-    """ 
+        Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
+
+        Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c     
+        """ 
         self.acc = vec(0,PLAYER_GRAV)
         keys = pg.key.get_pressed()
         if keys[pg.K_LEFT]:
@@ -95,29 +95,29 @@ Creates the Player class to provide a template for players in the game.
             self.pos.x = 0
 
 class Platform(pg.sprite.Sprite):
-"""
-Creates the Platform class to provide a template for platforms in the game.
-"""
-    def __init__(self, x, y, w, h):
     """
-    Initializes (sets up) the platform class.
+    Creates the Platform class to provide a template for platforms in the game.
+    """
+    def __init__(self, x, y, w, h):
+        """
+        Initializes (sets up) the platform class.
 
-    Parameters: 
-    
-        self (self):  keyword we can access the attributes and methods of the class in python 
-    
-        x (int): x coordinate of the platform on the screen (changing the coordinate moves the pltform horizontally)
+        Parameters: 
 
-        y (int): y coordinate of the platform on the screen (changing the coordinate moves the pltform vertically)
+            self (self):  keyword we can access the attributes and methods of the class in python 
 
-        w (int): length of the platform (changing the coordinate makes the platform longer)
+            x (int): x coordinate of the platform on the screen (changing the coordinate moves the pltform horizontally)
 
-        h (int): height of the platform (changing the coordinate makes the platform taller)
+            y (int): y coordinate of the platform on the screen (changing the coordinate moves the pltform vertically)
 
-    Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
+            w (int): length of the platform (changing the coordinate makes the platform longer)
 
-    Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c
-    """     
+            h (int): height of the platform (changing the coordinate makes the platform taller)
+
+        Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
+
+        Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c
+        """     
         pg.sprite.Sprite.__init__(self)
         self.image = pg.Surface((w,h))
         self.image.fill(BLACK)
@@ -127,23 +127,23 @@ Creates the Platform class to provide a template for platforms in the game.
 
 
 class Enemy(pg.sprite.Sprite):
-"""
-Creates the Enemy class to provide a template for enemies in the game.
-"""
-    def __init__(self,x,y, img):
     """
-    Initializes (sets up) the enemy class.
+    Creates the Enemy class to provide a template for enemies in the game.
+    """
+    def __init__(self,x,y, img):
+        """
+        Initializes (sets up) the enemy class.
 
-    Parameters: 
-    
-        self (self):  keyword we can access the attributes and methods of the class in python 
-    
-        x (int): x coordinate of the platform on the screen (changing the coordinate moves the platform horizontally)
+        Parameters: 
 
-        y (int): y coordinate of the platform on the screen (changing the coordinate moves the platform vertically)
+            self (self):  keyword we can access the attributes and methods of the class in python 
 
-        img (.png file): png file that has an image for the enemy        
-    """ 
+            x (int): x coordinate of the platform on the screen (changing the coordinate moves the platform horizontally)
+
+            y (int): y coordinate of the platform on the screen (changing the coordinate moves the platform vertically)
+
+            img (.png file): png file that has an image for the enemy        
+        """ 
         pg.sprite.Sprite.__init__(self)
         self.image = pg.image.load(path.join(img_dir, img)).convert_alpha()
         self.rect = self.image.get_rect()
@@ -153,39 +153,39 @@ Creates the Enemy class to provide a template for enemies in the game.
         
         
     def update(self):
-    """
-    Method to control sprite's behavior (enemy health).
+        """
+        Method to control sprite's behavior (enemy health).
 
-    Parameters: 
-    
-        self (self):  keyword we can access the attributes and methods of the class in python     
-    """ 
+        Parameters: 
+
+            self (self):  keyword we can access the attributes and methods of the class in python     
+        """ 
         if self.health < 0:
             self.kill()
     
 
 class Arrow(pg.sprite.Sprite):
-"""
-Creates the Arrow class to provide a template for arrows (player weapons) in the game.
-"""
-    def __init__(self, x, y, img):
     """
-    Initializes (sets up) the arrow class.
+    Creates the Arrow class to provide a template for arrows (player weapons) in the game.
+    """
+    def __init__(self, x, y, img):
+        """
+        Initializes (sets up) the arrow class.
 
-    Parameters: 
-    
-        self (self):  keyword we can access the attributes and methods of the class in python 
-    
-        x (int): 
+        Parameters: 
 
-        y (int): 
+            self (self):  keyword we can access the attributes and methods of the class in python 
 
-        img (.png file): png file that has an image for the enemy        
+            x (int): x coordinate of the arrow on the screen 
 
-    Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
+            y (int): y coordinate of the arrow on the screen 
 
-    Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c
-    """  
+            img (.png file): png file that has an image for the enemy        
+
+        Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
+
+        Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c
+        """  
         pg.sprite.Sprite.__init__(self)
         self.image = pg.image.load(path.join(img_dir, img)).convert_alpha()
         self.image.set_colorkey(BLACK)
@@ -197,17 +197,17 @@ Creates the Arrow class to provide a template for arrows (player weapons) in the
         self.acc = vec(0,0)
     
     def update(self):
-    """
-    Method to control sprite's behavior (arrow movement and impact).
+        """
+        Method to control sprite's behavior (arrow movement and impact).
 
-    Parameters: 
-    
-        self (self):  keyword we can access the attributes and methods of the class in python 
+        Parameters: 
 
-    Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
+            self (self):  keyword we can access the attributes and methods of the class in python 
 
-    Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c     
-    """         
+        Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
+
+        Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c     
+        """         
         # equations of motion
         self.acc = vec(0, PLAYER_GRAV)
         self.acc.x += self.vel.x
@@ -225,23 +225,23 @@ Creates the Arrow class to provide a template for arrows (player weapons) in the
 
        
 class Fireball(pg.sprite.Sprite):
-"""
-Creates the Fireball class to provide a template for fireballs (enemy weapons) in the game.
-"""
-    def __init__(self, x, y, img):
     """
-    Initializes (sets up) the fireball class.
+    Creates the Fireball class to provide a template for fireballs (enemy weapons) in the game.
+    """
+    def __init__(self, x, y, img):
+        """
+        Initializes (sets up) the fireball class.
 
-    Parameters: 
-    
-        self (self):  keyword we can access the attributes and methods of the class in python 
-    
-        x (int): 
+        Parameters: 
 
-        y (int): 
+            self (self):  keyword we can access the attributes and methods of the class in python 
 
-        img (.png file): png file that has an image for the enemy        
-    """ 
+            x (int): x coordinate of the fireball on the screen 
+
+            y (int): y coordinate of the fireball on the screen 
+
+            img (.png file): png file that has an image for the enemy        
+        """  
         pg.sprite.Sprite.__init__(self)
         self.image = pg.image.load(path.join(img_dir, img)).convert_alpha()
         self.image.set_colorkey(BLACK)
@@ -253,13 +253,13 @@ Creates the Fireball class to provide a template for fireballs (enemy weapons) i
         self.acc = vec(0,0)
     
     def update(self):
-    """
-    Method to control sprite's behavior (fireball movement and impact).
+        """
+        Method to control sprite's behavior (fireball movement and impact).
 
-    Parameters: 
-    
-        self (self):  keyword we can access the attributes and methods of the class in python    
-    """         
+        Parameters: 
+
+            self (self):  keyword we can access the attributes and methods of the class in python    
+        """         
         # equations of motion
         self.acc = vec(0, 0.008)
         self.acc.x += self.vel.x
