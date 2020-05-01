@@ -3,8 +3,6 @@ import pygame
 from pygame import *
 from os import path
 
-img_dir = path.join(path.dirname(__file__), 'images')
-
 #game options/settimgs
 TITLE = 'Champions are Coming'
 WIDTH = 960
