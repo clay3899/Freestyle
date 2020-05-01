@@ -9,16 +9,16 @@ from settings import *
 from sprites import *
 
 
-enemy1_shoot_event = pygame.USEREVENT +1
-pygame.time.set_timer(enemy1_shoot_event,2000)
+enemy1_shoot_event = pg.USEREVENT +1
+pg.time.set_timer(enemy1_shoot_event,2000)
 
-enemy2_shoot_event = pygame.USEREVENT +2
+enemy2_shoot_event = pg.USEREVENT +2
 pygame.time.set_timer(enemy2_shoot_event,3000)
 
-enemy3_shoot_event = pygame.USEREVENT +3
-pygame.time.set_timer(enemy3_shoot_event, 2500)
+enemy3_shoot_event = pg.USEREVENT +3
+pg.time.set_timer(enemy3_shoot_event, 2500)
 
-player_damage_event = pygame.USEREVENT +4
+player_damage_event = pg.USEREVENT +4
 
 
 pg.mixer.pre_init(44100,16,2,4096)
@@ -110,7 +110,9 @@ class Game:
             self.fireballs.vel = 0
             self.player.health -= FIREBALL_DAMAGE
             self.HP_prev = self.player.health + FIREBALL_DAMAGE
-
+       
+        if self.player.health <= 0:
+            self.playing = False
        
             
        
@@ -120,7 +122,9 @@ class Game:
 
           
 
-      
+    
+
+              
 
     def events(self):
         # game loop -- events      
@@ -152,7 +156,7 @@ class Game:
     def draw(self):
         # game loop -- draw
  
-        self.background_image = pg.image.load("game\images\Forest.jpg").convert()
+        self.background_image = pg.image.load("game\images\Forest.jpg").convert_alpha()
         self.screen.blit(self.background_image, [0, 0])
         self.all_sprites.draw(self.screen)
         
@@ -173,8 +177,7 @@ class Game:
             pg.draw.rect(display_screen,hb_color,(50,20,self.player.health,20),0)
             pg.display.flip()
 
-        if self.player.health <= 0:
-            self.end_screen()
+       
 
 
     
@@ -208,29 +211,29 @@ class Game:
             self.all_sprites.add(fire_ball3)
             self.fireballs.add(fire_ball3)
 
-
-
-    
-
-
-    
+   
 
     #Code help to understand structure of the start screen from https://github.com/joshuawillman/The-Lonely-Shooter
     def start_screen(self):
         img_dir = path.join(path.dirname(__file__), 'images')
         title = pg.image.load(path.join(img_dir, "title_text.png")).convert_alpha()
         title = pg.transform.scale(title, (WIDTH, 165))
-        background = pg.image.load('game\images\Home_Screen.jpg').convert_alpha()
+        background = pg.image.load('game\images\Home_Screen.jpg').convert()
         background_rect = background.get_rect()
 
         arrow_keys = pg.image.load(path.join(img_dir, 'arrow_keys.png')).convert_alpha()
         arrow_keys = pg.transform.scale(arrow_keys, (150, 85))
 
+        spacebar = pg.image.load(path.join(img_dir, 'spacebar1.png')).convert_alpha()
+        spacebar = pg.transform.scale(spacebar, (150, 50))
+
         display_screen.blit(background, background_rect)
         display_screen.blit(title, (0,110))
         display_screen.blit(arrow_keys, (720, 570))
+        display_screen.blit(spacebar, (720, 670))
 
-        def draw_text(surface, text, size, x, y, color):
+        
+        def draw_text(self, surface, text, size, x, y, color):
 
             font = pg.font.Font(pg.font.match_font('cambria'), size)
             text_surface = font.render(text, True, color)
@@ -238,10 +241,11 @@ class Game:
             text_rect.midtop = (x, y)
             surface.blit(text_surface, text_rect)
 
-        draw_text(display_screen, "Are You Ready for the Challenge?", 35, WIDTH/2, HEIGHT/2, WHITE)
-        draw_text(display_screen, "If so, press [ENTER] to begin", 35, WIDTH/2, (HEIGHT/2) + 50, WHITE)
-        draw_text(display_screen, "If not, press [Q] to quit", 35, WIDTH/2, (HEIGHT/2) + 100, WHITE)
-        draw_text(display_screen, "MOVE:", 35, 630, 550, WHITE)
+        draw_text(self, display_screen, "Are You Ready for the Challenge?", 35, WIDTH/2, HEIGHT/2, WHITE)
+        draw_text(self, display_screen, "If so, press [ENTER] to begin", 35, WIDTH/2, (HEIGHT/2) + 50, WHITE)
+        draw_text(self, display_screen, "If not, press [Q] to quit", 35, WIDTH/2, (HEIGHT/2) + 100, WHITE)
+        draw_text(self, display_screen, "MOVE:", 35, 630, 570, WHITE)
+        draw_text(self, display_screen, "SHOOT:", 35, 630, 670, WHITE)
 
         #code for playing sound from CrouchingPython on YouTube https://www.youtube.com/watch?v=YQ1mixa9RAw
         pg.mixer.music.load('game\sounds\Destiny.mp3')
@@ -264,13 +268,49 @@ class Game:
                  
 
     def end_screen(self):
-        pass
+        if self.running == False:    
+            return
+        #img_dir = path.join(path.dirname(__file__), 'images')
+        
+        background = pg.image.load('game\images\onfiretown.png')#.convert()
+        background = pygame.transform.scale(background, (WIDTH, HEIGHT))
+        rect = background.get_rect()
+        display_screen.blit(background, rect)
+
+        font = pg.font.Font(pg.font.match_font('cambria'),75)
+        text = font.render("GAME OVER",20,WHITE)
+        display_screen.blit(text,(275,150))
+
+        font2 = pg.font.Font(pg.font.match_font('cambria'),25)
+        text2 = font2.render("Overwhelmed by the enemy onslaught, you fall in battle.",18,WHITE)
+        display_screen.blit(text2,(165,260))
+
+        text3 = font2.render("With nobody left to protect the town, it falls into chaos and ruin.",18,WHITE)
+        display_screen.blit(text3,(125,300))
+
+        text4 = font2.render("Press [ENTER] to play again!",20,GREEN)
+        display_screen.blit(text4,(315,350))
 
 
 
 
 
-    
+        pg.display.flip()
+
+        while True:
+            event = pg.event.poll()
+            if event.type == pg.KEYDOWN:
+                if event.key == pg.K_RETURN:
+                    break
+                elif event.key == pg.K_q:
+                    pg.quit()
+                    self.running = False
+            elif event.type == QUIT:
+                pg.quit()
+                sys.exit() 
+        
+        
+  
 
 
 def scrolling_text(screen):
@@ -281,18 +321,24 @@ def scrolling_text(screen):
 
     #Scrolling Story Text
     rolling_text = '''
-    placeholder
-
-    placeholder
-
-    placeholder
+    Three evil wizards are about to attack your village! 
+    
+    They are currently at the edge of the forest...
+    You have time to stop them, but must hurry!
+    Will you be the hero and save your village? 
+    
+    Or will you let it be burned by the wizards' magic?
+    Use the arrow keys to move and jump
+    and the spacebar to shoot arrows!
+    
+    It is your time to let the wizards know that 
+    
+    A Champion is Coming to foil their plan!
+    Press Enter to Save Your Village
     '''
     
     running = True
-    '''while running:
-        for event in pygame.event.get():
-            if event.type==QUIT:
-                running = False'''       
+     
 
 
     while True:
@@ -306,13 +352,13 @@ def scrolling_text(screen):
         
         screen.fill(0)
         
-        deltaY -=4 #adjusts speed of text
+        deltaY -=3 #adjusts speed of text
         msg_list = []
         pos_list = []
         i=0
         
         #Font and Background
-        font = pygame.font.SysFont('cambria',60)
+        font = pygame.font.SysFont('cambria',35)
         background = pg.image.load('game\images\parchment.png')#.convert()
         background = pygame.transform.scale(background, (WIDTH, HEIGHT))
         rect = background.get_rect()
@@ -334,6 +380,9 @@ def scrolling_text(screen):
             screen.blit(msg_list[j], pos_list[j])
         pygame.display.update()
     exit
+
+
+
 
 
 
