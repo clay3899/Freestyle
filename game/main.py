@@ -110,17 +110,7 @@ class Game:
             self.fireballs.vel = 0
             self.player.health -= FIREBALL_DAMAGE
             self.HP_prev = self.player.health + FIREBALL_DAMAGE
-
-       
-            
-       
-            
-                
-     
-
-          
-
-      
+              
 
     def events(self):
         # game loop -- events      
@@ -152,7 +142,7 @@ class Game:
     def draw(self):
         # game loop -- draw
  
-        self.background_image = pg.image.load("game\images\Forest.jpg").convert()
+        self.background_image = pg.image.load("game\images\Forest.jpg").convert_alpha()
         self.screen.blit(self.background_image, [0, 0])
         self.all_sprites.draw(self.screen)
         
