@@ -211,12 +211,7 @@ class Game:
             self.all_sprites.add(fire_ball3)
             self.fireballs.add(fire_ball3)
 
-
-
-    
-
-
-    
+   
 
     #Code help to understand structure of the start screen from https://github.com/joshuawillman/The-Lonely-Shooter
     def start_screen(self):
@@ -298,14 +293,7 @@ class Game:
                 sys.exit() 
         
         
-        
-        pass
-
-
-
-
-
-    
+  
 
 
 def scrolling_text(screen):
@@ -316,17 +304,31 @@ def scrolling_text(screen):
 
     #Scrolling Story Text
     rolling_text = '''
-    Three evil wizards are about to attack your village. 
+    Three evil wizards are about to attack your village! 
+
     
-    They are currently at the edge of the forest.
+    They are currently at the edge of the forest...
 
-    You have time to stop them, but you must defeat all three wizards before they are able to enter your village.
 
-    Will you be the hero and save your village, or will you let it be burned by the wizards magic?
+    You have time to stop them, but must hurry!
 
-    Use the arrow keys to move and jump and the spacebar to shoot arrows!
+
+    Will you be the hero and save your village? 
     
-    It is your time to let the wizards know that Champions are Coming to foil their plan!
+    Or will you let it be burned by the wizards' magic?
+
+
+    Use the arrow keys to move and jump
+
+    and the spacebar to shoot arrows!
+
+    
+    It is your time to let the wizards know that 
+    
+    A Champion is Coming to foil their plan!
+
+
+    Press Enter to Save Your Village
     '''
     
     running = True
@@ -344,13 +346,13 @@ def scrolling_text(screen):
         
         screen.fill(0)
         
-        deltaY -=4 #adjusts speed of text
+        deltaY -=3 #adjusts speed of text
         msg_list = []
         pos_list = []
         i=0
         
         #Font and Background
-        font = pygame.font.SysFont('cambria',60)
+        font = pygame.font.SysFont('cambria',35)
         background = pg.image.load('game\images\parchment.png')#.convert()
         background = pygame.transform.scale(background, (WIDTH, HEIGHT))
         rect = background.get_rect()
