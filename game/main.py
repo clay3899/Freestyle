@@ -216,9 +216,13 @@ class Game:
         arrow_keys = pg.image.load(path.join(img_dir, 'arrow_keys.png')).convert_alpha()
         arrow_keys = pg.transform.scale(arrow_keys, (150, 85))
 
+        spacebar = pg.image.load(path.join(img_dir, 'spacebar1.png')).convert_alpha()
+        spacebar = pg.transform.scale(spacebar, (150, 50))
+
         display_screen.blit(background, background_rect)
         display_screen.blit(title, (0,110))
         display_screen.blit(arrow_keys, (720, 570))
+        display_screen.blit(spacebar, (720, 670))
 
         def draw_text(surface, text, size, x, y, color):
 
@@ -231,7 +235,8 @@ class Game:
         draw_text(display_screen, "Are You Ready for the Challenge?", 35, WIDTH/2, HEIGHT/2, WHITE)
         draw_text(display_screen, "If so, press [ENTER] to begin", 35, WIDTH/2, (HEIGHT/2) + 50, WHITE)
         draw_text(display_screen, "If not, press [Q] to quit", 35, WIDTH/2, (HEIGHT/2) + 100, WHITE)
-        draw_text(display_screen, "MOVE:", 35, 630, 550, WHITE)
+        draw_text(display_screen, "MOVE:", 35, 630, 570, WHITE)
+        draw_text(display_screen, "SHOOT:", 35, 630, 670, WHITE)
 
         #code for playing sound from CrouchingPython on YouTube https://www.youtube.com/watch?v=YQ1mixa9RAw
         pg.mixer.music.load('game\sounds\Destiny.mp3')
