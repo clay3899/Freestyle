@@ -22,7 +22,7 @@ Creates the Player class to provide a template for players in the game.
 
         img (.png file): png file that has an image for the player
     
-    Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was altered to tailor to project
+    Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
 
     Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c
     """
@@ -46,7 +46,7 @@ Creates the Player class to provide a template for players in the game.
     
         self (self):  keyword we can access the attributes and methods of the class in python 
     
-    Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was altered to tailor to project
+    Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
 
     Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c
     """ 
@@ -103,7 +103,7 @@ Creates the Platform class to provide a template for platforms in the game.
 
         h (int): height of the platform (changing the coordinate makes the platform taller)
 
-    Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was altered to tailor to project
+    Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
 
     Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c
     """     
@@ -127,9 +127,9 @@ Creates the Enemy class to provide a template for enemies in the game.
     
         self (self):  keyword we can access the attributes and methods of the class in python 
     
-        x (int): x coordinate of the platform on the screen (changing the coordinate moves the pltform horizontally)
+        x (int): x coordinate of the platform on the screen (changing the coordinate moves the platform horizontally)
 
-        y (int): y coordinate of the platform on the screen (changing the coordinate moves the pltform vertically)
+        y (int): y coordinate of the platform on the screen (changing the coordinate moves the platform vertically)
 
         img (.png file): png file that has an image for the enemy        
     """ 
@@ -164,7 +164,7 @@ Creates the Arrow class to provide a template for arrows (player weapons) in the
 
         img (.png file): png file that has an image for the enemy        
 
-    Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was altered to tailor to project
+    Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
 
     Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c
     """  
@@ -214,7 +214,7 @@ Creates the Fireball class to provide a template for fireballs (enemy weapons) i
 
         img (.png file): png file that has an image for the enemy        
 
-    Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was altered to tailor to project
+    Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
 
     Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c
     """ 
