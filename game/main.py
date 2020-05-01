@@ -21,7 +21,7 @@ pg.time.set_timer(enemy3_shoot_event, 2500)
 player_damage_event = pg.USEREVENT +4
 
 
-pg.mixer.pre_init(44100,16,2,4096)
+pg.mixer.pre_init(44100,16,2,4096) #initialize sound capabilities of pygame
 pg.init()
 
 display_screen = pg.display.set_mode((WIDTH, HEIGHT))
