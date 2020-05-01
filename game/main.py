@@ -238,12 +238,19 @@ class Game:
         display_screen.blit(spacebar, (720, 670))
 
         
+        def draw_text(self, surface, text, size, x, y, color):
 
-        draw_text(display_screen, "Are You Ready for the Challenge?", 35, WIDTH/2, HEIGHT/2, WHITE)
-        draw_text(display_screen, "If so, press [ENTER] to begin", 35, WIDTH/2, (HEIGHT/2) + 50, WHITE)
-        draw_text(display_screen, "If not, press [Q] to quit", 35, WIDTH/2, (HEIGHT/2) + 100, WHITE)
-        draw_text(display_screen, "MOVE:", 35, 630, 570, WHITE)
-        draw_text(display_screen, "SHOOT:", 35, 630, 670, WHITE)
+            font = pg.font.Font(pg.font.match_font('cambria'), size)
+            text_surface = font.render(text, True, color)
+            text_rect = text_surface.get_rect()
+            text_rect.midtop = (x, y)
+            surface.blit(text_surface, text_rect)
+
+        draw_text(self, display_screen, "Are You Ready for the Challenge?", 35, WIDTH/2, HEIGHT/2, WHITE)
+        draw_text(self, display_screen, "If so, press [ENTER] to begin", 35, WIDTH/2, (HEIGHT/2) + 50, WHITE)
+        draw_text(self, display_screen, "If not, press [Q] to quit", 35, WIDTH/2, (HEIGHT/2) + 100, WHITE)
+        draw_text(self, display_screen, "MOVE:", 35, 630, 570, WHITE)
+        draw_text(self, display_screen, "SHOOT:", 35, 630, 670, WHITE)
 
         #code for playing sound from CrouchingPython on YouTube https://www.youtube.com/watch?v=YQ1mixa9RAw
         pg.mixer.music.load('game\sounds\Destiny.mp3')
@@ -263,13 +270,6 @@ class Game:
                 pg.quit()
                 sys.exit() 
 
-    def draw_text(self, surface, text, size, x, y, color):
-
-            font = pg.font.Font(pg.font.match_font('cambria'), size)
-            text_surface = font.render(text, True, color)
-            text_rect = text_surface.get_rect()
-            text_rect.midtop = (x, y)
-            surface.blit(text_surface, text_rect)
                  
 
     def end_screen(self):
