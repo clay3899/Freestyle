@@ -61,6 +61,17 @@ Creates the Player class to provide a template for players in the game.
         
     
     def update(self):
+    """
+    Method to control sprite's behavior (player movement).
+
+    Parameters: 
+    
+        self (self):  keyword we can access the attributes and methods of the class in python 
+
+    Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
+
+    Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c     
+    """ 
         self.acc = vec(0,PLAYER_GRAV)
         keys = pg.key.get_pressed()
         if keys[pg.K_LEFT]:
@@ -142,6 +153,13 @@ Creates the Enemy class to provide a template for enemies in the game.
         
         
     def update(self):
+    """
+    Method to control sprite's behavior (enemy health).
+
+    Parameters: 
+    
+        self (self):  keyword we can access the attributes and methods of the class in python     
+    """ 
         if self.health < 0:
             self.kill()
     
@@ -179,7 +197,17 @@ Creates the Arrow class to provide a template for arrows (player weapons) in the
         self.acc = vec(0,0)
     
     def update(self):
-        
+    """
+    Method to control sprite's behavior (arrow movement and impact).
+
+    Parameters: 
+    
+        self (self):  keyword we can access the attributes and methods of the class in python 
+
+    Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
+
+    Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c     
+    """         
         # equations of motion
         self.acc = vec(0, PLAYER_GRAV)
         self.acc.x += self.vel.x
@@ -213,10 +241,6 @@ Creates the Fireball class to provide a template for fireballs (enemy weapons) i
         y (int): 
 
         img (.png file): png file that has an image for the enemy        
-
-    Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
-
-    Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c
     """ 
         pg.sprite.Sprite.__init__(self)
         self.image = pg.image.load(path.join(img_dir, img)).convert_alpha()
@@ -229,7 +253,13 @@ Creates the Fireball class to provide a template for fireballs (enemy weapons) i
         self.acc = vec(0,0)
     
     def update(self):
-        
+    """
+    Method to control sprite's behavior (fireball movement and impact).
+
+    Parameters: 
+    
+        self (self):  keyword we can access the attributes and methods of the class in python    
+    """         
         # equations of motion
         self.acc = vec(0, 0.008)
         self.acc.x += self.vel.x

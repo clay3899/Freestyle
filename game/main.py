@@ -113,6 +113,17 @@ Creates the game class to run the game.
         
     
     def update(self):
+    """
+    Method to control sprite's behavior (impact of collisions).
+
+    Parameters: 
+    
+        self (self):  keyword we can access the attributes and methods of the class in python 
+
+    Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
+
+    Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c     
+    """ 
         # game loop -- updates
         self.all_sprites.update()
 
