@@ -356,6 +356,13 @@ Creates the game class to run the game.
                  
 
     def end_screen(self):
+        """
+        Function to create an end screen after the player wins or loses on the pygame screen.
+
+        Parameters: 
+        
+            self (self): keyword we can access the attributes and methods of the class in python 
+        """  
         img_dir = path.join(path.dirname(__file__), 'images')
         title = pg.image.load(path.join(img_dir, "title_text.png")).convert_alpha()
         title = pg.transform.scale(title, (WIDTH, 165))
@@ -383,7 +390,15 @@ Creates the game class to run the game.
         
   
 def scrolling_text(screen):
-            
+"""
+Function to create a screen with scrolling text similar to the Star Wars Exposition Screen.
+
+Parameters: 
+
+    self (self): keyword we can access the attributes and methods of the class in python 
+    
+Source: 
+"""              
 
     centerx, centery = screen.get_rect().centerx, screen.get_rect().centery
     deltaY = centery + 20 
@@ -462,7 +477,7 @@ def scrolling_text(screen):
     exit
 
 
-
+#Run game class
 g = Game()
 g.start_screen()
 scrolling_text(display_screen)
