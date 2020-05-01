@@ -316,11 +316,17 @@ def scrolling_text(screen):
 
     #Scrolling Story Text
     rolling_text = '''
-    placeholder
+    Three evil wizards are about to attack your village. 
+    
+    They are currently at the edge of the forest.
 
-    placeholder
+    You have time to stop them, but you must defeat all three wizards before they are able to enter your village.
 
-    placeholder
+    Will you be the hero and save your village, or will you let it be burned by the wizards magic?
+
+    Use the arrow keys to move and jump and the spacebar to shoot arrows!
+    
+    It is your time to let the wizards know that Champions are Coming to foil their plan!
     '''
     
     running = True
