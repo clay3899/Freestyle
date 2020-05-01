@@ -21,6 +21,7 @@ class Player(pg.sprite.Sprite):
         self.vel = vec(0,0)
         self.acc = vec(0,0)
         self.health = PLAYER_HEALTH
+        self.radius = 15 
     
     def jump(self):
         
@@ -104,7 +105,7 @@ class Arrow(pg.sprite.Sprite):
         self.pos += self.vel + 0.5 * self.acc
         
         self.rect.x = self.pos.x
-        self.rect.y = self.pos.y - 64
+        self.rect.y = self.pos.y - 32
 
         if self.rect.x > WIDTH + 100:
             self.kill()
@@ -122,7 +123,7 @@ class Fireball(pg.sprite.Sprite):
         self.rect.centery = y
         self.rect.centerx = x
         self.pos = vec(x, y)
-        self.vel = vec(-ARROW_SPEED,0)
+        self.vel = vec(-FIREBALL_SPEED,0)
         self.acc = vec(0,0)
     
     def update(self):
