@@ -3,8 +3,6 @@ import pygame
 from pygame import *
 from os import path
 
-img_dir = path.join(path.dirname(__file__), 'images')
-
 #game options/settimgs
 TITLE = 'Champions are Coming'
 WIDTH = 960
@@ -17,7 +15,7 @@ PLAYER_ACC = 0.5
 PLAYER_FRICTION = -0.12
 PLAYER_GRAV = .7
 PLAYER_JUMP = 18
-PLAYER_HEALTH = 100
+PLAYER_HEALTH = 1
 # Arrows
 ARROW_SPEED = 13
 ARROW_DAMAGE = 1

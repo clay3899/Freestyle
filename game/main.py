@@ -273,7 +273,7 @@ class Game:
         img_dir = path.join(path.dirname(__file__), 'images')
         title = pg.image.load(path.join(img_dir, "title_text.png")).convert_alpha()
         title = pg.transform.scale(title, (WIDTH, 165))
-        background = pg.image.load('game\images\Home_Screen.jpg').convert()
+        background = pg.image.load('game\images\Home_Screen.jpg').convert_alpha()
         background_rect = background.get_rect()
 
         arrow_keys = pg.image.load(path.join(img_dir, 'arrow_keys.png')).convert_alpha()
@@ -342,7 +342,31 @@ class Game:
         
             self (self): keyword we can access the attributes and methods of the class in python 
         """  
+        # If player Wins
 
+        background = pg.image.load('game\images\Winner_Screen.jpg').convert_alpha()
+        background = pygame.transform.scale(background, (WIDTH, HEIGHT))
+        rect = background.get_rect()
+        display_screen.blit(background, rect)
+
+        font = pg.font.Font(pg.font.match_font('cambria'),75)
+        text = font.render("You are the Champion!",20,WHITE)
+        display_screen.blit(text,(120,200))
+
+        font2 = pg.font.Font(pg.font.match_font('cambria'),30)
+        text2 = font2.render("With your valient bow and arrow you have defeated the wizards!",23,BLACK)
+        display_screen.blit(text2,(30,450))
+
+        text3 = font2.render("Your village is celbrating because it is safe...for now!",23,BLACK)
+        display_screen.blit(text3,(100,520))
+
+        text4 = font2.render("Press [q] to quit",20,BLACK)
+        display_screen.blit(text4,(400,600))
+
+
+        pg.display.flip()
+
+        #If player Loses
         if self.running == False:    
             return
         
@@ -364,10 +388,8 @@ class Game:
         text3 = font2.render("With nobody left to protect the town, it falls into chaos and ruin.",18,WHITE)
         display_screen.blit(text3,(125,300))
 
-        text4 = font2.render("Press [ENTER] to play again!",20,GREEN)
+        text4 = font2.render("Press [ENTER] to play again or [q] to quit",20,GREEN)
         display_screen.blit(text4,(300,350))
-
-
         pg.display.flip()
 
 
