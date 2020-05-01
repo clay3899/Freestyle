@@ -25,7 +25,7 @@ SHOT_TIME = 400
 
 #Fireball
 FIREBALL_SPEED = 5
-FIREBALL_DAMAGE = 10
+FIREBALL_DAMAGE = 100
 
 # starting platforms
 

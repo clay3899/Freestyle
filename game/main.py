@@ -96,6 +96,8 @@ class Game:
         hits = pg.sprite.groupcollide(self.enemies, self.arrows, False, True)
         for hit in hits:
             hit.health -= ARROW_DAMAGE
+            arrow_sound = pg.mixer.Sound('game\sounds\get_hit.ogg')
+            pg.mixer.Sound.play(arrow_sound)
 
         hits = pg.sprite.groupcollide(self.platforms, self.arrows, False, True)
         for hit in hits:
@@ -289,7 +291,7 @@ class Game:
         display_screen.blit(text3,(125,300))
 
         text4 = font2.render("Press [ENTER] to play again!",20,GREEN)
-        display_screen.blit(text4,(315,350))
+        display_screen.blit(text4,(300,350))
 
 
 
