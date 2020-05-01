@@ -3,8 +3,6 @@ from settings import *
 from os import path
 
 vec = pg.math.Vector2
-img_dir = path.join(path.dirname(__file__), 'images') #variable for image filepath
-
 
 class Player(pg.sprite.Sprite):
     """
