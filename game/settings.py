@@ -30,10 +30,11 @@ FIREBALL_DAMAGE = 10
 # starting platforms
 
 PLATFORM_LIST = [(0, HEIGHT- 5, WIDTH, 10), 
-                (WIDTH /2 - 50, HEIGHT *3/4, 100, 5),
+                (WIDTH - 620, HEIGHT *3/4, 100, 5),
                 (WIDTH - 120, HEIGHT - 360, 100, 5),
                 (WIDTH - 155, HEIGHT - 540, 75, 5),
-                (WIDTH/4, HEIGHT * random.randint(25,50)/100, 200, 5)]
+                (WIDTH - random.randint(475,500), HEIGHT - 300, 75, 5),
+                (WIDTH/4, HEIGHT - random.randint(475,500), 200, 5)]
 
 # colors
 WHITE = (255, 255, 255)
