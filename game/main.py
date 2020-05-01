@@ -377,7 +377,6 @@ class Game:
 
     def end_screen(self):
 
-
         """
         Function to create an end screen after the player wins or loses on the pygame screen.
 
@@ -388,9 +387,8 @@ class Game:
 
         if self.running == False:    
             return
-        #img_dir = path.join(path.dirname(__file__), 'images')
         
-        background = pg.image.load('game\images\onfiretown.png')#.convert()
+        background = pg.image.load('game\images\onfiretown.png').convert_alpha()
         background = pygame.transform.scale(background, (WIDTH, HEIGHT))
         rect = background.get_rect()
         display_screen.blit(background, rect)
@@ -438,7 +436,7 @@ class Game:
 
             screen: the screen on which the scrolling text should display
 
-        Source: 
+        Source: https://youtu.be/Vbj-CtchRSI
         """              
 
         centerx, centery = screen.get_rect().centerx, screen.get_rect().centery
