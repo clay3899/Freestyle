@@ -14,7 +14,8 @@ class Player(pg.sprite.Sprite):
 
         Parameters: 
 
-            self (self):  keyword we can access the attributes and methods of the class in python 
+            self (self):  keyword we can access the attributes and methods 
+            of the class in python 
 
             game 
 
@@ -42,7 +43,8 @@ class Player(pg.sprite.Sprite):
 
         Parameters: 
 
-            self (self):  keyword we can access the attributes and methods of the class in python 
+            self (self):  keyword we can access the attributes and methods 
+            of the class in python 
 
         Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
 
@@ -64,7 +66,8 @@ class Player(pg.sprite.Sprite):
 
         Parameters: 
 
-            self (self):  keyword we can access the attributes and methods of the class in python 
+            self (self):  keyword we can access the attributes and methods 
+            of the class in python 
 
         Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
 
@@ -102,15 +105,20 @@ class Platform(pg.sprite.Sprite):
 
         Parameters: 
 
-            self (self):  keyword we can access the attributes and methods of the class in python 
+            self (self):  keyword we can access the attributes and methods 
+            of the class in python 
 
-            x (int): x coordinate of the platform on the screen (changing the coordinate moves the pltform horizontally)
+            x (int): x coordinate of the platform on the screen (changing 
+            the coordinate moves the pltform horizontally)
 
-            y (int): y coordinate of the platform on the screen (changing the coordinate moves the pltform vertically)
+            y (int): y coordinate of the platform on the screen (changing 
+            the coordinate moves the pltform vertically)
 
-            w (int): length of the platform (changing the coordinate makes the platform longer)
+            w (int): length of the platform (changing the coordinate makes 
+            the platform longer)
 
-            h (int): height of the platform (changing the coordinate makes the platform taller)
+            h (int): height of the platform (changing the coordinate makes 
+            the platform taller)
 
         Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
 
@@ -134,11 +142,14 @@ class Enemy(pg.sprite.Sprite):
 
         Parameters: 
 
-            self (self):  keyword we can access the attributes and methods of the class in python 
+            self (self):  keyword we can access the attributes and methods 
+            of the class in python 
 
-            x (int): x coordinate of the platform on the screen (changing the coordinate moves the platform horizontally)
+            x (int): x coordinate of the platform on the screen (changing 
+            the coordinate moves the platform horizontally)
 
-            y (int): y coordinate of the platform on the screen (changing the coordinate moves the platform vertically)
+            y (int): y coordinate of the platform on the screen (changing 
+            the coordinate moves the platform vertically)
 
             img (.png file): png file that has an image for the enemy        
         """ 
@@ -151,21 +162,21 @@ class Enemy(pg.sprite.Sprite):
         
         
     def update(self):
+        """
+        Method to control sprite's behavior (enemy health).
 
+        Parameters: 
+
+            self (self):  keyword we can access the attributes and methods 
+            of the class in python     
+        """
         if self.health <= 0:
 
-            """
-            Method to control sprite's behavior (enemy health).
-    
-            Parameters: 
-    
-                self (self):  keyword we can access the attributes and methods of the class in python     
-            """ 
-        if self.health < 0:
-
-            self.kill()
-            death_sound = pg.mixer.Sound('game\sounds\explode.ogg')
-            pg.mixer.Sound.play(death_sound)
+            if self.health < 0:
+            
+                self.kill()
+                death_sound = pg.mixer.Sound('game\sounds\explode.ogg')
+                pg.mixer.Sound.play(death_sound)
     
     def draw_health(self):
         if self.health > 60:
@@ -194,7 +205,8 @@ class Arrow(pg.sprite.Sprite):
 
         Parameters: 
 
-            self (self):  keyword we can access the attributes and methods of the class in python 
+            self (self):  keyword we can access the attributes and methods 
+            of the class in python 
 
             x (int): x coordinate of the arrow on the screen 
 
@@ -222,7 +234,8 @@ class Arrow(pg.sprite.Sprite):
 
         Parameters: 
 
-            self (self):  keyword we can access the attributes and methods of the class in python 
+            self (self):  keyword we can access the attributes and methods 
+            of the class in python 
 
         Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
 
@@ -254,7 +267,8 @@ class Fireball(pg.sprite.Sprite):
 
         Parameters: 
 
-            self (self):  keyword we can access the attributes and methods of the class in python 
+            self (self):  keyword we can access the attributes and methods 
+            of the class in python 
 
             x (int): x coordinate of the fireball on the screen 
 
@@ -278,7 +292,8 @@ class Fireball(pg.sprite.Sprite):
 
         Parameters: 
 
-            self (self):  keyword we can access the attributes and methods of the class in python    
+            self (self):  keyword we can access the attributes and methods 
+            of the class in python    
         """         
         # equations of motion
         self.acc = vec(0, 0.008)

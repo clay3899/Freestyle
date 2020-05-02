@@ -39,7 +39,8 @@ class Game:
         
         Parameters: 
         
-            self (self):  keyword we can access the attributes and methods of the class in python 
+            self (self):  keyword we can access the attributes and methods 
+            of the class in python 
         
         Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
         
@@ -53,16 +54,15 @@ class Game:
         self.screen = pg.display.set_mode((WIDTH, HEIGHT))
         pg.display.set_caption(TITLE)
         self.clock = pg.time.Clock()
-        
-        
-    
+         
     def new(self):
         """
         Starts a new pygame window.
         
         Parameters: 
         
-            self (self):  keyword we can access the attributes and methods of the class in python 
+            self (self):  keyword we can access the attributes and methods 
+            of the class in python 
         
         Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
         
@@ -91,14 +91,14 @@ class Game:
       
         self.run()
         
-
     def run(self):
         """
         Creates the game loop.
         
         Parameters: 
         
-            self (self):  keyword we can access the attributes and methods of the class in python 
+            self (self):  keyword we can access the attributes and methods 
+            of the class in python 
         
         Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
         
@@ -114,15 +114,14 @@ class Game:
             self.update()
             self.draw()
 
-        
-    
     def update(self):
         """
         Method to control sprite's behavior (impact of collisions).
        
         Parameters: 
         
-            self (self):  keyword we can access the attributes and methods of the class in python 
+            self (self):  keyword we can access the attributes and methods 
+            of the class in python 
         
         Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
         
@@ -164,15 +163,14 @@ class Game:
         if self.player.health <= 0:
             self.playing = False
        
-              
-
     def events(self):
         """
         Creates the events loop to allow for actions to occur in the pygame window.
        
         Parameters: 
            
-            self (self):  keyword we can access the attributes and methods of the class in python 
+            self (self):  keyword we can access the attributes and methods 
+            of the class in python 
        
         Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
        
@@ -210,7 +208,8 @@ class Game:
 
         Parameters: 
 
-            self (self):  keyword we can access the attributes and methods of the class in python 
+            self (self):  keyword we can access the attributes and methods 
+            of the class in python 
        
         Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
        
@@ -244,8 +243,15 @@ class Game:
             if isinstance(sprite, Enemy):
                 sprite.draw_health()
 
-
     def fire(self):
+        """
+        Used to fire arrows from the player.
+
+        Parameters: 
+
+            self (self):  keyword we can access the attributes and methods 
+            of the class in python 
+        """  
         arrow = Arrow(int(self.player.rect.centerx),int(self.player.rect.centery), 'uber_tiny.png')
         self.all_sprites.add(arrow)
         self.arrows.add(arrow)
@@ -256,7 +262,8 @@ class Game:
 
         Parameters: 
 
-            self (self):  keyword we can access the attributes and methods of the class in python 
+            self (self):  keyword we can access the attributes and methods 
+            of the class in python 
         """  
         if self.enemy1.health > 0:
             fire_ball1 = Fireball(int(self.enemy1.rect.centerx),int(self.enemy1.rect.centery), 'Fireball1.png')
@@ -264,14 +271,14 @@ class Game:
             self.all_sprites.add(fire_ball1)
             self.fireballs.add(fire_ball1)
 
-
     def shoot_fire2(self):
         """
         Creates the fireballs that enemy 2 shoots.
 
         Parameters: 
 
-            self (self):  keyword we can access the attributes and methods of the class in python 
+            self (self):  keyword we can access the attributes and methods 
+            of the class in python 
         """ 
         if self.enemy2.health > 0:
             fire_ball2 = Fireball(int(self.enemy2.rect.centerx),int(self.enemy2.rect.centery), 'Fireball1.png')
@@ -279,31 +286,29 @@ class Game:
             self.all_sprites.add(fire_ball2)
             self.fireballs.add(fire_ball2)
   
-
     def shoot_fire3(self):
         """
         Creates the fireballs that enemy 3 shoots.
 
         Parameters: 
 
-            self (self):  keyword we can access the attributes and methods of the class in python 
+            self (self):  keyword we can access the attributes and methods 
+            of the class in python 
         """ 
         if self.enemy3.health > 0:
             self.radius = 15
             fire_ball3 = Fireball(int(self.enemy3.rect.centerx),int(self.enemy3.rect.centery), 'Fireball1.png')
             self.all_sprites.add(fire_ball3)
             self.fireballs.add(fire_ball3)
-
-
-
-    
+  
     def start_screen(self):
         """
         Function to create start screen on the pygame screen.
 
         Parameters: 
 
-            self (self):  keyword we can access the attributes and methods of the class in python 
+            self (self):  keyword we can access the attributes and methods 
+            of the class in python 
         
         Source: Code help to understand structure of the start screen from https://github.com/joshuawillman/The-Lonely-Shooter
         """  
@@ -329,14 +334,28 @@ class Game:
         def draw_text(self, surface, text, size, x, y, color):
             """
             Function to draw text on the the start screen.
+
             Parameters: 
-                self (self): keyword we can access the attributes and methods of the class in python 
-                surface 
-                text (str): Words that are desired to be on the pygame screen
+
+                self (self): keyword we can access the attributes and 
+                methods of the class in python 
+                
+                surface: identifies the screen on which to draw text
+
+                text (str): Words that are desired to be on the pygame 
+                screen
+
                 size (int):  Provides the desired text size of words
-                x (int): x coordinate of the text on the screen (changing the coordinate moves the text horizontally)
-                y (int): y coordinate of the text on the screen (changing the coordinate moves the text vertically)
-                color (preset color code from pygame): Determines the color of the text
+
+                x (int): x coordinate of the text on the screen (changing 
+                the coordinate moves the text horizontally)
+
+                y (int): y coordinate of the text on the screen (changing 
+                the coordinate moves the text vertically)
+
+                color (preset color code from pygame): Determines the color 
+                of the text
+
             Source: Code help to understand structure of the start screen from https://github.com/joshuawillman/The-Lonely-Shooter
             """  
             font = pg.font.Font(pg.font.match_font('cambria'), size)
@@ -369,8 +388,6 @@ class Game:
                 pg.quit()
                 sys.exit() 
 
-                 
-
     def end_screen(self):
         
         """
@@ -378,7 +395,8 @@ class Game:
         
         Parameters:
 
-            self (self): keyword we can access the attributes and methods of the class in python 
+            self (self): keyword we can access the attributes and methods 
+            of the class in python 
         """  
         
         if not self.running:
@@ -390,14 +408,9 @@ class Game:
         background = pg.image.load('game\images\Home_Screen.jpg').convert()
         background_rect = background.get_rect()
 
-
-        """
-        Function to create an end screen after the player wins or loses on the pygame screen.
-        Parameters: 
-            self (self): keyword we can access the attributes and methods of the class in python 
-        """  
         # If player Wins
 
+         
         background = pg.image.load('game\images\Winner_Screen.jpg').convert_alpha()
         background = pygame.transform.scale(background, (WIDTH, HEIGHT))
         rect = background.get_rect()
@@ -465,7 +478,9 @@ class Game:
         Sends text containing game stats to user
 
         Parameters: 
-            self (self):  keyword we can access the attributes and methods of the class in python 
+
+            self (self):  keyword we can access the attributes and methods 
+            of the class in python 
         """ 
     
         load_dotenv()
@@ -485,24 +500,29 @@ class Game:
     def format_time(self):
         """
         Gets the time pygame has been running and ensures it is the proper format for output (in seconds and 2 decimal points)
-        Parameters: 
-            self (self):  keyword we can access the attributes and methods of the class in python 
-        """ 
         
+        Parameters: 
+
+            self (self):  keyword we can access the attributes and methods 
+            of the class in python 
+        """ 
         time = pg.time.get_ticks()
         time_seconds = str(round((time/1000),2))
         return time_seconds
         
-
     def scrolling_text(self, screen):
         """
         Function to create a screen with scrolling text similar to the Star Wars Exposition Screen.
+        
         Parameters: 
-            self (self): keyword we can access the attributes and methods of the class in python 
+            
+            self (self): keyword we can access the attributes and methods 
+            of the class in python 
+            
             screen: the screen on which the scrolling text should display
+        
         Source: https://youtu.be/Vbj-CtchRSI
         """              
-
         centerx, centery = screen.get_rect().centerx, screen.get_rect().centery
         deltaY = centery + 20 
 
