@@ -36,9 +36,13 @@ class Game:
     def __init__(self):
         """
         Initializes (sets up) the game class.
+        
         Parameters: 
+        
             self (self):  keyword we can access the attributes and methods of the class in python 
+        
         Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
+        
         Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c
         """
         # initialiaze game window, etc.
@@ -55,9 +59,13 @@ class Game:
     def new(self):
         """
         Starts a new pygame window.
+        
         Parameters: 
+        
             self (self):  keyword we can access the attributes and methods of the class in python 
+        
         Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
+        
         Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c
         """
         # start a new game
@@ -87,9 +95,13 @@ class Game:
     def run(self):
         """
         Creates the game loop.
+        
         Parameters: 
+        
             self (self):  keyword we can access the attributes and methods of the class in python 
+        
         Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
+        
         Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c
         """
         # game loop
@@ -107,9 +119,13 @@ class Game:
     def update(self):
         """
         Method to control sprite's behavior (impact of collisions).
+       
         Parameters: 
+        
             self (self):  keyword we can access the attributes and methods of the class in python 
+        
         Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
+        
         Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c     
         """ 
         # game loop -- updates
@@ -153,9 +169,13 @@ class Game:
     def events(self):
         """
         Creates the events loop to allow for actions to occur in the pygame window.
+       
         Parameters: 
+           
             self (self):  keyword we can access the attributes and methods of the class in python 
+       
         Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
+       
         Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c
         """
         # game loop -- events      
@@ -187,9 +207,13 @@ class Game:
     def draw(self):
         """
         Function that allows for the creation of items on the pygame screen.
+
         Parameters: 
+
             self (self):  keyword we can access the attributes and methods of the class in python 
+       
         Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
+       
         Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c
         """
         # game loop -- draw
@@ -229,7 +253,9 @@ class Game:
     def shoot_fire1(self): 
         """
         Creates the fireballs that enemy 1 shoots.
+
         Parameters: 
+
             self (self):  keyword we can access the attributes and methods of the class in python 
         """  
         if self.enemy1.health > 0:
@@ -242,7 +268,9 @@ class Game:
     def shoot_fire2(self):
         """
         Creates the fireballs that enemy 2 shoots.
+
         Parameters: 
+
             self (self):  keyword we can access the attributes and methods of the class in python 
         """ 
         if self.enemy2.health > 0:
@@ -255,7 +283,9 @@ class Game:
     def shoot_fire3(self):
         """
         Creates the fireballs that enemy 3 shoots.
+
         Parameters: 
+
             self (self):  keyword we can access the attributes and methods of the class in python 
         """ 
         if self.enemy3.health > 0:
@@ -270,8 +300,11 @@ class Game:
     def start_screen(self):
         """
         Function to create start screen on the pygame screen.
+
         Parameters: 
+
             self (self):  keyword we can access the attributes and methods of the class in python 
+        
         Source: Code help to understand structure of the start screen from https://github.com/joshuawillman/The-Lonely-Shooter
         """  
         img_dir = path.join(path.dirname(__file__), 'images')
@@ -339,7 +372,14 @@ class Game:
                  
 
     def end_screen(self):
+        
+        """
+        Function to create an end screen after the player wins or loses on the pygame screen.
+        
+        Parameters:
 
+            self (self): keyword we can access the attributes and methods of the class in python 
+        """  
         
         if not self.running:
             exit
@@ -423,6 +463,7 @@ class Game:
 
         """
         Sends text containing game stats to user
+
         Parameters: 
             self (self):  keyword we can access the attributes and methods of the class in python 
         """ 
