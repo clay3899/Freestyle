@@ -445,7 +445,7 @@ class Game:
         display_screen.blit(text4,(400,600))
         pg.display.flip()
 
-        #self.send_text()
+        self.send_text()
 
         while True:
             event = pg.event.poll()
@@ -457,30 +457,30 @@ class Game:
                 pg.quit()
                 
         
-#    def send_text(self):
-#
-#        """
-#        Sends text containing game stats to user
-#
-#        Parameters: 
-#
-#            self (self):  keyword we can access the attributes and methods 
-#            of the class in python 
-#        """ 
-#    
-#        load_dotenv()
-#
-#        TWILIO_ACCOUNT_SID = os.environ.get("TWILIO_ACCOUNT_SID", "OOPS, please specify env var called 'TWILIO_ACCOUNT_SID'")
-#        TWILIO_AUTH_TOKEN  = os.environ.get("TWILIO_AUTH_TOKEN", "OOPS, please specify env var called 'TWILIO_AUTH_TOKEN'")
-#        SENDER_SMS  = os.environ.get("SENDER_SMS", "OOPS, please specify env var called 'SENDER_SMS'")
-#        RECIPIENT_SMS  = os.environ.get("RECIPIENT_SMS", "OOPS, please specify env var called 'RECIPIENT_SMS'")
-#
-#        client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
-#
-#      
-#        content = "Thank you so much for playing Champions are Coming. In total, you have been playing for " + self.format_time() + " seconds."
-#        message = client.messages.create(to=RECIPIENT_SMS, from_=SENDER_SMS, body=content)
-#        pass
+    def send_text(self):
+
+        """
+        Sends text containing game stats to user
+
+        Parameters: 
+
+            self (self):  keyword we can access the attributes and methods 
+            of the class in python 
+        """ 
+    
+        load_dotenv()
+
+        TWILIO_ACCOUNT_SID = os.environ.get("TWILIO_ACCOUNT_SID", "OOPS, please specify env var called 'TWILIO_ACCOUNT_SID'")
+        TWILIO_AUTH_TOKEN  = os.environ.get("TWILIO_AUTH_TOKEN", "OOPS, please specify env var called 'TWILIO_AUTH_TOKEN'")
+        SENDER_SMS  = os.environ.get("SENDER_SMS", "OOPS, please specify env var called 'SENDER_SMS'")
+        RECIPIENT_SMS  = os.environ.get("RECIPIENT_SMS", "OOPS, please specify env var called 'RECIPIENT_SMS'")
+
+        client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
+
+      
+        content = "Thank you so much for playing Champions are Coming. In total, you have been playing for " + self.format_time() + " seconds."
+        message = client.messages.create(to = RECIPIENT_SMS, from_ = SENDER_SMS, body = content)
+        
 
     def format_time(self):
         """
