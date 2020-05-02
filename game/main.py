@@ -11,21 +11,17 @@ from dotenv import load_dotenv
 from twilio.rest import Client
 import pytest
 
-#player_damage_event = pg.USEREVENT +4
 
 pg.mixer.pre_init(44100,16,2,4096) #initialize sound capabilities of pygame
 pg.init()
 
+#Set pygame screen size
 display_screen = pg.display.set_mode((WIDTH, HEIGHT))
 
+#Enemy Fireball Timer
 enemy1_shoot_event = pg.USEREVENT +1
 pg.time.set_timer(enemy1_shoot_event,3000)
 
-enemy2_shoot_event = pg.USEREVENT +2
-pg.time.set_timer(enemy2_shoot_event,3000)
-
-enemy3_shoot_event = pg.USEREVENT +3
-pg.time.set_timer(enemy3_shoot_event, 2500)
 
 class Game:
     """
@@ -199,7 +195,6 @@ class Game:
             if event.type == enemy1_shoot_event:
                 self.shoot_fire()
             
-
     def draw(self):
         """
         Function that allows for the creation of items on the pygame screen.
@@ -263,7 +258,6 @@ class Game:
             self (self):  keyword we can access the attributes and methods 
             of the class in python 
         """  
-
         if self.enemy1.health > 0:
             fire_ball1 = Fireball(int(self.enemy1.rect.centerx + 50),int(self.enemy1.rect.centery), 'Fireball1.png')
             self.radius = 15
@@ -310,8 +304,6 @@ class Game:
         display_screen.blit(arrow_keys, (720, 570))
         display_screen.blit(spacebar, (720, 670))
 
-
-        
         def draw_text(self, surface, text, size, x, y, color):
             """
             Function to draw text on the the start screen.
@@ -564,7 +556,6 @@ class Game:
                 screen.blit(msg_list[j], pos_list[j])
             pygame.display.update()
         exit
-
 
 
 #Run game class
