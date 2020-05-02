@@ -468,14 +468,28 @@ class Game:
         #Scrolling Story Text
         rolling_text = '''
         Three evil wizards are about to attack your village! 
+
+
         They are currently at the edge of the forest...
+
         You have time to stop them, but must hurry!
+
+
         Will you be the hero and save your village? 
+
         Or will you let it be burned by the wizards' magic?
+
+
         Use the arrow keys to move and jump
+
         and the spacebar to shoot arrows!
-        It is your time to let the wizards know that 
+
+
+        It is your time to let the wizards know that
+
         A Champion is Coming to foil their plan!
+
+
         Press Enter to Save Your Village
         '''
 

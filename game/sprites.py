@@ -154,13 +154,13 @@ class Enemy(pg.sprite.Sprite):
 
         if self.health <= 0:
 
-        """
-        Method to control sprite's behavior (enemy health).
-
-        Parameters: 
-
-            self (self):  keyword we can access the attributes and methods of the class in python     
-        """ 
+            """
+            Method to control sprite's behavior (enemy health).
+    
+            Parameters: 
+    
+                self (self):  keyword we can access the attributes and methods of the class in python     
+            """ 
         if self.health < 0:
 
             self.kill()

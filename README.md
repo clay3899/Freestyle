@@ -19,10 +19,10 @@ conda create -n game-env Pytho=3.7 #first time only
 conda activate game-env #after creation
 ```
 
-Install pygame in the environment:
+Install the requirements.txt file in the environment:
 
 ```sh
-pip install pygame
+pip install -r requirements.txt
 ```
 
 ## Playing the Game
