@@ -147,10 +147,13 @@ class Enemy(pg.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
-        self.health = 10
+        self.health = ENEMY_HEALTH
         
         
     def update(self):
+
+        if self.health <= 0:
+
         """
         Method to control sprite's behavior (enemy health).
 
@@ -159,10 +162,27 @@ class Enemy(pg.sprite.Sprite):
             self (self):  keyword we can access the attributes and methods of the class in python     
         """ 
         if self.health < 0:
+
             self.kill()
             death_sound = pg.mixer.Sound('game\sounds\explode.ogg')
             pg.mixer.Sound.play(death_sound)
     
+    def draw_health(self):
+        if self.health > 60:
+            col = GREEN
+        elif self.health > 30:
+            col = YELLOW
+        else:
+            col = RED
+
+        width = int(self.rect.width * self.health/ENEMY_HEALTH)
+        width2 = int(self.rect.width)
+        self.health_bar = pg.Rect(0, 0, width, 7)
+        self.total = pg.Rect(0,0, width2, 7)
+        if self.health < ENEMY_HEALTH:
+            pg.draw.rect(self.image, BLACK, self.total)
+            pg.draw.rect(self.image, col, self.health_bar)
+        
 
 class Arrow(pg.sprite.Sprite):
     """
@@ -265,7 +285,6 @@ class Fireball(pg.sprite.Sprite):
         self.acc.x += self.vel.x
         self.vel.y += self.acc.y
         self.pos += self.vel + 0.5 * self.acc
-        
         self.rect.x = self.pos.x
         self.rect.y = self.pos.y - 64
         
