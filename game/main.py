@@ -177,7 +177,10 @@ class Game:
             pg.draw.rect(display_screen,hb_color,(50,20,self.player.health,20),0)
             pg.display.flip()
 
-       
+       # Mob heath
+        for sprite in self.all_sprites:
+            if isinstance(sprite, Enemy):
+                sprite.draw_health()
 
 
     
@@ -268,6 +271,10 @@ class Game:
                  
 
     def end_screen(self):
+        
+        if not self.running:
+            exit
+        
         img_dir = path.join(path.dirname(__file__), 'images')
         title = pg.image.load(path.join(img_dir, "title_text.png")).convert_alpha()
         title = pg.transform.scale(title, (WIDTH, 165))
@@ -290,7 +297,7 @@ class Game:
                     self.running = False
             elif event.type == QUIT:
                 pg.quit()
-                sys.exit() 
+                
         
         
         

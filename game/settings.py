@@ -20,8 +20,11 @@ PLAYER_JUMP = 18
 PLAYER_HEALTH = 100
 # Arrows
 ARROW_SPEED = 13
-ARROW_DAMAGE = 1
+ARROW_DAMAGE = 10
 SHOT_TIME = 400
+
+# Enemy Health
+ENEMY_HEALTH = 100
 
 #Fireball
 FIREBALL_SPEED = 5
@@ -43,6 +46,8 @@ GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 LBROWN = (181, 101, 29)
 DBROWN = (101, 67, 33)
+YELLOW = (255, 255, 0)
+
 
 # screens
 img_dir = path.join(path.dirname(__file__), 'images')
