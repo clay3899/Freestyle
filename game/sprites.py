@@ -131,7 +131,6 @@ class Platform(pg.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
-
 class Enemy(pg.sprite.Sprite):
     """
     Creates the Enemy class to provide a template for enemies in the game.
@@ -171,12 +170,10 @@ class Enemy(pg.sprite.Sprite):
             of the class in python     
         """
         if self.health <= 0:
-
-            if self.health < 0:
-            
-                self.kill()
-                death_sound = pg.mixer.Sound('game\sounds\explode.ogg')
-                pg.mixer.Sound.play(death_sound)
+        
+            self.kill()
+            death_sound = pg.mixer.Sound('game\sounds\explode.ogg')
+            pg.mixer.Sound.play(death_sound)
     
     def draw_health(self):
         """
@@ -202,7 +199,6 @@ class Enemy(pg.sprite.Sprite):
             pg.draw.rect(self.image, BLACK, self.total)
             pg.draw.rect(self.image, col, self.health_bar)
         
-
 class Arrow(pg.sprite.Sprite):
     """
     Creates the Arrow class to provide a template for arrows (player weapons) in the game.
@@ -262,8 +258,6 @@ class Arrow(pg.sprite.Sprite):
             self.kill()
         if self.rect.y > HEIGHT + 100:
             self.kill()
-
-
        
 class Fireball(pg.sprite.Sprite):
     """

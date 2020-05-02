@@ -11,7 +11,6 @@ from dotenv import load_dotenv
 from twilio.rest import Client
 import pytest
 
-
 enemy1_shoot_event = pg.USEREVENT +1
 pg.time.set_timer(enemy1_shoot_event,2000)
 
@@ -130,6 +129,9 @@ class Game:
         # game loop -- updates
         self.all_sprites.update()
 
+        if len(self.enemies) == 0:
+            self.playing = False 
+
         #check if player hits platform if falling
         if self.player.vel.y > 0:
             hits = pg.sprite.spritecollide(self.player, self.platforms, False,)
@@ -142,6 +144,8 @@ class Game:
         hits = pg.sprite.groupcollide(self.enemies, self.arrows, False, True)
         for hit in hits:
             hit.health -= ARROW_DAMAGE
+            if hit.health <= 0:
+                self.enemies.remove(hit)
             arrow_sound = pg.mixer.Sound('game\sounds\get_hit.ogg')
             pg.mixer.Sound.play(arrow_sound)
 
@@ -386,9 +390,8 @@ class Game:
                     self.running = False
             elif event.type == QUIT:
                 pg.quit()
-                sys.exit() 
 
-    def end_screen(self):
+    def end_screen_1(self):
         
         """
         Function to create an end screen after the player wins or loses on the pygame screen.
@@ -397,66 +400,57 @@ class Game:
 
             self (self): keyword we can access the attributes and methods 
             of the class in python 
+        
         """  
-#
-        ## If player Wins
-#
-        #
-        #background = pg.image.load('game\images\Winner_Screen.jpg').convert_alpha()
-        #background = pygame.transform.scale(background, (WIDTH, HEIGHT))
-        #rect = background.get_rect()
-        #display_screen.blit(background, rect)
-#
-        #font = pg.font.Font(pg.font.match_font('cambria'),75)
-        #text = font.render("You are the Champion!",20,WHITE)
-        #display_screen.blit(text,(120,200))
-#
-        #font2 = pg.font.Font(pg.font.match_font('cambria'),30)
-        #text2 = font2.render("With your valient bow and arrow you have defeated the wizards!",23,BLACK)
-        #display_screen.blit(text2,(30,450))
-#
-        #text3 = font2.render("Your village is celbrating because it is safe...for now!",23,BLACK)
-        #display_screen.blit(text3,(100,520))
-#
-        #text4 = font2.render("Press [q] to quit",20,BLACK)
-        #display_screen.blit(text4,(400,600))
-#
-#
-        #pg.display.flip()
-
-        #If player Loses
-        if self.running == False:    
-            return
-        
-        #self.send_text()
-        
         background = pg.image.load('game\images\onfiretown.png').convert_alpha()
         background = pygame.transform.scale(background, (WIDTH, HEIGHT))
         rect = background.get_rect()
         display_screen.blit(background, rect)
-
         font = pg.font.Font(pg.font.match_font('cambria'),75)
         text = font.render("GAME OVER",20,WHITE)
         display_screen.blit(text,(275,150))
-
         font2 = pg.font.Font(pg.font.match_font('cambria'),25)
         text2 = font2.render("Overwhelmed by the enemy onslaught, you fall in battle.",18,WHITE)
         display_screen.blit(text2,(165,260))
-
         text3 = font2.render("With nobody left to protect the town, it falls into chaos and ruin.",18,WHITE)
         display_screen.blit(text3,(125,300))
-
-        text4 = font2.render("Press [ENTER] to play again or [q] to quit",20,GREEN)
-        display_screen.blit(text4,(300,350))
+        text4 = font2.render("Press [q] to quit",20,GREEN)
+        display_screen.blit(text4,(400,350))
         pg.display.flip()
-
 
         while True:
             event = pg.event.poll()
             if event.type == pg.KEYDOWN:
-                if event.key == pg.K_RETURN:
-                    break
-                elif event.key == pg.K_q:
+                if event.key == pg.K_q:
+                    pg.quit()
+                    self.running = False
+            elif event.type == QUIT:
+                pg.quit()
+    
+    def end_screen_2(self):
+        
+        background = pg.image.load('game\images\Winner_Screen.jpg').convert_alpha()
+        background = pygame.transform.scale(background, (WIDTH, HEIGHT))
+        rect = background.get_rect()
+        display_screen.blit(background, rect)
+        font = pg.font.Font(pg.font.match_font('cambria'),75)
+        text = font.render("You are the Champion!",20,WHITE)
+        display_screen.blit(text,(120,200))
+        font2 = pg.font.Font(pg.font.match_font('cambria'),30)
+        text2 = font2.render("With your valient bow and arrow you have defeated the wizards!",23,BLACK)
+        display_screen.blit(text2,(30,450))
+        text3 = font2.render("Your village is celbrating because it is safe...for now!",23,BLACK)
+        display_screen.blit(text3,(100,520))
+        text4 = font2.render("Press [q] to quit",20,BLACK)
+        display_screen.blit(text4,(400,600))
+        pg.display.flip()
+
+        #self.send_text()
+
+        while True:
+            event = pg.event.poll()
+            if event.type == pg.KEYDOWN:
+                if event.key == pg.K_q:
                     pg.quit()
                     self.running = False
             elif event.type == QUIT:
@@ -599,9 +593,9 @@ g.start_screen()
 g.scrolling_text(display_screen)
 while g.running:
     g.new()
-    #if self.enemies.health < 0:
-    #    g.winner_screen()
-    #else:
-    g.end_screen()
+    if g.player.health > 0:
+        g.end_screen_2()
+    if g.player.health <= 0:
+        g.end_screen_1()
 
 pg.quit()
