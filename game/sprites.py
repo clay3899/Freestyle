@@ -17,7 +17,7 @@ class Player(pg.sprite.Sprite):
             self (self):  keyword we can access the attributes and methods 
             of the class in python 
 
-            game 
+            game: used to reference items in the game class
 
             img (.png file): png file that has an image for the player
 

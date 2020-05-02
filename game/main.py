@@ -455,8 +455,7 @@ class Game:
                     self.running = False
             elif event.type == QUIT:
                 pg.quit()
-                
-        
+                    
     def send_text(self):
 
         """
@@ -481,7 +480,6 @@ class Game:
         content = "Thank you so much for playing Champions are Coming. In total, you have been playing for " + self.format_time() + " seconds."
         message = client.messages.create(to = RECIPIENT_SMS, from_ = SENDER_SMS, body = content)
         
-
     def format_time(self):
         """
         Gets the time pygame has been running and ensures it is the proper format for output (in seconds and 2 decimal points)
