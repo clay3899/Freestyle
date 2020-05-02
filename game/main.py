@@ -19,13 +19,13 @@ pg.init()
 display_screen = pg.display.set_mode((WIDTH, HEIGHT))
 
 enemy1_shoot_event = pg.USEREVENT +1
-pg.time.set_timer(enemy1_shoot_event,8000)
+pg.time.set_timer(enemy1_shoot_event,3000)
 
 enemy2_shoot_event = pg.USEREVENT +2
-pg.time.set_timer(enemy2_shoot_event,10000)
+pg.time.set_timer(enemy2_shoot_event,3000)
 
 enemy3_shoot_event = pg.USEREVENT +3
-pg.time.set_timer(enemy3_shoot_event, 9000)
+pg.time.set_timer(enemy3_shoot_event, 2500)
 
 class Game:
     """
@@ -74,9 +74,9 @@ class Game:
         self.fireballs = pg.sprite.Group()
         self.player = Player(self, 'archer.png')
         self.all_sprites.add(self.player)
-        self.enemy1 = Enemy(680, 655, 'wizard.png')
+        self.enemy1 = Enemy(720, 655, 'wizard.png')
         self.enemy2 = Enemy(WIDTH - 100, HEIGHT - 420, 'wizard.png')
-        self.enemy3 = Enemy(WIDTH - 155, HEIGHT - 600, 'wizard.png')
+        self.enemy3 = Enemy(WIDTH - 150, HEIGHT - 600, 'wizard.png')
         self.all_sprites.add(self.enemy1, self.enemy2, self.enemy3) 
         self.enemies.add(self.enemy1, self.enemy2, self.enemy3)
         self.previous_time = pg.time.get_ticks()
@@ -199,11 +199,6 @@ class Game:
             if event.type == enemy1_shoot_event:
                 self.shoot_fire()
             
-            if event.type == enemy2_shoot_event:
-                self.shoot_fire()
-
-            if event.type == enemy3_shoot_event:
-                self.shoot_fire()
 
     def draw(self):
         """
@@ -270,20 +265,20 @@ class Game:
         """  
 
         if self.enemy1.health > 0:
-            fire_ball1 = Fireball(int(self.enemy1.rect.centerx),int(self.enemy1.rect.centery), 'Fireball1.png')
+            fire_ball1 = Fireball(int(self.enemy1.rect.centerx + 50),int(self.enemy1.rect.centery), 'Fireball1.png')
             self.radius = 15
             self.all_sprites.add(fire_ball1)
             self.fireballs.add(fire_ball1)
 
         if self.enemy2.health > 0:
-            fire_ball2 = Fireball(int(self.enemy2.rect.centerx),int(self.enemy2.rect.centery), 'Fireball1.png')
+            fire_ball2 = Fireball(int(self.enemy2.rect.centerx + 100),int(self.enemy2.rect.centery), 'Fireball1.png')
             self.radius = 15
             self.all_sprites.add(fire_ball2)
             self.fireballs.add(fire_ball2)
 
         if self.enemy3.health > 0:
             self.radius = 15
-            fire_ball3 = Fireball(int(self.enemy3.rect.centerx),int(self.enemy3.rect.centery), 'Fireball1.png')
+            fire_ball3 = Fireball(int(self.enemy3.rect.centerx + 300),int(self.enemy3.rect.centery), 'Fireball1.png')
             self.all_sprites.add(fire_ball3)
             self.fireballs.add(fire_ball3)
   
@@ -386,7 +381,7 @@ class Game:
         """  
         if not self.running:
             return
-            
+
         background = pg.image.load('game\images\onfiretown.png').convert_alpha()
         background = pygame.transform.scale(background, (WIDTH, HEIGHT))
         rect = background.get_rect()

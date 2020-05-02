@@ -298,7 +298,7 @@ class Fireball(pg.sprite.Sprite):
             of the class in python    
         """         
         # equations of motion
-        self.acc = vec(0, 0.008)
+        self.acc = vec(0, 0.006)
         self.acc.x += self.vel.x
         self.vel.y += self.acc.y
         self.pos += self.vel + 0.5 * self.acc
