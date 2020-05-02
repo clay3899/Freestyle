@@ -11,22 +11,21 @@ from dotenv import load_dotenv
 from twilio.rest import Client
 import pytest
 
-enemy1_shoot_event = pg.USEREVENT +1
-pg.time.set_timer(enemy1_shoot_event,2000)
-
-enemy2_shoot_event = pg.USEREVENT +2
-pygame.time.set_timer(enemy2_shoot_event,3000)
-
-enemy3_shoot_event = pg.USEREVENT +3
-pg.time.set_timer(enemy3_shoot_event, 2500)
-
-player_damage_event = pg.USEREVENT +4
-
+#player_damage_event = pg.USEREVENT +4
 
 pg.mixer.pre_init(44100,16,2,4096) #initialize sound capabilities of pygame
 pg.init()
 
 display_screen = pg.display.set_mode((WIDTH, HEIGHT))
+
+enemy1_shoot_event = pg.USEREVENT +1
+pg.time.set_timer(enemy1_shoot_event,8000)
+
+enemy2_shoot_event = pg.USEREVENT +2
+pg.time.set_timer(enemy2_shoot_event,10000)
+
+enemy3_shoot_event = pg.USEREVENT +3
+pg.time.set_timer(enemy3_shoot_event, 9000)
 
 class Game:
     """
@@ -196,15 +195,15 @@ class Game:
                         self.previous_time = self.current_time
                         self.fire()
 
-        
+            
             if event.type == enemy1_shoot_event:
-                self.shoot_fire1()
+                self.shoot_fire()
             
             if event.type == enemy2_shoot_event:
-                self.shoot_fire2()
+                self.shoot_fire()
 
             if event.type == enemy3_shoot_event:
-                self.shoot_fire3()
+                self.shoot_fire()
 
     def draw(self):
         """
@@ -260,45 +259,28 @@ class Game:
         self.all_sprites.add(arrow)
         self.arrows.add(arrow)
 
-    def shoot_fire1(self): 
+    def shoot_fire(self):
         """
-        Creates the fireballs that enemy 1 shoots.
+        Creates the fireballs that enemies shoots.
 
         Parameters: 
 
             self (self):  keyword we can access the attributes and methods 
             of the class in python 
         """  
+
         if self.enemy1.health > 0:
             fire_ball1 = Fireball(int(self.enemy1.rect.centerx),int(self.enemy1.rect.centery), 'Fireball1.png')
             self.radius = 15
             self.all_sprites.add(fire_ball1)
             self.fireballs.add(fire_ball1)
 
-    def shoot_fire2(self):
-        """
-        Creates the fireballs that enemy 2 shoots.
-
-        Parameters: 
-
-            self (self):  keyword we can access the attributes and methods 
-            of the class in python 
-        """ 
         if self.enemy2.health > 0:
             fire_ball2 = Fireball(int(self.enemy2.rect.centerx),int(self.enemy2.rect.centery), 'Fireball1.png')
             self.radius = 15
             self.all_sprites.add(fire_ball2)
             self.fireballs.add(fire_ball2)
-  
-    def shoot_fire3(self):
-        """
-        Creates the fireballs that enemy 3 shoots.
 
-        Parameters: 
-
-            self (self):  keyword we can access the attributes and methods 
-            of the class in python 
-        """ 
         if self.enemy3.health > 0:
             self.radius = 15
             fire_ball3 = Fireball(int(self.enemy3.rect.centerx),int(self.enemy3.rect.centery), 'Fireball1.png')
@@ -402,6 +384,9 @@ class Game:
             of the class in python 
         
         """  
+        if not self.running:
+            return
+            
         background = pg.image.load('game\images\onfiretown.png').convert_alpha()
         background = pygame.transform.scale(background, (WIDTH, HEIGHT))
         rect = background.get_rect()
@@ -429,6 +414,9 @@ class Game:
     
     def end_screen_2(self):
         
+        if not self.running:
+            return
+
         background = pg.image.load('game\images\Winner_Screen.jpg').convert_alpha()
         background = pygame.transform.scale(background, (WIDTH, HEIGHT))
         rect = background.get_rect()

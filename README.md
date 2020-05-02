@@ -24,7 +24,6 @@ Install the requirements.txt file in the environment:
 ```sh
 pip install -r requirements.txt
 ```
-
 ## Playing the Game
 
 From within the virtual environment, use the following command to run the Python script from the command-line:
