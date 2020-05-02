@@ -3,14 +3,27 @@ from settings import *
 from os import path
 
 vec = pg.math.Vector2
-img_dir = path.join(path.dirname(__file__), 'images')
 
-
-
-
-# from KidsCanCode
 class Player(pg.sprite.Sprite):
+    """
+    Creates the Player class to provide a template for players in the game.
+    """
     def __init__(self, game, img):
+        """
+        Initializes (sets up) the player class.
+
+        Parameters: 
+
+            self (self):  keyword we can access the attributes and methods of the class in python 
+
+            game 
+
+            img (.png file): png file that has an image for the player
+
+        Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
+
+        Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c
+        """
         self.game = game
         pg.sprite.Sprite.__init__(self)
         self.image = pg.Surface((32,32))
@@ -24,7 +37,17 @@ class Player(pg.sprite.Sprite):
         self.radius = 15 
     
     def jump(self):
-        
+        """
+        Defines rules for the player action of jumping.
+
+        Parameters: 
+
+            self (self):  keyword we can access the attributes and methods of the class in python 
+
+        Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
+
+        Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c
+        """ 
         self.rect.y += 1
 
         hits = pg.sprite.spritecollide(self,self.game.platforms, False)
@@ -36,6 +59,17 @@ class Player(pg.sprite.Sprite):
         
     
     def update(self):
+        """
+        Method to control sprite's behavior (player movement).
+
+        Parameters: 
+
+            self (self):  keyword we can access the attributes and methods of the class in python 
+
+        Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
+
+        Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c     
+        """ 
         self.acc = vec(0,PLAYER_GRAV)
         keys = pg.key.get_pressed()
         if keys[pg.K_LEFT]:
@@ -59,7 +93,29 @@ class Player(pg.sprite.Sprite):
             self.pos.x = 0
 
 class Platform(pg.sprite.Sprite):
+    """
+    Creates the Platform class to provide a template for platforms in the game.
+    """
     def __init__(self, x, y, w, h):
+        """
+        Initializes (sets up) the platform class.
+
+        Parameters: 
+
+            self (self):  keyword we can access the attributes and methods of the class in python 
+
+            x (int): x coordinate of the platform on the screen (changing the coordinate moves the pltform horizontally)
+
+            y (int): y coordinate of the platform on the screen (changing the coordinate moves the pltform vertically)
+
+            w (int): length of the platform (changing the coordinate makes the platform longer)
+
+            h (int): height of the platform (changing the coordinate makes the platform taller)
+
+        Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
+
+        Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c
+        """     
         pg.sprite.Sprite.__init__(self)
         self.image = pg.Surface((w,h))
         self.image.fill(BLACK)
@@ -67,9 +123,25 @@ class Platform(pg.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
-# Source: https://opensource.com/article/18/5/pygame-enemy
+
 class Enemy(pg.sprite.Sprite):
-    def __init__(self,x,y, img): #add an img attribute
+    """
+    Creates the Enemy class to provide a template for enemies in the game.
+    """
+    def __init__(self,x,y, img):
+        """
+        Initializes (sets up) the enemy class.
+
+        Parameters: 
+
+            self (self):  keyword we can access the attributes and methods of the class in python 
+
+            x (int): x coordinate of the platform on the screen (changing the coordinate moves the platform horizontally)
+
+            y (int): y coordinate of the platform on the screen (changing the coordinate moves the platform vertically)
+
+            img (.png file): png file that has an image for the enemy        
+        """ 
         pg.sprite.Sprite.__init__(self)
         self.image = pg.image.load(path.join(img_dir, img)).convert_alpha()
         self.rect = self.image.get_rect()
@@ -77,11 +149,23 @@ class Enemy(pg.sprite.Sprite):
         self.rect.y = y
         self.health = ENEMY_HEALTH
         
-
         
     def update(self):
+
         if self.health <= 0:
+
+        """
+        Method to control sprite's behavior (enemy health).
+
+        Parameters: 
+
+            self (self):  keyword we can access the attributes and methods of the class in python     
+        """ 
+        if self.health < 0:
+
             self.kill()
+            death_sound = pg.mixer.Sound('game\sounds\explode.ogg')
+            pg.mixer.Sound.play(death_sound)
     
     def draw_health(self):
         if self.health > 60:
@@ -101,7 +185,27 @@ class Enemy(pg.sprite.Sprite):
         
 
 class Arrow(pg.sprite.Sprite):
+    """
+    Creates the Arrow class to provide a template for arrows (player weapons) in the game.
+    """
     def __init__(self, x, y, img):
+        """
+        Initializes (sets up) the arrow class.
+
+        Parameters: 
+
+            self (self):  keyword we can access the attributes and methods of the class in python 
+
+            x (int): x coordinate of the arrow on the screen 
+
+            y (int): y coordinate of the arrow on the screen 
+
+            img (.png file): png file that has an image for the enemy        
+
+        Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
+
+        Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c
+        """  
         pg.sprite.Sprite.__init__(self)
         self.image = pg.image.load(path.join(img_dir, img)).convert_alpha()
         self.image.set_colorkey(BLACK)
@@ -113,7 +217,17 @@ class Arrow(pg.sprite.Sprite):
         self.acc = vec(0,0)
     
     def update(self):
-        
+        """
+        Method to control sprite's behavior (arrow movement and impact).
+
+        Parameters: 
+
+            self (self):  keyword we can access the attributes and methods of the class in python 
+
+        Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
+
+        Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c     
+        """         
         # equations of motion
         self.acc = vec(0, PLAYER_GRAV)
         self.acc.x += self.vel.x
@@ -128,10 +242,26 @@ class Arrow(pg.sprite.Sprite):
         if self.rect.y > HEIGHT + 100:
             self.kill()
 
-        pass
+
        
 class Fireball(pg.sprite.Sprite):
+    """
+    Creates the Fireball class to provide a template for fireballs (enemy weapons) in the game.
+    """
     def __init__(self, x, y, img):
+        """
+        Initializes (sets up) the fireball class.
+
+        Parameters: 
+
+            self (self):  keyword we can access the attributes and methods of the class in python 
+
+            x (int): x coordinate of the fireball on the screen 
+
+            y (int): y coordinate of the fireball on the screen 
+
+            img (.png file): png file that has an image for the enemy        
+        """  
         pg.sprite.Sprite.__init__(self)
         self.image = pg.image.load(path.join(img_dir, img)).convert_alpha()
         self.image.set_colorkey(BLACK)
@@ -143,7 +273,13 @@ class Fireball(pg.sprite.Sprite):
         self.acc = vec(0,0)
     
     def update(self):
-        
+        """
+        Method to control sprite's behavior (fireball movement and impact).
+
+        Parameters: 
+
+            self (self):  keyword we can access the attributes and methods of the class in python    
+        """         
         # equations of motion
         self.acc = vec(0, 0.008)
         self.acc.x += self.vel.x
@@ -151,7 +287,7 @@ class Fireball(pg.sprite.Sprite):
         self.pos += self.vel + 0.5 * self.acc
         self.rect.x = self.pos.x
         self.rect.y = self.pos.y - 64
-        pass
+        
                
         
     
