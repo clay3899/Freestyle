@@ -179,6 +179,14 @@ class Enemy(pg.sprite.Sprite):
                 pg.mixer.Sound.play(death_sound)
     
     def draw_health(self):
+        """
+        Used to draw the enemy health bars.
+
+        Parameters: 
+
+            self (self):  keyword we can access the attributes and methods 
+            of the class in python     
+        """
         if self.health > 60:
             col = GREEN
         elif self.health > 30:

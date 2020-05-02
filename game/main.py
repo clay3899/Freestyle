@@ -398,46 +398,37 @@ class Game:
             self (self): keyword we can access the attributes and methods 
             of the class in python 
         """  
-        
-        if not self.running:
-            exit
-        
-        img_dir = path.join(path.dirname(__file__), 'images')
-        title = pg.image.load(path.join(img_dir, "title_text.png")).convert_alpha()
-        title = pg.transform.scale(title, (WIDTH, 165))
-        background = pg.image.load('game\images\Home_Screen.jpg').convert()
-        background_rect = background.get_rect()
-
-        # If player Wins
-
-         
-        background = pg.image.load('game\images\Winner_Screen.jpg').convert_alpha()
-        background = pygame.transform.scale(background, (WIDTH, HEIGHT))
-        rect = background.get_rect()
-        display_screen.blit(background, rect)
-
-        font = pg.font.Font(pg.font.match_font('cambria'),75)
-        text = font.render("You are the Champion!",20,WHITE)
-        display_screen.blit(text,(120,200))
-
-        font2 = pg.font.Font(pg.font.match_font('cambria'),30)
-        text2 = font2.render("With your valient bow and arrow you have defeated the wizards!",23,BLACK)
-        display_screen.blit(text2,(30,450))
-
-        text3 = font2.render("Your village is celbrating because it is safe...for now!",23,BLACK)
-        display_screen.blit(text3,(100,520))
-
-        text4 = font2.render("Press [q] to quit",20,BLACK)
-        display_screen.blit(text4,(400,600))
-
-
-        pg.display.flip()
+#
+        ## If player Wins
+#
+        #
+        #background = pg.image.load('game\images\Winner_Screen.jpg').convert_alpha()
+        #background = pygame.transform.scale(background, (WIDTH, HEIGHT))
+        #rect = background.get_rect()
+        #display_screen.blit(background, rect)
+#
+        #font = pg.font.Font(pg.font.match_font('cambria'),75)
+        #text = font.render("You are the Champion!",20,WHITE)
+        #display_screen.blit(text,(120,200))
+#
+        #font2 = pg.font.Font(pg.font.match_font('cambria'),30)
+        #text2 = font2.render("With your valient bow and arrow you have defeated the wizards!",23,BLACK)
+        #display_screen.blit(text2,(30,450))
+#
+        #text3 = font2.render("Your village is celbrating because it is safe...for now!",23,BLACK)
+        #display_screen.blit(text3,(100,520))
+#
+        #text4 = font2.render("Press [q] to quit",20,BLACK)
+        #display_screen.blit(text4,(400,600))
+#
+#
+        #pg.display.flip()
 
         #If player Loses
         if self.running == False:    
             return
         
-        self.send_text()
+        #self.send_text()
         
         background = pg.image.load('game\images\onfiretown.png').convert_alpha()
         background = pygame.transform.scale(background, (WIDTH, HEIGHT))
@@ -472,30 +463,30 @@ class Game:
                 pg.quit()
                 
         
-    def send_text(self):
-
-        """
-        Sends text containing game stats to user
-
-        Parameters: 
-
-            self (self):  keyword we can access the attributes and methods 
-            of the class in python 
-        """ 
-    
-        load_dotenv()
-
-        TWILIO_ACCOUNT_SID = os.environ.get("TWILIO_ACCOUNT_SID", "OOPS, please specify env var called 'TWILIO_ACCOUNT_SID'")
-        TWILIO_AUTH_TOKEN  = os.environ.get("TWILIO_AUTH_TOKEN", "OOPS, please specify env var called 'TWILIO_AUTH_TOKEN'")
-        SENDER_SMS  = os.environ.get("SENDER_SMS", "OOPS, please specify env var called 'SENDER_SMS'")
-        RECIPIENT_SMS  = os.environ.get("RECIPIENT_SMS", "OOPS, please specify env var called 'RECIPIENT_SMS'")
-
-        client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
-
-      
-        content = "Thank you so much for playing Champions are Coming. In total, you have been playing for " + self.format_time() + " seconds."
-        message = client.messages.create(to=RECIPIENT_SMS, from_=SENDER_SMS, body=content)
-        pass
+#    def send_text(self):
+#
+#        """
+#        Sends text containing game stats to user
+#
+#        Parameters: 
+#
+#            self (self):  keyword we can access the attributes and methods 
+#            of the class in python 
+#        """ 
+#    
+#        load_dotenv()
+#
+#        TWILIO_ACCOUNT_SID = os.environ.get("TWILIO_ACCOUNT_SID", "OOPS, please specify env var called 'TWILIO_ACCOUNT_SID'")
+#        TWILIO_AUTH_TOKEN  = os.environ.get("TWILIO_AUTH_TOKEN", "OOPS, please specify env var called 'TWILIO_AUTH_TOKEN'")
+#        SENDER_SMS  = os.environ.get("SENDER_SMS", "OOPS, please specify env var called 'SENDER_SMS'")
+#        RECIPIENT_SMS  = os.environ.get("RECIPIENT_SMS", "OOPS, please specify env var called 'RECIPIENT_SMS'")
+#
+#        client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
+#
+#      
+#        content = "Thank you so much for playing Champions are Coming. In total, you have been playing for " + self.format_time() + " seconds."
+#        message = client.messages.create(to=RECIPIENT_SMS, from_=SENDER_SMS, body=content)
+#        pass
 
     def format_time(self):
         """
@@ -608,6 +599,9 @@ g.start_screen()
 g.scrolling_text(display_screen)
 while g.running:
     g.new()
+    #if self.enemies.health < 0:
+    #    g.winner_screen()
+    #else:
     g.end_screen()
 
 pg.quit()
