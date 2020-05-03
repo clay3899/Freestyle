@@ -290,9 +290,22 @@ class Game:
         Source: Code help to understand structure of the start screen from https://github.com/joshuawillman/The-Lonely-Shooter
         """  
         def insert_image(img, x, y):
+            """
+            Function to draw image on screen.
+
+            Parameters:
+
+            img (.png): image file name
+
+            x (int): x coordinate of the image on the screen (changing 
+            the coordinate moves the text horizontally)
+    
+            y (int): y coordinate of the image on the screen (changing 
+            the coordinate moves the text vertically) 
+            """
             image = pg.image.load(path.join(img_dir, img)).convert_alpha()
-            image_transform = pg.transform.scale(image, (x, y)) 
-            return image_transform
+            image_transformed = pg.transform.scale(image, (x, y)) 
+            return image_transformed
         
         #Draw .png images on screen
         title = insert_image('title_text.png', WIDTH, 165)
@@ -303,7 +316,7 @@ class Game:
         background = pg.image.load('game\images\Home_Screen.jpg').convert_alpha()
         background_rect = background.get_rect()
 
-        #adjust position of images
+        #Adjust position of images on screen
         display_screen.blit(background, background_rect)
         display_screen.blit(title, (0,110))
         display_screen.blit(arrow_keys, (720, 570))
