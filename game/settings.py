@@ -23,14 +23,13 @@ ARROW_DAMAGE = 10
 SHOT_TIME = 400
 
 # Enemy Health
-ENEMY_HEALTH = 100
+ENEMY_HEALTH = 0
 
 #Fireball
 FIREBALL_SPEED = 5
 FIREBALL_DAMAGE = 10
 
 # starting platforms
-
 PLATFORM_LIST = [(0, HEIGHT- 5, WIDTH, 10), 
                 (WIDTH - 620, HEIGHT *3/4, 100, 5),
                 (WIDTH - 120, HEIGHT - 360, 100, 5),
@@ -51,3 +50,31 @@ YELLOW = (255, 255, 0)
 
 # variable for image file path
 img_dir = path.join(path.dirname(__file__), 'images')
+
+#Story for Scrolling Text
+STORY = '''
+        Three evil wizards are about to attack your village! 
+
+
+        They are currently at the edge of the forest...
+
+        You have time to stop them, but must hurry!
+
+
+        Will you be the hero and save your village? 
+
+        Or will you let it be burned by the wizards' magic?
+
+
+        Use the arrow keys to move and jump
+
+        and the spacebar to shoot arrows!
+
+
+        It is your time to let the wizards know that
+
+        A Champion is Coming to foil their plan!
+
+
+        Press Enter to Save Your Village
+        '''

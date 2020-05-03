@@ -305,7 +305,39 @@ class Fireball(pg.sprite.Sprite):
         self.rect.x = self.pos.x
         self.rect.y = self.pos.y - 64
         
-               
+class Draw_Text(pg.sprite.Sprite):
+    def __init__(self, surface, text, size, x, y, color):
+        """
+        Function to draw text on the the start screen
+    
+        Parameters:
+    
+            self (self): keyword we can access the attributes and 
+            methods of the class in python 
+            
+            surface: identifies the screen on which to draw text
+    
+            text (str): Words that are desired to be on the pygame 
+            screen
+    
+            size (int):  Provides the desired text size of word
+    
+            x (int): x coordinate of the text on the screen (changing 
+            the coordinate moves the text horizontally)
+    
+            y (int): y coordinate of the text on the screen (changing 
+            the coordinate moves the text vertically)
+    
+            color (preset color code from pygame): Determines the color 
+            of the text
+    
+        Source: Code help to understand structure of the start screen from https://github.com/joshuawillman/The-Lonely-Shooter
+        """  
+        font = pg.font.Font(pg.font.match_font('cambria'), size)
+        text_surface = font.render(text, True, color)
+        text_rect = text_surface.get_rect()
+        text_rect.midtop = (x, y)
+        surface.blit(text_surface, text_rect)              
         
     
 

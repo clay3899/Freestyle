@@ -304,44 +304,11 @@ class Game:
         display_screen.blit(arrow_keys, (720, 570))
         display_screen.blit(spacebar, (720, 670))
 
-        def draw_text(self, surface, text, size, x, y, color):
-            """
-            Function to draw text on the the start screen.
-
-            Parameters: 
-
-                self (self): keyword we can access the attributes and 
-                methods of the class in python 
-                
-                surface: identifies the screen on which to draw text
-
-                text (str): Words that are desired to be on the pygame 
-                screen
-
-                size (int):  Provides the desired text size of words
-
-                x (int): x coordinate of the text on the screen (changing 
-                the coordinate moves the text horizontally)
-
-                y (int): y coordinate of the text on the screen (changing 
-                the coordinate moves the text vertically)
-
-                color (preset color code from pygame): Determines the color 
-                of the text
-
-            Source: Code help to understand structure of the start screen from https://github.com/joshuawillman/The-Lonely-Shooter
-            """  
-            font = pg.font.Font(pg.font.match_font('cambria'), size)
-            text_surface = font.render(text, True, color)
-            text_rect = text_surface.get_rect()
-            text_rect.midtop = (x, y)
-            surface.blit(text_surface, text_rect)
-
-        draw_text(self, display_screen, "Are You Ready for the Challenge?", 35, WIDTH/2, HEIGHT/2, WHITE)
-        draw_text(self, display_screen, "If so, press [ENTER] to begin", 35, WIDTH/2, (HEIGHT/2) + 50, WHITE)
-        draw_text(self, display_screen, "If not, press [Q] to quit", 35, WIDTH/2, (HEIGHT/2) + 100, WHITE)
-        draw_text(self, display_screen, "MOVE:", 35, 630, 570, WHITE)
-        draw_text(self, display_screen, "SHOOT:", 35, 630, 670, WHITE)
+        Draw_Text(display_screen, "Are You Ready for the Challenge?", 35, WIDTH/2, HEIGHT/2, WHITE)
+        Draw_Text(display_screen, "If so, press [ENTER] to begin", 35, WIDTH/2, (HEIGHT/2) + 50, WHITE)
+        Draw_Text(display_screen, "If not, press [Q] to quit", 35, WIDTH/2, (HEIGHT/2) + 100, WHITE)
+        Draw_Text(display_screen, "MOVE:", 35, 630, 570, WHITE)
+        Draw_Text(display_screen, "SHOOT:", 35, 630, 670, WHITE)
 
         #code for playing sound from CrouchingPython on YouTube https://www.youtube.com/watch?v=YQ1mixa9RAw
         pg.mixer.music.load('game\sounds\Destiny.mp3')
@@ -378,16 +345,12 @@ class Game:
         background = pygame.transform.scale(background, (WIDTH, HEIGHT))
         rect = background.get_rect()
         display_screen.blit(background, rect)
-        font = pg.font.Font(pg.font.match_font('cambria'),75)
-        text = font.render("GAME OVER",20,WHITE)
-        display_screen.blit(text,(275,150))
-        font2 = pg.font.Font(pg.font.match_font('cambria'),25)
-        text2 = font2.render("Overwhelmed by the enemy onslaught, you fall in battle.",18,WHITE)
-        display_screen.blit(text2,(165,260))
-        text3 = font2.render("With nobody left to protect the town, it falls into chaos and ruin.",18,WHITE)
-        display_screen.blit(text3,(125,300))
-        text4 = font2.render("Press [q] to quit",20,GREEN)
-        display_screen.blit(text4,(400,350))
+        
+        Draw_Text(display_screen, "GAME OVER", 75, 475, 150, WHITE)
+        Draw_Text(display_screen, "Overwhelmed by the enemy onslaught, you fall in battle.", 25, 475, 250, WHITE)
+        Draw_Text(display_screen,"With nobody left to protect the town, it falls into chaos and ruin.", 18, 475, 300, WHITE)
+        Draw_Text(display_screen, "Press [q] to quit", 20, 500, 350, GREEN)
+
         pg.display.flip()
 
         while True:
@@ -408,16 +371,12 @@ class Game:
         background = pygame.transform.scale(background, (WIDTH, HEIGHT))
         rect = background.get_rect()
         display_screen.blit(background, rect)
-        font = pg.font.Font(pg.font.match_font('cambria'),75)
-        text = font.render("You are the Champion!",20,WHITE)
-        display_screen.blit(text,(120,200))
-        font2 = pg.font.Font(pg.font.match_font('cambria'),30)
-        text2 = font2.render("With your valient bow and arrow you have defeated the wizards!",23,BLACK)
-        display_screen.blit(text2,(30,450))
-        text3 = font2.render("Your village is celbrating because it is safe...for now!",23,BLACK)
-        display_screen.blit(text3,(100,520))
-        text4 = font2.render("Press [q] to quit",20,BLACK)
-        display_screen.blit(text4,(400,600))
+
+        Draw_Text(display_screen, "You are the Champion!", 75, 490, 200, WHITE)
+        Draw_Text(display_screen, "With your valient bow and arrow you have defeated the wizards!", 30, 475, 450, BLACK)
+        Draw_Text(display_screen, "Your village is celbrating because it is safe...for now!", 30, 460, 520, BLACK)
+        Draw_Text(display_screen, "Press [q] to quit.", 30, 500, 600, BLACK)
+
         pg.display.flip()
 
         self.send_text()
@@ -485,36 +444,9 @@ class Game:
         deltaY = centery + 20 
 
         #Scrolling Story Text
-        rolling_text = '''
-        Three evil wizards are about to attack your village! 
-
-
-        They are currently at the edge of the forest...
-
-        You have time to stop them, but must hurry!
-
-
-        Will you be the hero and save your village? 
-
-        Or will you let it be burned by the wizards' magic?
-
-
-        Use the arrow keys to move and jump
-
-        and the spacebar to shoot arrows!
-
-
-        It is your time to let the wizards know that
-
-        A Champion is Coming to foil their plan!
-
-
-        Press Enter to Save Your Village
-        '''
+        rolling_text = STORY
 
         running = True
-
-
 
         while True:
             event = pg.event.poll()
@@ -523,7 +455,6 @@ class Game:
                     break
             elif event.type == QUIT:
                 pg.quit()
-                sys.exit() 
 
             screen.fill(0)
 
@@ -547,10 +478,8 @@ class Game:
                 pos_list.append(pos)
                 i = i+1
 
-
             if (centery + deltaY + 30*(len(rolling_text.split('\n'))) < 0):
                 running = False
-
 
             for j in range(i):
                 screen.blit(msg_list[j], pos_list[j])
