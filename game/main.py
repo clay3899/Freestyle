@@ -124,41 +124,44 @@ class Game:
         # game loop -- updates
         self.all_sprites.update()
 
-        if len(self.enemies) == 0:
-            self.playing = False 
-
         #check if player hits platform if falling
         if self.player.vel.y > 0:
-            hits = pg.sprite.spritecollide(self.player, self.platforms, False,)
-        
-            if hits:
-                self.player.pos.y = hits[0].rect.top
+            hits_lands = pg.sprite.spritecollide(self.player, self.platforms, False,)
+            if hits_lands:
+                self.player.pos.y = hits_lands[0].rect.top
                 self.player.vel.y = 0
                 self.player.acc.y = 0        
 
-        hits = pg.sprite.groupcollide(self.enemies, self.arrows, False, True)
-        for hit in hits:
+        # Reduce enemy health if hit by arrow
+        hits_enemies = pg.sprite.groupcollide(self.enemies, self.arrows, False, True)
+        for hit in hits_enemies:
             hit.health -= ARROW_DAMAGE
             if hit.health <= 0:
                 self.enemies.remove(hit)
-            arrow_sound = pg.mixer.Sound('game\sounds\get_hit.ogg')
+            arrow_sound = pg.mixer.Sound('game\sounds\get_hit.ogg') #sound effect
             pg.mixer.Sound.play(arrow_sound)
 
-        hits = pg.sprite.groupcollide(self.platforms, self.arrows, False, True)
-        for hit in hits:
+        # Have arrow stop if hits platform
+        hits_platform = pg.sprite.groupcollide(self.platforms, self.arrows, False, True)
+        for hit in hits_platform:
             hit.acc = (0,0)
             hit.vel = (0,0)
 
-        hits = pg.sprite.spritecollide(self.player, self.fireballs, True,  pg.sprite.collide_circle)
-        if hits:
-            fire_sound = pg.mixer.Sound('game\sounds\enemyhit.ogg')
+        # Reduce player health if hit by fireball
+        hits_player = pg.sprite.spritecollide(self.player, self.fireballs, True,  pg.sprite.collide_circle)
+        if hits_player:
+            fire_sound = pg.mixer.Sound('game\sounds\enemyhit.ogg') #sound effect
             pg.mixer.Sound.play(fire_sound)
             self.fireballs.acc = 0
             self.fireballs.vel = 0
             self.player.health -= FIREBALL_DAMAGE
             self.HP_prev = self.player.health + FIREBALL_DAMAGE
 
-       
+        #Stop playing if all enemies are killed
+        if len(self.enemies) == 0:
+            self.playing = False 
+
+        #Stop playing if player loses all health
         if self.player.health <= 0:
             self.playing = False
        
@@ -177,7 +180,6 @@ class Game:
         """
         # game loop -- events      
         for event in pg.event.get():
-
             if event.type == pg.QUIT:
                 if self.playing:
                     self.playing = False
@@ -189,11 +191,9 @@ class Game:
                     self.current_time = pg.time.get_ticks()
                     if self.current_time - self.previous_time > SHOT_TIME:   
                         self.previous_time = self.current_time
-                        self.fire()
-
-            
+                        self.fire() #action of player to fire arrow
             if event.type == enemy1_shoot_event:
-                self.shoot_fire()
+                self.shoot_fire() #action of enemy to shoot fireballs
             
     def draw(self):
         """
@@ -209,7 +209,6 @@ class Game:
         Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c
         """
         # game loop -- draw
- 
         self.background_image = pg.image.load("game\images\Forest.jpg").convert_alpha()
         self.screen.blit(self.background_image, [0, 0])
         self.all_sprites.draw(self.screen)
@@ -258,18 +257,21 @@ class Game:
             self (self):  keyword we can access the attributes and methods 
             of the class in python 
         """  
+        #Contorls fireballs of enemy 1
         if self.enemy1.health > 0:
             fire_ball1 = Fireball(int(self.enemy1.rect.centerx + 50),int(self.enemy1.rect.centery), 'Fireball1.png')
             self.radius = 15
             self.all_sprites.add(fire_ball1)
             self.fireballs.add(fire_ball1)
 
+        #Contorls fireballs of enemy 2
         if self.enemy2.health > 0:
             fire_ball2 = Fireball(int(self.enemy2.rect.centerx + 100),int(self.enemy2.rect.centery), 'Fireball1.png')
             self.radius = 15
             self.all_sprites.add(fire_ball2)
             self.fireballs.add(fire_ball2)
 
+        #Contorls fireballs of enemy 3
         if self.enemy3.health > 0:
             self.radius = 15
             fire_ball3 = Fireball(int(self.enemy3.rect.centerx + 300),int(self.enemy3.rect.centery), 'Fireball1.png')
@@ -287,30 +289,34 @@ class Game:
         
         Source: Code help to understand structure of the start screen from https://github.com/joshuawillman/The-Lonely-Shooter
         """  
-        img_dir = path.join(path.dirname(__file__), 'images')
-        title = pg.image.load(path.join(img_dir, "title_text.png")).convert_alpha()
-        title = pg.transform.scale(title, (WIDTH, 165))
+        def insert_image(img, x, y):
+            image = pg.image.load(path.join(img_dir, img)).convert_alpha()
+            image_transform = pg.transform.scale(image, (x, y)) 
+            return image_transform
+        
+        #Draw .png images on screen
+        title = insert_image('title_text.png', WIDTH, 165)
+        arrow_keys = insert_image('arrow_keys.png', 150, 85)
+        spacebar = insert_image('spacebar1.png', 150, 50)
+
+        #Add in background image
         background = pg.image.load('game\images\Home_Screen.jpg').convert_alpha()
         background_rect = background.get_rect()
 
-        arrow_keys = pg.image.load(path.join(img_dir, 'arrow_keys.png')).convert_alpha()
-        arrow_keys = pg.transform.scale(arrow_keys, (150, 85))
-
-        spacebar = pg.image.load(path.join(img_dir, 'spacebar1.png')).convert_alpha()
-        spacebar = pg.transform.scale(spacebar, (150, 50))
-
+        #adjust position of images
         display_screen.blit(background, background_rect)
         display_screen.blit(title, (0,110))
         display_screen.blit(arrow_keys, (720, 570))
         display_screen.blit(spacebar, (720, 670))
 
+        #Draw Text on Screen
         Draw_Text(display_screen, "Are You Ready for the Challenge?", 35, WIDTH/2, HEIGHT/2, WHITE)
         Draw_Text(display_screen, "If so, press [ENTER] to begin", 35, WIDTH/2, (HEIGHT/2) + 50, WHITE)
         Draw_Text(display_screen, "If not, press [Q] to quit", 35, WIDTH/2, (HEIGHT/2) + 100, WHITE)
         Draw_Text(display_screen, "MOVE:", 35, 630, 570, WHITE)
         Draw_Text(display_screen, "SHOOT:", 35, 630, 670, WHITE)
 
-        #code for playing sound from CrouchingPython on YouTube https://www.youtube.com/watch?v=YQ1mixa9RAw
+        #Play music; code for playing sound from CrouchingPython on YouTube https://www.youtube.com/watch?v=YQ1mixa9RAw
         pg.mixer.music.load('game\sounds\Destiny.mp3')
         pg.mixer.music.set_volume(0.5)
         pg.mixer.music.play(-1)
@@ -411,7 +417,7 @@ class Game:
         client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
 
       
-        content = "Thank you so much for playing Champions are Coming. In total, you have been playing for " + self.format_time() + " seconds."
+        content = "Thank you so much for playing Champions are Coming. In total, you have been playing for " + self.format_time() + " seconds. Play again to beat your time!"
         message = client.messages.create(to = RECIPIENT_SMS, from_ = SENDER_SMS, body = content)
         
     def format_time(self):
