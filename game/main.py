@@ -203,10 +203,6 @@ class Game:
 
             self (self):  keyword we can access the attributes and methods 
             of the class in python 
-       
-        Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
-       
-        Source Link: https://www.youtube.com/watch?v=uWvb3QzA48c
         """
         # game loop -- draw
         self.background_image = pg.image.load("game\images\Forest.jpg").convert_alpha()
@@ -225,12 +221,12 @@ class Game:
         pg.draw.rect(display_screen,hb_color,(50,20,self.player.health,20),0)
         pg.display.flip()
 
-        #Health bar
+        #Player Health bar
         if self.player.health < self.HP_prev:
             pg.draw.rect(display_screen,hb_color,(50,20,self.player.health,20),0)
             pg.display.flip()
 
-       # Mob heath
+       # Enemy health bar
         for sprite in self.all_sprites:
             if isinstance(sprite, Enemy):
                 sprite.draw_health()
@@ -287,7 +283,7 @@ class Game:
             self (self):  keyword we can access the attributes and methods 
             of the class in python 
         
-        Source: Code help to understand structure of the start screen from https://github.com/joshuawillman/The-Lonely-Shooter
+        Source: Code help to understand general structure of a pygame screen from https://github.com/joshuawillman/The-Lonely-Shooter 
         """  
         def insert_image(img, x, y):
             """

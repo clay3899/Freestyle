@@ -170,7 +170,6 @@ class Enemy(pg.sprite.Sprite):
             of the class in python     
         """
         if self.health <= 0:
-        
             self.kill()
             death_sound = pg.mixer.Sound('game\sounds\explode.ogg')
             pg.mixer.Sound.play(death_sound)
@@ -330,8 +329,6 @@ class Draw_Text(pg.sprite.Sprite):
     
             color (preset color code from pygame): Determines the color 
             of the text
-    
-        Source: Code help to understand structure of the start screen from https://github.com/joshuawillman/The-Lonely-Shooter
         """  
         font = pg.font.Font(pg.font.match_font('cambria'), size)
         text_surface = font.render(text, True, color)
