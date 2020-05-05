@@ -14,9 +14,10 @@ class Player(pg.sprite.Sprite):
 
         Parameters: 
 
-            self (self):  keyword we can access the attributes and methods of the class in python 
+            self (self):  keyword we can access the attributes and methods 
+            of the class in python 
 
-            game 
+            game: used to reference items in the game class
 
             img (.png file): png file that has an image for the player
 
@@ -42,7 +43,8 @@ class Player(pg.sprite.Sprite):
 
         Parameters: 
 
-            self (self):  keyword we can access the attributes and methods of the class in python 
+            self (self):  keyword we can access the attributes and methods 
+            of the class in python 
 
         Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
 
@@ -64,7 +66,8 @@ class Player(pg.sprite.Sprite):
 
         Parameters: 
 
-            self (self):  keyword we can access the attributes and methods of the class in python 
+            self (self):  keyword we can access the attributes and methods 
+            of the class in python 
 
         Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
 
@@ -102,15 +105,20 @@ class Platform(pg.sprite.Sprite):
 
         Parameters: 
 
-            self (self):  keyword we can access the attributes and methods of the class in python 
+            self (self):  keyword we can access the attributes and methods 
+            of the class in python 
 
-            x (int): x coordinate of the platform on the screen (changing the coordinate moves the pltform horizontally)
+            x (int): x coordinate of the platform on the screen (changing 
+            the coordinate moves the pltform horizontally)
 
-            y (int): y coordinate of the platform on the screen (changing the coordinate moves the pltform vertically)
+            y (int): y coordinate of the platform on the screen (changing 
+            the coordinate moves the pltform vertically)
 
-            w (int): length of the platform (changing the coordinate makes the platform longer)
+            w (int): length of the platform (changing the coordinate makes 
+            the platform longer)
 
-            h (int): height of the platform (changing the coordinate makes the platform taller)
+            h (int): height of the platform (changing the coordinate makes 
+            the platform taller)
 
         Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
 
@@ -123,7 +131,6 @@ class Platform(pg.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
-
 class Enemy(pg.sprite.Sprite):
     """
     Creates the Enemy class to provide a template for enemies in the game.
@@ -134,11 +141,14 @@ class Enemy(pg.sprite.Sprite):
 
         Parameters: 
 
-            self (self):  keyword we can access the attributes and methods of the class in python 
+            self (self):  keyword we can access the attributes and methods 
+            of the class in python 
 
-            x (int): x coordinate of the platform on the screen (changing the coordinate moves the platform horizontally)
+            x (int): x coordinate of the platform on the screen (changing 
+            the coordinate moves the platform horizontally)
 
-            y (int): y coordinate of the platform on the screen (changing the coordinate moves the platform vertically)
+            y (int): y coordinate of the platform on the screen (changing 
+            the coordinate moves the platform vertically)
 
             img (.png file): png file that has an image for the enemy        
         """ 
@@ -157,6 +167,9 @@ class Enemy(pg.sprite.Sprite):
             """
             Method to control sprite's behavior (enemy health).
 
+            """
+            """Method to control sprite's behavior (enemy health).
+
             Parameters: 
 
                 self (self):  keyword we can access the attributes and methods of the class in python     
@@ -169,6 +182,14 @@ class Enemy(pg.sprite.Sprite):
             pg.mixer.Sound.play(death_sound)
     
     def draw_health(self):
+        """
+        Used to draw the enemy health bars.
+
+        Parameters: 
+
+            self (self):  keyword we can access the attributes and methods 
+            of the class in python     
+        """
         if self.health > 60:
             col = GREEN
         elif self.health > 30:
@@ -184,7 +205,6 @@ class Enemy(pg.sprite.Sprite):
             pg.draw.rect(self.image, BLACK, self.total)
             pg.draw.rect(self.image, col, self.health_bar)
         
-
 class Arrow(pg.sprite.Sprite):
     """
     Creates the Arrow class to provide a template for arrows (player weapons) in the game.
@@ -195,7 +215,8 @@ class Arrow(pg.sprite.Sprite):
 
         Parameters: 
 
-            self (self):  keyword we can access the attributes and methods of the class in python 
+            self (self):  keyword we can access the attributes and methods 
+            of the class in python 
 
             x (int): x coordinate of the arrow on the screen 
 
@@ -223,7 +244,8 @@ class Arrow(pg.sprite.Sprite):
 
         Parameters: 
 
-            self (self):  keyword we can access the attributes and methods of the class in python 
+            self (self):  keyword we can access the attributes and methods 
+            of the class in python 
 
         Source: YouTube Videos KidsCanCode provided information needed for initial setup of code, though code was majorly altered to tailor to project
 
@@ -242,8 +264,6 @@ class Arrow(pg.sprite.Sprite):
             self.kill()
         if self.rect.y > HEIGHT + 100:
             self.kill()
-
-
        
 class Fireball(pg.sprite.Sprite):
     """
@@ -255,7 +275,8 @@ class Fireball(pg.sprite.Sprite):
 
         Parameters: 
 
-            self (self):  keyword we can access the attributes and methods of the class in python 
+            self (self):  keyword we can access the attributes and methods 
+            of the class in python 
 
             x (int): x coordinate of the fireball on the screen 
 
@@ -279,17 +300,48 @@ class Fireball(pg.sprite.Sprite):
 
         Parameters: 
 
-            self (self):  keyword we can access the attributes and methods of the class in python    
+            self (self):  keyword we can access the attributes and methods 
+            of the class in python    
         """         
         # equations of motion
-        self.acc = vec(0, 0.008)
+        self.acc = vec(0, 0.006)
         self.acc.x += self.vel.x
         self.vel.y += self.acc.y
         self.pos += self.vel + 0.5 * self.acc
         self.rect.x = self.pos.x
         self.rect.y = self.pos.y - 64
         
-               
+class Draw_Text(pg.sprite.Sprite):
+    def __init__(self, surface, text, size, x, y, color):
+        """
+        Function to draw text on the the start screen
+    
+        Parameters:
+    
+            self (self): keyword we can access the attributes and 
+            methods of the class in python 
+            
+            surface: identifies the screen on which to draw text
+    
+            text (str): Words that are desired to be on the pygame 
+            screen
+    
+            size (int):  Provides the desired text size of word
+    
+            x (int): x coordinate of the text on the screen (changing 
+            the coordinate moves the text horizontally)
+    
+            y (int): y coordinate of the text on the screen (changing 
+            the coordinate moves the text vertically)
+    
+            color (preset color code from pygame): Determines the color 
+            of the text
+        """  
+        font = pg.font.Font(pg.font.match_font('cambria'), size)
+        text_surface = font.render(text, True, color)
+        text_rect = text_surface.get_rect()
+        text_rect.midtop = (x, y)
+        surface.blit(text_surface, text_rect)              
         
     
 
