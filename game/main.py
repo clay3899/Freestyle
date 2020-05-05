@@ -10,6 +10,7 @@ from sprites import *
 from dotenv import load_dotenv
 from twilio.rest import Client
 import pytest
+from send_text import *
 
 
 pg.mixer.pre_init(44100,16,2,4096) #initialize sound capabilities of pygame
@@ -404,7 +405,9 @@ class Game:
                     self.running = False
             elif event.type == QUIT:
                 pg.quit()
-                    
+
+       
+
     def send_text(self):
 
         """
@@ -426,7 +429,7 @@ class Game:
         client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
 
       
-        content = "Thank you so much for playing Champions are Coming. In total, you have been playing for " + self.format_time() + " seconds. Play again to beat your time!"
+        content = text_content(self.format_time())
         message = client.messages.create(to = RECIPIENT_SMS, from_ = SENDER_SMS, body = content)
         
     def format_time(self):
