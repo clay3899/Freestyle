@@ -404,9 +404,7 @@ class Game:
                     pg.quit()
                     self.running = False
             elif event.type == QUIT:
-                pg.quit()
-
-       
+                pg.quit()  
 
     def send_text(self):
 
