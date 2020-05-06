@@ -176,7 +176,7 @@ class Enemy(pg.sprite.Sprite):
                 self (self):  keyword we can access the attributes and methods of the class in python     
             """
         
-        if self.health < 0:
+        if self.health <= 0:
 
             self.kill()
             death_sound = pg.mixer.Sound('game\sounds\explode.ogg')
