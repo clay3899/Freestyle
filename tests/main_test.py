@@ -1,11 +1,8 @@
-from game.main import format_time
-import pytest
-import pygame as pg
+from game.send_text import text_content
+from dotenv import load_dotenv
 
 
-#The issue is we cannot use the if name = main function
-
-def test_format_time():
-    result = format_time(1234)
-    assert result == "1.23"
+def test_text_content():
+    result = text_content(1.22)
+    return "Thank you so much for playing Champions are Coming. In total, you have been playing for 1.22 seconds. Play again to beat your time!"
 

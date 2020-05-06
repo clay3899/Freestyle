@@ -4,6 +4,7 @@ from os import path
 
 vec = pg.math.Vector2
 
+
 class Player(pg.sprite.Sprite):
     """
     Creates the Player class to provide a template for players in the game.
