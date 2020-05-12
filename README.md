@@ -1,6 +1,6 @@
 # Freestyle: Champions are Coming
 
-## Instalation
+## Installation
 
 Fork this repository and then use GitHub Desktop software or the command-line to download or "clone" it onto your computer. Choose a familiar download location like the Desktop.
 
@@ -15,7 +15,7 @@ cd ~/Desktop/Freestyle
 Create and activate a new Anaconda virtual environment:
 
 ```sh
-conda create -n game-env Pytho=3.7 #first time only
+conda create -n game-env Python=3.7 #first time only
 conda activate game-env #after creation
 ```
 
